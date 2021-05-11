@@ -19,7 +19,7 @@
 //resource definition
 extern coap_resource_t res_presence; 
 extern coap_resource_t res_quality; 
-extern coap_resource_t res_light; 
+extern coap_resource_t res_air; 
 
 extern bool lightOn;
 extern int presence;
@@ -30,8 +30,8 @@ bool registered = false;
 
 #define SERVER_EP "coap://[fd00::1]:5683"
 
-PROCESS(node_process, "Air quality node");
-AUTOSTART_PROCESSES(&node_process);
+PROCESS(air_node, "Air quality node");
+AUTOSTART_PROCESSES(&air_node);
 
 static struct etimer timer;
 
@@ -61,9 +61,9 @@ PROCESS_THREAD(node_process, ev, data){
 
 	leds_set(LEDS_NUM_TO_MASK(LEDS_RED)); // at the beginning, all lights are off
 
-	coap_activate_resource(&res_presence, "res_presence");
-	coap_activate_resource(&res_light, "res_light");
-    coap_activate_resource(&res_quality, "res_quality");
+	coap_activate_resource(&res_presence, "presence_sensor");
+	coap_activate_resource(&res_air, "air_actuator");
+    coap_activate_resource(&res_quality, "quality_sensor");
 
 	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
 
