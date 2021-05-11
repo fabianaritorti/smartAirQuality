@@ -1,0 +1,114 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "coap-log.h"
+#include "sys/log.h"
+#include "sys/node-id.h"
+#include "contiki.h"
+#include "coap-engine.h"
+#include "coap-blocking-api.h"
+#include "sys/etimer.h"
+#include "os/dev/leds.h"
+
+#define LOG_MODULE "NODE"
+#define LOG_LEVEL LOG_LEVEL_DBG
+
+#define P_THRESHOLD 50
+#define Q_THRESHOLD 100
+
+//resource definition
+extern coap_resource_t res_presence; 
+extern coap_resource_t res_quality; 
+extern coap_resource_t res_light; 
+
+extern bool lightOn;
+extern int presence;
+extern int quality;
+bool oldLightOn;
+bool registered = false;
+
+
+#define SERVER_EP "coap://[fd00::1]:5683"
+
+PROCESS(node_process, "Air quality node");
+AUTOSTART_PROCESSES(&node_process);
+
+static struct etimer timer;
+
+void client_chunk_handler(coap_message_t *response) {
+  
+	const uint8_t *chunk;
+
+	if(response == NULL) {
+		puts("Request timed out");
+	return;
+	}
+
+	if(!registered)
+	registered = true;
+
+	int len = coap_get_payload(response, &chunk);
+	printf("|%.*s", len, (char *)chunk);
+}
+
+PROCESS_THREAD(node_process, ev, data){
+
+	static coap_endpoint_t server_ep;
+	static coap_message_t request[1];
+
+	PROCESS_BEGIN();
+	
+
+	leds_set(LEDS_NUM_TO_MASK(LEDS_RED)); // at the beginning, all lights are off
+
+	coap_activate_resource(&res_presence, "res_presence");
+	coap_activate_resource(&res_light, "res_light");
+    coap_activate_resource(&res_quality, "res_quality");
+
+	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
+
+	coap_init_message(request, COAP_TYPE_CON, COAP_GET ,0);
+	coap_set_header_uri_path(request, "registration");
+	
+
+	char msg[4];
+	
+	sprintf(msg,"%d",node_id);
+	coap_set_payload(request, (uint16_t * )msg, sizeof(msg)-1);
+
+
+	while(!registered){
+		LOG_DBG("Retrying registration..\n");
+		COAP_BLOCKING_REQUEST(&server_ep, request, client_chunk_handler);
+	}
+
+	LOG_DBG("Registered\n");
+
+    //genero un valore intero randomico ogni 20 secondi(per la presenza e la qualità dell'aria)
+    etimer_set(&timer,20 * CLOCK_SECOND);
+
+    while(true) {
+        PROCESS_WAIT_EVENT();
+        if(ev == PROCESS_EVENT_TIMER) {
+
+            presence = 1 + rand()%100;
+            quality = 1 + rand()%100;
+            LOG_DBG("presence: %d\n", presence);
+            LOG_DBG("quality: %d\n", quality);
+            if (presence <= P_THRESHOLD) {
+                leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+            }
+            else if (presence > P_THRESHOLD && quality <= Q_THRESHOLD) {
+                leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+                //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
+            }
+            etimer_reset(&timer);
+            res_light.trigger();
+            res_presence.trigger();
+            res_quality.trigger();
+
+        }
+        PROCESS_END();
+    }
+
+
