@@ -21,10 +21,10 @@ extern coap_resource_t res_presence;
 extern coap_resource_t res_quality; 
 extern coap_resource_t res_air; 
 
-extern bool lightOn;
+extern bool air_state;
 extern int presence;
 extern int quality;
-bool oldLightOn;
+bool air_state_old;
 bool registered = false;
 
 
@@ -91,21 +91,37 @@ PROCESS_THREAD(node_process, ev, data){
         PROCESS_WAIT_EVENT();
         if(ev == PROCESS_EVENT_TIMER) {
 
+			air_state_old = air_state;
+
             presence = 1 + rand()%100;
             quality = 1 + rand()%100;
             LOG_DBG("presence: %d\n", presence);
             LOG_DBG("quality: %d\n", quality);
             if (presence <= P_THRESHOLD) {
+				air_state = 0;
                 leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
             }
             else if (presence > P_THRESHOLD && quality <= Q_THRESHOLD) {
+				air_state = 1;
                 leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
                 //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
             }
+			if (quality <= Q_THRESHOLD) {
+				air_state = 1;
+				leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+			}
+			else if (quality > Q_THRESHOLD) {
+				air_state = 0;
+				leds_set(LEDS_NUM_TO_MASK(LEDS_RED))
+			}
+
+			if (air_state != air_state_old) { // when state changes, trigger call
+				res_air.trigger();
+				res_presence.trigger();
+				res_quality.trigger();
+			}
             etimer_reset(&timer);
-            res_light.trigger();
-            res_presence.trigger();
-            res_quality.trigger();
+            
 
         }
         PROCESS_END();

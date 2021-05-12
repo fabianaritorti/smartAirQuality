@@ -10,9 +10,9 @@
 
 
 extern struct process air_node;
-process_event_t POST_EVENT;
-bool status = false;
-bool is_auto = true;
+//process_event_t POST_EVENT;
+bool air_state = 0;
+//bool is_auto = true;
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
 static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
@@ -62,4 +62,40 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 	}
     size_t len = 0;
 	const char *status = NULL;
+	int check = 1;
+
     //rivedere bene la parte sia di air.c che delle risorse
+	if((len = coap_get_post_variable(request, "state", &status))) {
+		//atoi function convert a string argument to an integer 
+		if (atoi(status) == 1){
+			air_state = 1;
+			LOG_DBG("Purification Air Started! \n");
+			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+			
+		}
+		
+		else if(atoi(state) == 0){
+			air_state = 0;
+			LOG_DBG("Purification Air Stopped! \n");
+			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+
+		}
+		else{
+			check = 0;
+		}
+		
+		
+		
+	}
+	else{
+		check = 0;
+	}
+
+	if (check){
+		coap_set_status_code(response, CHANGED_2_04);
+	}
+	else{
+		coap_set_status_code(response, BAD_REQUEST_4_00);
+	}
+		
+}
