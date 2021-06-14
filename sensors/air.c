@@ -51,7 +51,7 @@ void client_chunk_handler(coap_message_t *response) {
 	printf("|%.*s", len, (char *)chunk);
 }
 
-PROCESS_THREAD(node_process, ev, data){
+PROCESS_THREAD(air_node, ev, data){
 
 	static coap_endpoint_t server_ep;
 	static coap_message_t request[1];
@@ -112,7 +112,7 @@ PROCESS_THREAD(node_process, ev, data){
 			}
 			else if (quality > Q_THRESHOLD) {
 				air_state = 0;
-				leds_set(LEDS_NUM_TO_MASK(LEDS_RED))
+				leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
 			}
 
 			if (air_state != air_state_old) { // when state changes, trigger call
@@ -126,5 +126,5 @@ PROCESS_THREAD(node_process, ev, data){
         }
         PROCESS_END();
     }
-
+}
 
