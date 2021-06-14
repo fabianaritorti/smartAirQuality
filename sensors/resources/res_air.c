@@ -12,6 +12,7 @@
 extern struct process air_node;
 //process_event_t POST_EVENT;
 bool air_state = 0;
+bool lightOn = 0;
 //bool is_auto = true;
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
@@ -74,7 +75,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 			
 		}
 		
-		else if(atoi(state) == 0){
+		else if(atoi(status) == 0){
 			air_state = 0;
 			LOG_DBG("Purification Air Stopped! \n");
 			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
