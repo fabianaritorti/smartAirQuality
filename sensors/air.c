@@ -124,7 +124,8 @@ PROCESS_THREAD(air_node, ev, data){
             
 
         }
-        PROCESS_END();
+        
     }
+	PROCESS_END();
 }
 
