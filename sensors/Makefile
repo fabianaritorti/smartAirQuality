@@ -1,6 +1,6 @@
 CONTIKI_PROJECT = coap-air-node
 all: $(CONTIKI_PROJECT)
-CONTIKI = ../../..
+CONTIKI = ../..
 
 
 CFLAGS += -DPROJECT_CONF_H=\"project-conf.h\"
