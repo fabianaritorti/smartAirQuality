@@ -50,7 +50,9 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 	coap_get_header_accept(request, &accept);
 
 	if(accept == TEXT_PLAIN) {
+		LOG_DBG("RICEVO TEXT"); 
 		coap_set_header_content_format(response, TEXT_PLAIN);
+		
   		coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
 	} else {
 		coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
