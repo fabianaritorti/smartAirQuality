@@ -28,6 +28,7 @@ bool air_state_old;
 bool registered = false;
 
 
+
 #define SERVER_EP "coap://[fd00::1]:5683"
 
 PROCESS(air_node, "Air quality node");
