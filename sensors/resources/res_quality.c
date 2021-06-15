@@ -36,31 +36,31 @@ static void res_event_handler(void){
 	counter++;
 	coap_notify_observers(&res_quality);
 }
-static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
+// static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 
-	printf("ciao");
+// 	printf("ciao");
 
 
-	if(request != NULL){
-		LOG_DBG("Observing handler number %d\n", counter);
-	}
+// 	if(request != NULL){
+// 		LOG_DBG("Observing handler number %d\n", counter);
+// 	}
 
 	
 
 
-	unsigned int accept = -1;
-	coap_get_header_accept(request, &accept);
+// 	unsigned int accept = -1;
+// 	coap_get_header_accept(request, &accept);
 
-	if(accept == TEXT_PLAIN) {
-		LOG_DBG("RICEVO TEXT"); 
-		coap_set_header_content_format(response, TEXT_PLAIN);
+// 	if(accept == TEXT_PLAIN) {
+// 		LOG_DBG("RICEVO TEXT"); 
+// 		coap_set_header_content_format(response, TEXT_PLAIN);
 		
-  		coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
-	// } else {
-	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
-	// 	const char *msg = "Supporting content-types text/plain";
-	// 	coap_set_payload(response, msg, strlen(msg));
-	}
+//   		coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
+// 	// } else {
+// 	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
+// 	// 	const char *msg = "Supporting content-types text/plain";
+// 	// 	coap_set_payload(response, msg, strlen(msg));
+// 	}
 
 
 	// if (accept== -1)
@@ -76,6 +76,25 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 	// 	snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"quality\":%d}", quality);
 	// 	coap_set_payload(response, buffer, strlen((char *)buffer));
 	// }
-	
 
+
+//}
+const char* buff = "EVENT";
+static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset) {
+	if (buff == NULL) {
+		return;
+	}
+
+	char* b = (char*)buffer;
+
+	sprintf(b, "{\e\": [%s] }", buff);
+	int lenght = strlen(b) +1;
+
+	coap_set_header_content_format(response, TEXT_PLAIN);
+	coap_set_payload(response, buffer, lenght);
+
+	printf("CIAO FUNZIONA", (char*)buffer);
+
+
+	
 }
