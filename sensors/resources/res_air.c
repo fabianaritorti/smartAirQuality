@@ -117,7 +117,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 		success = 0;
 	}
 
-	if (check){
+	if (success){
 		coap_set_status_code(response, CHANGED_2_04);
 	}
 	else{
