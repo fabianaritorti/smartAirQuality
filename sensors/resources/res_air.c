@@ -100,7 +100,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 		else{
 			check = 0;
 		}
-		air_state = atoi(status)
+		air_state = atoi(status);
 		
 		
 		
