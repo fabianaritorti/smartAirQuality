@@ -36,65 +36,34 @@ static void res_event_handler(void){
 	counter++;
 	coap_notify_observers(&res_quality);
 }
-// static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
-
-// 	printf("ciao");
-
-
-// 	if(request != NULL){
-// 		LOG_DBG("Observing handler number %d\n", counter);
-// 	}
-
+static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 	
-
-
-// 	unsigned int accept = -1;
-// 	coap_get_header_accept(request, &accept);
-
-// 	if(accept == TEXT_PLAIN) {
-// 		LOG_DBG("RICEVO TEXT"); 
-// 		coap_set_header_content_format(response, TEXT_PLAIN);
-		
-//   		coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
-// 	// } else {
-// 	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
-// 	// 	const char *msg = "Supporting content-types text/plain";
-// 	// 	coap_set_payload(response, msg, strlen(msg));
-// 	}
-
-
-	// if (accept== -1)
-	// 	accept = APPLICATION_JSON;
-
-	// if(accept == APPLICATION_XML) {
-	// 	coap_set_header_content_format(response, APPLICATION_XML);
- 	// 	snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<quality=\"%d\"/>", quality);
-	// 	coap_set_payload(response, buffer, strlen((char *)buffer));
-    // 	} 
-	// else if(accept == APPLICATION_JSON) {
-	// 	coap_set_header_content_format(response, APPLICATION_JSON);
-	// 	snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"quality\":%d}", quality);
-	// 	coap_set_payload(response, buffer, strlen((char *)buffer));
-	// }
-
-
-//}
-const char* buff = "EVENT";
-static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset) {
-	if (buff == NULL) {
-		return;
+	if(request != NULL){
+		LOG_DBG("Received GET\n");
 	}
 
-	char* b = (char*)buffer;
+	unsigned int accept = -1;
+	coap_get_header_accept(request, &accept);
 
-	sprintf(b, "{\e\": [%s] }", buff);
-	int lenght = strlen(b) +1;
+	if (accept== -1) 
+		accept = APPLICATION_JSON;
 
-	coap_set_header_content_format(response, TEXT_PLAIN);
-	coap_set_payload(response, buffer, lenght);
+	if(accept == TEXT_PLAIN) {
+	    coap_set_header_content_format(response, TEXT_PLAIN);
+	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "<quality=\"%d\"/>", quality);
+	    coap_set_payload(response, (uint8_t *)buffer, strlen((char *)buffer));    
+	} else if(accept == APPLICATION_XML) {
+		coap_set_header_content_format(response, APPLICATION_XML);
+ 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<quality=\"%d\"/>", quality);
+		coap_set_payload(response, buffer, strlen((char *)buffer));
+    } else if (accept == APPLICATION_JSON) {
+		coap_set_header_content_format(response, APPLICATION_JSON);
+		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"quality\":%d}", quality);
+		coap_set_payload(response, buffer, strlen((char *)buffer));
+	} else {
+		coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
+		const char *msg = "Supporting content-type plaintext application/json and application/XML";
+		coap_set_payload(response, msg, strlen(msg));
+  	}
 
-	printf("CIAO FUNZIONA", (char*)buffer);
-
-
-	
 }
