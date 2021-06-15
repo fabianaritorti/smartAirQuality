@@ -13,7 +13,7 @@ extern struct process air_node;
 process_event_t POST_EVENT;
 bool air_state = 0;
 //bool lightOn = 0;
-static int counter = 0;
+//static int counter = 0;
 //bool is_auto = true;
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
