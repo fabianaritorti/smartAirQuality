@@ -43,28 +43,31 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 		LOG_DBG("Observing handler number %d\n", counter); 
 	}
 
+	coap_set_header_content_format(response, TEXT_PLAIN);
+  	coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
 
-	unsigned int accept = -1;
-	coap_get_header_accept(request, &accept);
+
+	// unsigned int accept = -1;
+	// coap_get_header_accept(request, &accept);
 
 
-	if (accept== -1)
-		accept = APPLICATION_JSON;
+	// if (accept== -1)
+	// 	accept = APPLICATION_JSON;
 
-	if(accept == APPLICATION_XML) {
-		coap_set_header_content_format(response, APPLICATION_XML);
- 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<presence=\"%d\"/>", quality);
-		coap_set_payload(response, buffer, strlen((char *)buffer));
-    	} 
-	else if(accept == APPLICATION_JSON) {
-		coap_set_header_content_format(response, APPLICATION_JSON);
-		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"presence\":%d}", quality);
-		coap_set_payload(response, buffer, strlen((char *)buffer));
-	}
-	else {
-		coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
-		const char *msg = "Supporting content-type application/json";
-		coap_set_payload(response, msg, strlen(msg));
-  	}
+	// if(accept == APPLICATION_XML) {
+	// 	coap_set_header_content_format(response, APPLICATION_XML);
+ 	// 	snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<presence=\"%d\"/>", quality);
+	// 	coap_set_payload(response, buffer, strlen((char *)buffer));
+    // 	} 
+	// else if(accept == APPLICATION_JSON) {
+	// 	coap_set_header_content_format(response, APPLICATION_JSON);
+	// 	snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"presence\":%d}", quality);
+	// 	coap_set_payload(response, buffer, strlen((char *)buffer));
+	// }
+	// else {
+	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
+	// 	const char *msg = "Supporting content-type application/json";
+	// 	coap_set_payload(response, msg, strlen(msg));
+  	// }
 
 }
