@@ -38,9 +38,11 @@ static void res_event_handler(void){
 }
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 
+	print("CIAO")
+
 
 	if(request != NULL){
-		LOG_DBG("Observing handler number %d\n", counter); 
+		LOG_DBG("Observing handler number %d\n", counter);
 	}
 
 	
@@ -54,11 +56,11 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 		coap_set_header_content_format(response, TEXT_PLAIN);
 		
   		coap_set_payload(response, buffer, snprintf((char *)buffer, preferred_size, "EVENT %lu", (unsigned long) counter));
-	} else {
-		coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
-		const char *msg = "Supporting content-types text/plain";
-		coap_set_payload(response, msg, strlen(msg));
-	}
+	// } else {
+	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
+	// 	const char *msg = "Supporting content-types text/plain";
+	// 	coap_set_payload(response, msg, strlen(msg));
+	// }
 
 
 	// if (accept== -1)
