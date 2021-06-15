@@ -63,8 +63,8 @@ PROCESS_THREAD(air_node, ev, data){
 	leds_set(LEDS_NUM_TO_MASK(LEDS_RED)); // at the beginning, all lights are off
 
 	//coap_activate_resource(&res_presence, "presence_sensor");
-	coap_activate_resource(&res_air, "air_actuator");
-    coap_activate_resource(&res_quality, "quality_sensor");
+	coap_activate_resource(&res_air, "res_air");
+    coap_activate_resource(&res_quality, "res_quality");
 
 	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
 
