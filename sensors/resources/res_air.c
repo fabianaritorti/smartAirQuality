@@ -81,10 +81,13 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 	const char *state = NULL;
 	int success = 1;
 
+	
+
     //rivedere bene la parte sia di air.c che delle risorse
 	if((len = coap_get_post_variable(request, "state", &state))) {
 		//atoi function convert a string argument to an integer 
 		if(strncmp(state, "ON", len) == 0) {
+			printf("CIAOOO");
 			air_state = 1;
 			LOG_DBG("Purification Air Started! \n");
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
