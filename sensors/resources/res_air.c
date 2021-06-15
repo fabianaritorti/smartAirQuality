@@ -73,22 +73,75 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 
 
 
+// static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset)
+// {
+// 	if(request != NULL) {
+// 		LOG_DBG("POST/PUT Request Sent\n");
+// 	}
+//     size_t len = 0;
+// 	const char *state = NULL;
+// 	int success = 1;
+
+	
+
+//     //rivedere bene la parte sia di air.c che delle risorse
+// 	if((len = coap_get_post_variable(request, "state", &state))) {
+// 		//atoi function convert a string argument to an integer 
+// 		if(strncmp(state, "ON", len) == 0) {
+// 			printf("CIAOOO");
+// 			air_state = 1;
+// 			LOG_DBG("Purification Air Started! \n");
+// 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+// 		} else if(strncmp(state, "OFF", len) == 0) {
+// 			air_state = 0;
+// 			LOG_DBG("Purification Air Stopped \n");
+// 			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+// 		// if (atoi(status) == 1){
+// 		// 	air_state = 1;
+// 		// 	LOG_DBG("Purification Air Started! \n");
+// 		// 	leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+			
+// 		// }
+		
+// 		// else if(atoi(status) == 0){
+// 		// 	air_state = 0;
+// 		// 	LOG_DBG("Purification Air Stopped! \n");
+// 		// 	leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+
+// 		}
+// 		else{
+// 			success = 0;
+// 		}
+// 		//air_state = atoi(status);
+		
+		
+		
+// 	}
+// 	else{
+// 		success = 0;
+// 	}
+
+// 	if (success){
+// 		coap_set_status_code(response, CHANGED_2_04);
+// 	}
+// 	else{
+// 		coap_set_status_code(response, BAD_REQUEST_4_00);
+// 	}
+		
+// }
 static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset)
 {
 	if(request != NULL) {
 		LOG_DBG("POST/PUT Request Sent\n");
+		LOG_DBG("Actual state: %d\n", air_state);
 	}
-    size_t len = 0;
+  
+	size_t len = 0;
 	const char *state = NULL;
 	int success = 1;
 
-	
-
-    //rivedere bene la parte sia di air.c che delle risorse
 	if((len = coap_get_post_variable(request, "state", &state))) {
-		//atoi function convert a string argument to an integer 
 		if(strncmp(state, "ON", len) == 0) {
-			printf("CIAOOO");
 			air_state = 1;
 			LOG_DBG("Purification Air Started! \n");
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
@@ -96,36 +149,14 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 			air_state = 0;
 			LOG_DBG("Purification Air Stopped \n");
 			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
-		// if (atoi(status) == 1){
-		// 	air_state = 1;
-		// 	LOG_DBG("Purification Air Started! \n");
-		// 	leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-			
-		// }
-		
-		// else if(atoi(status) == 0){
-		// 	air_state = 0;
-		// 	LOG_DBG("Purification Air Stopped! \n");
-		// 	leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
-
-		}
-		else{
+		} else
 			success = 0;
-		}
-		//air_state = atoi(status);
-		
-		
-		
-	}
-	else{
+	} else 
 		success = 0;
-	}
-
-	if (success){
+  
+	if(success)
 		coap_set_status_code(response, CHANGED_2_04);
-	}
-	else{
+	else
 		coap_set_status_code(response, BAD_REQUEST_4_00);
-	}
 		
 }
