@@ -60,7 +60,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 	// 	coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
 	// 	const char *msg = "Supporting content-types text/plain";
 	// 	coap_set_payload(response, msg, strlen(msg));
-	// }
+	}
 
 
 	// if (accept== -1)
