@@ -24,8 +24,8 @@ EVENT_RESOURCE(res_air, "title=\" Air actuator: ?POST/PUT auto=AUTO|MAN&status=O
 	           res_get_handler,
                res_post_put_handler,
                res_post_put_handler,
-               NULL,
-               res_event_handler);
+               NULL);
+ //              res_event_handler);
 
 static void res_event_handler(void) {
 	LOG_DBG("sending notification");
