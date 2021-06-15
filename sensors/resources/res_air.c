@@ -78,7 +78,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 		LOG_DBG("POST/PUT Request Sent\n");
 	}
     size_t len = 0;
-	const char *status = NULL;
+	const char *state = NULL;
 	int success = 1;
 
     //rivedere bene la parte sia di air.c che delle risorse
