@@ -9,8 +9,8 @@
 #define LOG_LEVEL LOG_LEVEL_DBG
 
 
-extern struct process air_node;
-process_event_t POST_EVENT;
+//extern struct process air_node;
+//process_event_t POST_EVENT;
 bool air_state = 0;
 //bool lightOn = 0;
 //static int counter = 0;
