@@ -74,7 +74,7 @@
   				<archive>
   					<manifest>
   						<addClasspath>true</addClasspath>
-  						<mainClass>server.Application</mainClass>
+  						<mainClass>server.MainApplication</mainClass>
   						<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
   					</manifest>
   				</archive>
