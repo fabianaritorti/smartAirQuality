@@ -74,7 +74,7 @@ PROCESS_THREAD(air_node, ev, data){
 
 	char msg[4];
 	
-	sprintf(msg,"%d",node_id);
+	//sprintf(msg,"%d",node_id);
 	coap_set_payload(request, (uint16_t * )msg, sizeof(msg)-1);
 
 
