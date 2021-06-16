@@ -9,40 +9,37 @@
 #define LOG_LEVEL LOG_LEVEL_DBG
 
 
-//extern struct process air_node;
-//process_event_t POST_EVENT;
+
 bool air_state = 0;
-//bool lightOn = 0;
-//static int counter = 0;
-//bool is_auto = true;
+
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
 static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
-static void res_event_handler(void);
+//static void res_event_handler(void);
 
-// RESOURCE(res_air, 
-// 		"title=\" Air actuator: ?POST/PUT auto=AUTO|MAN&status=ON|OFF\";rt=\"Air actuator\";obs",
-// 	    res_get_handler,
-//         res_post_put_handler,
-//         res_post_put_handler,
-//         NULL);
-
-
-EVENT_RESOURCE(res_air, 
+RESOURCE(res_air, 
 		"title=\" Air actuator: ?POST/PUT auto=AUTO|MAN&status=ON|OFF\";rt=\"Air actuator\";obs",
 	    res_get_handler,
         res_post_put_handler,
-        NULL,
-        NULL,
-		res_event_handler);
+        res_post_put_handler,
+        NULL);
 
 
- //              res_event_handler);
+// EVENT_RESOURCE(res_air, 
+// 		"title=\" Air actuator: ?POST/PUT auto=AUTO|MAN&status=ON|OFF\";rt=\"Air actuator\";obs",
+// 	    res_get_handler,
+//         res_post_put_handler,
+//         NULL,
+//         NULL,
+// 		res_event_handler);
 
-static void res_event_handler(void) {
-	LOG_DBG("sending notification");
-  	coap_notify_observers(&res_air);
-}
+
+
+
+// static void res_event_handler(void) {
+// 	LOG_DBG("sending notification");
+//   	coap_notify_observers(&res_air);
+// }
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 
