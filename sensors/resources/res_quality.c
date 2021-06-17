@@ -40,6 +40,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 	
 	if(request != NULL){
 		LOG_DBG("Received GET\n");
+		LOG_DBG("Observing handler number %d\n", counter);
 	}
 
 	unsigned int accept = -1;

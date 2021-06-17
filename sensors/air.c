@@ -88,7 +88,7 @@ PROCESS_THREAD(air_node, ev, data){
     //genero un valore intero randomico ogni 20 secondi(per la presenza e la qualità dell'aria)
     etimer_set(&timer,20 * CLOCK_SECOND);
 
-    while(1) {
+    while(true) {
         PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
 		printf("CIAO SORE1");
 		
