@@ -109,10 +109,12 @@ PROCESS_THREAD(air_node, ev, data){
             //     //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
             // }
 			if (quality <= Q_THRESHOLD) {
+				LOG_DBG("Air quality is bad! \n");
 				air_state = 1;
 				leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
 			}
 			else if (quality > Q_THRESHOLD) {
+				LOG_DBG("Air quality is good! \n");
 				air_state = 0;
 				leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
 			}
