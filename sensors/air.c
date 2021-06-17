@@ -90,10 +90,11 @@ PROCESS_THREAD(air_node, ev, data){
 
     while(1) {
         PROCESS_WAIT_EVENT();
+		printf("CIAO SORE1");
 		
 		
         if(ev == PROCESS_EVENT_TIMER) {
-			printf("CIAO SORE");
+			printf("CIAO SORE2");
 
 			air_state_old = air_state;
 
