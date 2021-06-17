@@ -14,7 +14,7 @@
 
 static int counter = 0;
 extern bool air_state; 
-//int quality = 30;
+int quality = 30;
 
 
 
