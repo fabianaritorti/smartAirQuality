@@ -89,48 +89,48 @@ PROCESS_THREAD(air_node, ev, data){
     etimer_set(&timer,20 * CLOCK_SECOND);
 
     while(1) {
-        PROCESS_WAIT_EVENT();
+        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
 		printf("CIAO SORE1");
 		
 		
-        if(ev == PROCESS_EVENT_TIMER) {
-			printf("CIAO SORE2");
+        
+			
 
-			air_state_old = air_state;
+		air_state_old = air_state;
 
-            //presence = 1 + rand()%100;
-            quality = 1 + rand()%100;
-            //LOG_DBG("presence: %d\n", presence);
-            LOG_DBG("quality: %d\n", quality);
-            // if (presence <= P_THRESHOLD) {
-			// 	air_state = 0;
-            //     leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
-            // }
-            // else if (presence > P_THRESHOLD && quality <= Q_THRESHOLD) {
-			// 	air_state = 1;
-            //     leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-            //     //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
-            // }
-			if (quality <= Q_THRESHOLD) {
-				LOG_DBG("Air quality is bad! \n");
-				air_state = 1;
-				leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-			}
-			else if (quality > Q_THRESHOLD) {
-				LOG_DBG("Air quality is good! \n");
-				air_state = 0;
-				leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
-			}
+        //presence = 1 + rand()%100;
+        quality = 1 + rand()%100;
+        //LOG_DBG("presence: %d\n", presence);
+        LOG_DBG("quality: %d\n", quality);
+        // if (presence <= P_THRESHOLD) {
+		// 	air_state = 0;
+        //     leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+        // }
+        // else if (presence > P_THRESHOLD && quality <= Q_THRESHOLD) {
+		// 	air_state = 1;
+        //     leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+        //     //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
+        // }
+		if (quality <= Q_THRESHOLD) {
+			LOG_DBG("Air quality is bad! \n");
+			air_state = 1;
+			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
+		}
+		else if (quality > Q_THRESHOLD) {
+			LOG_DBG("Air quality is good! \n");
+			air_state = 0;
+			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+		}
 
-			if (air_state != air_state_old) { // when state changes, trigger call
-				res_air.trigger();
-				//res_presence.trigger();
-				res_quality.trigger();
-			}
-            etimer_reset(&timer);
+		if (air_state != air_state_old) { // when state changes, trigger call
+			res_air.trigger();
+			//res_presence.trigger();
+			res_quality.trigger();
+		}
+        etimer_reset(&timer);
             
 
-        }
+        
         
     }
 	PROCESS_END();
