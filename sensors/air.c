@@ -87,6 +87,7 @@ PROCESS_THREAD(air_node, ev, data){
 
     //genero un valore intero randomico ogni 20 secondi(per la presenza e la qualità dell'aria)
     etimer_set(&timer,20 * CLOCK_SECOND);
+	printf("TIMER:%d \n",timer);
 
     while(true) {
         PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
@@ -99,7 +100,7 @@ PROCESS_THREAD(air_node, ev, data){
 		air_state_old = air_state;
 
         //presence = 1 + rand()%100;
-        quality = 1 + rand()%100;
+        int quality = 1 + rand()%100;
         //LOG_DBG("presence: %d\n", presence);
         LOG_DBG("quality: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
