@@ -1,0 +1,8 @@
+POST COMMANDS:
+
+coap-client -m post coap://[fd00::202:2:2:2]/res_air?POST -e state=ON
+
+GET COMMANDS:
+
+coap-client -m get coap://[fd00::202:2:2:2]/res_quality -e mode=on
+
