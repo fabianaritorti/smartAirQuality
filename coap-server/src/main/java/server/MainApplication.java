@@ -10,7 +10,7 @@ public class MainApplication {
 	}
 
 	public static void main(String[] args) {
-		MainApplication.getSharedInstance.start();
+		//MainApplication.getSharedInstance.start();
 		//System.out.println("WELCOME ");
 		
 
