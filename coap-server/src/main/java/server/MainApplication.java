@@ -10,7 +10,7 @@ public class MainApplication {
 	}
 
 	public static void main(String[] args) {
-		MainApplication.getSharedInstance.start();
+		MainApplication.getSharedInstance.showMenu();
 		//System.out.println("WELCOME ");
 		
 
@@ -28,11 +28,11 @@ public class MainApplication {
 
 	}
 
-	public void start() {
-		//showMenu();
-		System.out.println("BLA BLA");
+	// public void start() {
+	// 	//showMenu();
+	// 	System.out.println("BLA BLA");
 		
 
-	}
+	// }
 
 }
