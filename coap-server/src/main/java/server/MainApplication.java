@@ -3,7 +3,7 @@ package server;
 
 public class MainApplication {
 
-	private static MainApplication sharedInstance = new Application();
+	private static MainApplication sharedInstance = new MainApplication();
 
 	public static MainApplication getSharedInstance() {
 		return sharedInstance;
