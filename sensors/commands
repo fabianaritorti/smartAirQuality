@@ -6,3 +6,8 @@ GET COMMANDS:
 
 coap-client -m get coap://[fd00::202:2:2:2]/res_quality -e mode=on
 
+
+RUN APPLICATION:
+ java -jar target/coap-server-0.0.1-SNAPSHOT.jar
+
+
