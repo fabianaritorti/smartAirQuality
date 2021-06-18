@@ -77,11 +77,11 @@ PROCESS_THREAD(air_node, ev, data){
 	//sprintf(msg,"%d",node_id);
 	coap_set_payload(request, (uint16_t * )msg, sizeof(msg)-1);
 
-
-	// while(!registered){
-	// 	LOG_DBG("Retrying registration..\n");
-	// 	COAP_BLOCKING_REQUEST(&server_ep, request, client_chunk_handler);
-	// }
+	//per registrare la risorsa, commentare da riga 81 ad 84
+	while(!registered){
+		LOG_DBG("Retrying registration..\n");
+		COAP_BLOCKING_REQUEST(&server_ep, request, client_chunk_handler);
+	}
 
 	LOG_DBG("Registered\n");
 
