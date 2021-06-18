@@ -28,7 +28,7 @@ public class MainApplication {
 
 	}
 
-	private void start() {
+	public void start() {
 		showMenu();
 		
 
