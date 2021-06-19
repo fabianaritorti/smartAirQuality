@@ -42,7 +42,16 @@ public class RegistrationResource extends CoapResource {
 		}
 
 		String responseText = response.getResponseText();
-		String[] resources = responseText.split(",");
+		String[] resources = responseText.split(";");
+		
+		String []resourcesPath =  new String[TOTAL_RESOURCES]; 
+		int index = 0;
+		for (int i = 0; i<resources.length; i++) {
+			String []resources2 = resources[i].split(",");
+			if (resources2.length > 1) {
+				resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");			
+				}
+		}
 	}
 
 }
