@@ -29,6 +29,11 @@ public class MainApplication {
 		//System.out.println("WELCOME ");
 		while(true) {
 			int cmd = getCommand();
+			if (cmd > 3) {
+				System.out.println("Error on digiting command");
+				System.out.println("Please, check and insert a new command again");
+				showMenu();
+			}
 			switch(cmd) {
 				case 1:
 					//showResourcesStatus();
@@ -43,7 +48,9 @@ public class MainApplication {
 					showMenu();
 					break;
 				case 0:
+					System.out.println("**************************");
 					System.out.println("EXIT FROM THE APPLICATION");
+					System.out.println("**************************");
 					System.exit(0);
 					break;
 					
