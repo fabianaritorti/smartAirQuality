@@ -4,9 +4,10 @@ import org.eclipse.californium.core.CoapServer;
 
 public class MyServer extends CoapServer {
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public void startServer() {
+		System.out.println("Server started...");
+		this.add(new RegistrationResource("registration"));
+		this.start();
 	}
 
 

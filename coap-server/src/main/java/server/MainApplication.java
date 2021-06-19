@@ -24,9 +24,9 @@ public class MainApplication {
 
 	public static void main(String[] args) {
 		
-		//runServer();
+		runServer();
 		showMenu();
-		//System.out.println("WELCOME ");
+		
 		while(true) {
 			int cmd = getCommand();
 			if (cmd > 3) {
@@ -86,6 +86,17 @@ public class MainApplication {
 		} catch (NumberFormatException n) {
 			return -1;
 		}
+	}
+	
+public static void runServer() {
+		
+		new Thread() {
+			public void run() {
+				MyServer server = new MyServer();
+				server.startServer();
+			}
+		}.start();
+		
 	}
 
 	
