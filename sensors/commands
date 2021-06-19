@@ -7,7 +7,15 @@ GET COMMANDS:
 coap-client -m get coap://[fd00::202:2:2:2]/res_quality -e mode=on
 
 
+GET COMMANDS FOR SHOW ALL THE GET RESOURCES:
+
+coap-client -m get coap://[fd00::202:2:2:2]/.well-known/core
+
+
 RUN APPLICATION:
  java -jar target/coap-server-0.0.1-SNAPSHOT.jar
 
 
+RPL-BORDER-ROUTER
+
+make TARGET=cooja connect-router-cooja

@@ -45,6 +45,23 @@ public class Resource {
 		return "coap://[" + this.ip + "]:5683/" + this.path;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Resource [ip=");
+		builder.append(this.ip);
+		builder.append(", path=");
+		builder.append(this.path);
+		builder.append(", name=");
+		builder.append(this.name);
+		builder.append(", observable=");
+		builder.append(this.observable);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
+
 	
 
 
