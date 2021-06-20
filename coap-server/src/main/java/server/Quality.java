@@ -15,8 +15,8 @@ public class Quality extends Resource{
 		this.quality = quality;
 	}
 
-	public Quality(String ip, String path, String name, boolean observable) {
-		super(ip, path, name, observable);
+	public Quality(String ip, String path) {
+		super(ip, path);
 		//int quality = 20;
 		// TODO Auto-generated constructor stub
 	}

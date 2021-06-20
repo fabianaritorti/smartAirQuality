@@ -36,9 +36,9 @@ public class MyClient extends CoapClient {
 					if (jsonObject.containsKey("quality")) {
 						value = jsonObject.get("quality").toString();
 						int valueQuality = Integer.parseInt((value).trim());
-						keyQuality = getQualityKeys(MainApplication.qualityMap, quality);
+						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
 						
-						Air air = MainApplication.airMap.get(keyQuality);						
+						Air air = MainApplication.getAirMap().get(keyQuality);						
 						
 						
 						if (valueQuality < THRESHOLD) {
