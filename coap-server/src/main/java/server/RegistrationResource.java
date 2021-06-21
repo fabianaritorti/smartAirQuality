@@ -65,6 +65,7 @@ public class RegistrationResource extends CoapResource {
 		for (int i = 0; i<resources.length; i++) {
 			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
 			String []resources2 = resources[i].split(",");
+			System.out.println("RESOURCES2" + resources2[i]);
 			if (resources2.length > 1) {
 				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
 				//ottenere i nomi delle singole risorse
