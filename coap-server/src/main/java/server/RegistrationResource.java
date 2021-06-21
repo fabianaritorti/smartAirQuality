@@ -113,10 +113,11 @@ public class RegistrationResource extends CoapResource {
 					
 				}
 			}
-			nodeId++;
+			
 			
 			
 		}
+		nodeId++;
 		roomCounter++;
 		
 		System.out.println("Room "+ name + " added");
