@@ -76,9 +76,9 @@ public class RegistrationResource extends CoapResource {
 				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
 				//ottenere i nomi delle singole risorse
 				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
-				
-				resourcesPath[index++] = resources2[1].replaceAll("[//<>]", "");
-				System.out.println("RESOURCES_PATH"+ resourcesPath);
+				index++;
+				resourcesPath[index] = resources2[1].replaceAll("[//<>]", "");
+				System.out.println("RESOURCES_PATH"+ resourcesPath[index]);
 				}
 			
 		}
