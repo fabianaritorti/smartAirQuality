@@ -38,6 +38,8 @@ public class RegistrationResource extends CoapResource {
 		
 		
 		
+		
+		
 		//inetAddress è il source address della richiesta
 		InetAddress inetAddress = exchange.getSourceAddress();
 		System.out.println("INETADDRESS"+ inetAddress);
@@ -57,8 +59,8 @@ public class RegistrationResource extends CoapResource {
 		String responseText = response.getResponseText();
 		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
-		//String[] resources = responseText.split(";");
-		String[] resources = responseText.split(",");
+		String[] resources = responseText.split(";");
+		//String[] resources = responseText.split(",");
 		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
 		String []resourcesPath =  new String[TOTAL_RESOURCES]; 
 		int index = 0;
@@ -66,8 +68,8 @@ public class RegistrationResource extends CoapResource {
 			System.out.println("RESOURCES" + resources[i]);
 			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
 			//String []resources2 = resources[i].split(",");
-			//String []resources2 = resources[i].split(",");
-			String []resources2 = resources[i].split(";");
+			String []resources2 = resources[i].split(",");
+			//String []resources2 = resources[i].split(";");
 			System.out.println("RESOURCES2" + resources2[i]);
 			
 			if (resources2.length > 1) {
