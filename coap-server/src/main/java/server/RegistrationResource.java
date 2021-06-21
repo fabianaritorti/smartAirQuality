@@ -69,7 +69,9 @@ public class RegistrationResource extends CoapResource {
 				}
 			
 		}
+		System.out.println("IL NUMERO DI RISORSE E'" + resourcesPath.length);
 		for (int i = 0; i < resourcesPath.length; i++) {
+			
 			name = Rooms[nodeId];
 			if (resourcesPath[i] == null) {
 				System.out.println("There is no resource");
@@ -98,13 +100,13 @@ public class RegistrationResource extends CoapResource {
 					
 				}
 			}
-			
+			nodeId++;
 			
 			
 		}
 		roomCounter++;
-		nodeId++;
-		System.out.println("Room"+ name + "added");
+		
+		System.out.println("Room "+ name + " added");
 		System.out.println("-------------------------------");
 		System.out.println("The rooms registered are:" + roomCounter);
 		System.out.println("-------------------------------");
