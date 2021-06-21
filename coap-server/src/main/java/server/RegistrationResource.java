@@ -70,7 +70,7 @@ public class RegistrationResource extends CoapResource {
 			//String []resources2 = resources[i].split(",");
 			String []resources2 = resources[i].split(",");
 			//String []resources2 = resources[i].split(";");
-			System.out.println("RESOURCES2" + resources2[i]);
+			System.out.println("RESOURCES2" + resources2.length);
 			
 			if (resources2.length > 1) {
 				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
