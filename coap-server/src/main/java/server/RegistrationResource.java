@@ -56,7 +56,9 @@ public class RegistrationResource extends CoapResource {
 		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
 		String[] resources = responseText.split(";");
-		
+		for (int i = 0; i <resources.length; i++) {
+			System.out.println("RESOURCES" + resources[i]);
+		}
 		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
 		String []resourcesPath =  new String[TOTAL_RESOURCES]; 
 		int index = 0;
