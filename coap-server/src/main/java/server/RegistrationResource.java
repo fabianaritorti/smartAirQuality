@@ -66,19 +66,18 @@ public class RegistrationResource extends CoapResource {
 			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
 			String []resources2 = resources[i].split(",");
 			System.out.println("RESOURCES2" + resources2[i]);
-			String resFinal = resources2[1].replaceAll("[\\<>]", "");	
-			System.out.println("RESOURCES2" + resFinal);
-//			if (resources2.length > 1) {
-//				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
-//				//ottenere i nomi delle singole risorse
-//				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
-//				
-//				resourcesPath[index++] = resources2[1].replaceAll("[//<>]", "");
-//				System.out.println("RESOURCES_PATH"+ resourcesPath);
-//				}
+			
+			if (resources2.length > 1) {
+				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
+				//ottenere i nomi delle singole risorse
+				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
+				
+				resourcesPath[index++] = resources2[1].replaceAll("[//<>]", "");
+				System.out.println("RESOURCES_PATH"+ resourcesPath);
+				}
 			
 		}
-		System.out.println("IL NUMERO DI RISORSE E'" + resourcesPath.length);
+		
 		for (int i = 0; i < resourcesPath.length; i++) {
 			
 			name = Rooms[nodeId];
