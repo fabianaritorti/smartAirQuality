@@ -53,9 +53,10 @@ public class RegistrationResource extends CoapResource {
 		}
 		//responseText è il payload ottenuto tramite il metodo getResponseText(riga 21,24)
 		String responseText = response.getResponseText();
+		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
 		String[] resources = responseText.split(";");
-		System.out.println("PAYLOAD:" + resources);
+		
 		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
 		String []resourcesPath =  new String[TOTAL_RESOURCES]; 
 		int index = 0;
