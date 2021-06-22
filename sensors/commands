@@ -5,6 +5,7 @@ coap-client -m post coap://[fd00::202:2:2:2]/res_air?POST -e state=ON
 GET COMMANDS:
 
 coap-client -m get coap://[fd00::202:2:2:2]/res_quality -e mode=on
+coap-client -m get coap://[fd00::202:2:2:2]/res_presence -e mode=on
 
 
 GET COMMANDS FOR SHOW ALL THE GET RESOURCES:
