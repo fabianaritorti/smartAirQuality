@@ -88,14 +88,14 @@ public class MainApplication {
 		while(true) {
 			
 			int cmd = getCommand();
-			if (cmd > 3) {
+			if (cmd > 4) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
 				showMenu();
 			}
 			switch(cmd) {
 				case 1:
-					showResourcesStatus();
+					showResources();
 					showMenu();
 					break;
 				case 2:
@@ -124,9 +124,10 @@ public class MainApplication {
 		System.out.println("************************************************");
 		System.out.println("Welcome to the Air Depuration System!");
 		System.out.println("Please, insert a command");
-		System.out.println("1.Show the resources and their status");
+		System.out.println("1.Show the resources");
 		System.out.println("2.Start depuration");
 		System.out.println("3.Stop depuration");
+		System.out.println("4.Show node status");
 	// 	//eventualmente aggiungere altro
 		//System.out.pritnln("Show the last quality air value")
 		System.out.println("0.Exit");
@@ -158,7 +159,14 @@ public static void runServer() {
 		}.start();
 		
 	}
-public static void showResourcesStatus() {
+public static void showResources() {
+	System.out.println("THESE ARE THE RESOURCES:");
+	for (int i = 0; i < getQualityList().size(); i++) {
+		Air air = getAirList().get(i);
+		Quality quality = qualityList.get(i);
+		System.out.println("This is the " + i + "quality resource: " + quality.getIp() + " " + quality.getPath());
+		System.out.println("This is the " + i + "air resource: " + air.getIp() + " " + air.getPath());
+	}
 	
 }
 
