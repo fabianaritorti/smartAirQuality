@@ -129,9 +129,10 @@ PROCESS_THREAD(air_node, ev, data){
 			//res_presence.trigger();
 			res_quality.trigger();
 			//res_presence.trigger();
+			
 		}
-        etimer_reset(&timer);
-            
+        
+            etimer_reset(&timer);
 
         
         
