@@ -139,7 +139,8 @@ public class MainApplication {
 		System.out.println("1.Show the resources");
 		System.out.println("2.Start depuration");
 		System.out.println("3.Stop depuration");
-		System.out.println("4.Show node status");
+		System.out.println("4.Observe resource mode");
+		System.out.println("5.Show node status");
 	// 	//eventualmente aggiungere altro
 		//System.out.pritnln("Show the last quality air value")
 		System.out.println("0.Exit");
