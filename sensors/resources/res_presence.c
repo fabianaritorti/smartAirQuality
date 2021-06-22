@@ -41,6 +41,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 
 
 	if(request != NULL){
+		LOG_DBG("Received GET\n");
 		LOG_DBG("Observing handler number %d\n", counter); 
 	}
 
@@ -51,8 +52,12 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 
 	if (accept== -1)
 		accept = APPLICATION_JSON;
-
-	if(accept == APPLICATION_XML) {
+	
+	if(accept == TEXT_PLAIN) {
+	    coap_set_header_content_format(response, TEXT_PLAIN);
+	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "<presence=\"%d\"/>", presence);
+	    coap_set_payload(response, (uint8_t *)buffer, strlen((char *)buffer)); 
+	} else if(accept == APPLICATION_XML) {
 		coap_set_header_content_format(response, APPLICATION_XML);
  		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<presence=\"%d\"/>", presence);
 		coap_set_payload(response, buffer, strlen((char *)buffer));
