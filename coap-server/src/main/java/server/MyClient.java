@@ -18,7 +18,7 @@ public class MyClient extends CoapClient {
 	private Quality quality;
 	//String keyQuality;
 	
-	public MyClient(Quality quality) 
+	public MyClient(Quality quality) {
 		//viene restituito l'host address relativo a questa risorsa(nodo)
 		super(quality.getCoapURI());
 		this.quality = quality;
