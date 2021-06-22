@@ -20,3 +20,20 @@ RUN APPLICATION:
 RPL-BORDER-ROUTER
 
 make TARGET=cooja connect-router-cooja
+
+
+
+
+
+
+
+
+<properties>
+    <slf4jVersion>1.6.1</slf4jVersion>
+  </properties>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4jVersion}</version>
+    </dependency>
