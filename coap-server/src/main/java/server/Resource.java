@@ -4,13 +4,15 @@ public class Resource {
 
 	private String ip;
 	private String path;
+	private String name;
 	
 
 
-	public Resource(String ip, String path) {
+	public Resource(String ip, String path, String name) {
 		// TODO Auto-generated constructor stub
 		this.ip = ip;
 		this.path = path;
+		this.name = name;
 		
 	}
 

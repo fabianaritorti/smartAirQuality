@@ -59,23 +59,33 @@ public class RegistrationResource extends CoapResource {
 		String responseText = response.getResponseText();
 		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
-		String[] resources = responseText.split(",");
-		//String[] resources = responseText.split(",");
-		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
-		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
-		//int index = 0;
-		for (int i = 0; i<resources.length; i++) {
-			//System.out.println("RESOURCES" + resources[i]);
-			String[] parameters = resources[i].split(";");
-			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
-			//String []resources2 = resources[i].split(",");
-			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
-				String path = parameters[0].split("<")[1].replace(">", "");
-				//System.out.println("PATH "+ path);
-				String name = path.replace("/", "");
-				System.out.println("NAME" + name);
-				System.out.println("NAME" + path);
-			}
+		Integer startIndex = 0, endIndex;
+
+		while (true) {
+			startIndex = responseText.indexOf("</");
+			if (startIndex == -1)
+				break;
+			endIndex = responseText.indexOf(">");
+			String path = responseText.substring(startIndex + 2, endIndex);
+			responseText = responseText.substring(endIndex + 1);
+			System.out.println("PATH"+ path);
+//		String[] resources = responseText.split(",");
+//		//String[] resources = responseText.split(",");
+//		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
+//		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
+//		//int index = 0;
+//		for (int i = 0; i<resources.length; i++) {
+//			//System.out.println("RESOURCES" + resources[i]);
+//			String[] parameters = resources[i].split(";");
+//			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
+//			//String []resources2 = resources[i].split(",");
+//			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
+//				String path = parameters[0].split("<")[1].replace(">", "");
+//				//System.out.println("PATH "+ path);
+//				String name = path.replace("/", "");
+//				System.out.println("NAME" + name);
+//				System.out.println("NAME" + path);
+//			}
 				//String info = parameters[1]+";"+parameters[2];
 				
 //				boolean obs = false;
