@@ -74,8 +74,7 @@ public class RegistrationResource extends CoapResource {
 				//System.out.println("PATH "+ path);
 				String name = path.replace("/", "");
 				System.out.println("NAME" + name);
-			} else {
-				System.out.println("BYE");
+				System.out.println("NAME" + path);
 			}
 				//String info = parameters[1]+";"+parameters[2];
 				
