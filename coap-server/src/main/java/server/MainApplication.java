@@ -14,31 +14,56 @@ public class MainApplication {
 	
 	public static boolean waitRegistration = true;
 	
-	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
-	
-	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
+//	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
+//	
+//	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
 	
 	public static ArrayList<MyClient> clientList = new ArrayList<MyClient>();
 	
-	public static HashMap<String, Quality> getQualityMap() {
-		return qualityMap;
+	public static ArrayList<Quality> qualityList = new ArrayList<Quality>();
+	public static ArrayList<Air> airList = new ArrayList<Air>();
+	
+	public static ArrayList<Quality> getQualityList() {
+		return qualityList;
 	}
 
-	public static HashMap<String, Air> getAirMap() {
-		return airMap;
+	public static ArrayList<Air> getAirList() {
+		return airList;
 	}
 
+	public static void setQualityList(ArrayList<Quality> qualityList) {
+		MainApplication.qualityList = qualityList;
+	}
+
+	public static void setAirList(ArrayList<Air> airList) {
+		MainApplication.airList = airList;
+	}
+	
 	public static ArrayList<MyClient> getClientList() {
 		return clientList;
 	}
-
-	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
-		MainApplication.qualityMap = qualityMap;
-	}
-
-	public static void setAirMap(HashMap<String, Air> airMap) {
-		MainApplication.airMap = airMap;
-	}
+	//public static ArrayList<Presence> presenceList = new ArrayList<Presence>();
+	
+	
+//	public static HashMap<String, Quality> getQualityMap() {
+//		return qualityMap;
+//	}
+//
+//	public static HashMap<String, Air> getAirMap() {
+//		return airMap;
+//	}
+//
+//	public static ArrayList<MyClient> getClientList() {
+//		return clientList;
+//	}
+//
+//	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
+//		MainApplication.qualityMap = qualityMap;
+//	}
+//
+//	public static void setAirMap(HashMap<String, Air> airMap) {
+//		MainApplication.airMap = airMap;
+//	}
 
 	public static void setClientList(ArrayList<MyClient> clientList) {
 		MainApplication.clientList = clientList;

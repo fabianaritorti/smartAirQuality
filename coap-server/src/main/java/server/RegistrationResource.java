@@ -82,10 +82,24 @@ public class RegistrationResource extends CoapResource {
 			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
 				String path = parameters[0].split("<")[1].replace(">", "");
 				String name = path.replace("/", "");
-				System.out.println("PATH "+ path);
-				System.out.println("NAME" + name);
+//				System.out.println("PATH "+ path);
+//				System.out.println("NAME" + name);
+				if (name.contains("res_quality")) {
+					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
+					if(!MainApplication.getQualityList().contains(newQuality)) {
+						MainApplication.getQualityList().add(newQuality);
+						addObservingClient(newQuality);
+						
+					}
+				} else if (name.contains("res_air")) {
+					Air newAir = new Air(inetAddress.getHostAddress(), name);
+					if(!MainApplication.getAirList().contains(newAir)) {
+						MainApplication.getAirList().add(newAir);
+					}
+				}
+//					
 			}
-//				
+//			
 //				
 //				
 //				System.out.println("NAME" + path);
@@ -97,8 +111,7 @@ public class RegistrationResource extends CoapResource {
 //					obs = true;
 //				}
 				
-//				if (name.contains("res_quality")) {
-//					Flag newFlag = new Flag(name, path, addr.getHostAddress(), obs);
+				//Flag newFlag = new Flag(name, path, addr.getHostAddress(), obs);
 //					Application.getSharedInstance().getFlagsMap().put(name, newFlag);
 //					System.out.println("\n"+name+" registered\n");
 //					System.out.print(">> ");
