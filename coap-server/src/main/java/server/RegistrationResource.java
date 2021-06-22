@@ -59,17 +59,7 @@ public class RegistrationResource extends CoapResource {
 		String responseText = response.getResponseText();
 		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
-//		Integer startIndex = 0, endIndex;
-//
-//		while (true) {
-//			startIndex = responseText.indexOf("</");
-//			if (startIndex == -1)
-//				break;
-//			endIndex = responseText.indexOf(">");
-//			String path = responseText.substring(startIndex + 2, endIndex);
-//			responseText = responseText.substring(endIndex + 1);
-//			System.out.println("PATH"+ path);
-//		String[] resources = responseText.split(",");
+//		
 		String[] resources = responseText.split(",");
 //		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
 //		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
@@ -88,6 +78,7 @@ public class RegistrationResource extends CoapResource {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
 					if(!MainApplication.getQualityList().contains(newQuality)) {
 						MainApplication.getQualityList().add(newQuality);
+						System.out.println("RESOURCE" + name + "ADDED");
 						addObservingClient(newQuality);
 						
 					}
@@ -95,6 +86,7 @@ public class RegistrationResource extends CoapResource {
 					Air newAir = new Air(inetAddress.getHostAddress(), name);
 					if(!MainApplication.getAirList().contains(newAir)) {
 						MainApplication.getAirList().add(newAir);
+						System.out.println("RESOURCE" + name + "ADDED");
 					}
 				}
 //					
@@ -191,12 +183,12 @@ public class RegistrationResource extends CoapResource {
 //			MainApplication.setWaitRegistration(false);
 //		}
 //	}
-//	
 	public void addObservingClient(Quality q) {
-		MyClient client = new MyClient(q);
-		MainApplication.getClientList().add(client);
-		//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0
-		MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
-	}
+	MyClient client = new MyClient(q);
+	MainApplication.getClientList().add(client);
+	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0
+	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
+}
+	
 
 }
