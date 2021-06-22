@@ -81,16 +81,6 @@ public class MyClient extends CoapClient {
 		});
 	}
 	
-	//mi ritorno tutte le chiavi associati al valore della qualità
-//	public static <String,Quality> String getQualityKeys(Map <String,Quality> map, Quality q) {
-//		for (String k: map.keySet()) {
-//			if (q.equals(map.get(k))) {
-//				return k;
-//			}
-//		}
-//		return null;
-//		
-//	}
-	
+
 
 }

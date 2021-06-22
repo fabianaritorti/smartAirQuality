@@ -86,9 +86,7 @@ public class MainApplication {
 		showMenu();
 		
 		while(true) {
-			if (waitRegistration) {
-				System.out.println("Waiting for the registration of all resources");
-			}
+			
 			int cmd = getCommand();
 			if (cmd > 3) {
 				System.out.println("Error on digiting command");
