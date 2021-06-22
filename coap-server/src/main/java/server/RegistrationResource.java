@@ -9,9 +9,9 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class RegistrationResource extends CoapResource {
 	
-	private final static int TOTAL_RESOURCES = 3;
-	private int roomCounter = 0;
-	public static final String []Rooms = {"Hall", "Bathroom", "Study" };
+//	private final static int TOTAL_RESOURCES = 3;
+//	private int roomCounter = 0;
+//	public static final String []Rooms = {"Hall", "Bathroom", "Study" };
 	
 	public RegistrationResource(String name) {
 		super(name);
@@ -24,9 +24,9 @@ public class RegistrationResource extends CoapResource {
 	
 	
 	public void handleGET(CoapExchange exchange) {
-		int nodeId = 0;
+		//int nodeId = 0;
 		exchange.accept();
-		String name = null;
+		//String name = null;
 		
 		//ottengo la richiesta della payload come una stringa
 		//String responseText = exchange.getRequestText();
@@ -59,81 +59,113 @@ public class RegistrationResource extends CoapResource {
 		String responseText = response.getResponseText();
 		System.out.println("PAYLOAD:" + responseText);
 		//si fa lo split in base a ; per ottenere le songole risorse
-		String[] resources = responseText.split(";");
+		String[] resources = responseText.split(",");
 		//String[] resources = responseText.split(",");
 		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
-		String []resourcesPath =  new String[TOTAL_RESOURCES]; 
-		int index = 0;
+		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
+		//int index = 0;
 		for (int i = 0; i<resources.length; i++) {
-			System.out.println("RESOURCES" + resources[i]);
+			//System.out.println("RESOURCES" + resources[i]);
+			String[] parameters = resources[i].split(";");
 			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
 			//String []resources2 = resources[i].split(",");
-			String []resources2 = resources[i].split(",");
-			//String []resources2 = resources[i].split(";");
-			System.out.println("RESOURCES2" + resources2.length);
-			
-			if (resources2.length > 1) {
-				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
-				//ottenere i nomi delle singole risorse
-				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
-				index++;
-				resourcesPath[index] = resources2[1].replaceAll("[//<>]", "");
-				System.out.println("RESOURCES_PATH"+ resourcesPath[index]);
-				}
-			
-		}
-		
-		for (int i = 0; i < resourcesPath.length; i++) {
-			
-			name = Rooms[nodeId];
-			if (resourcesPath[i] == null) {
-				System.out.println("There is no resource");
+			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
+				String path = parameters[0].split("<")[1].replace(">", "");
+				//System.out.println("PATH "+ path);
+				String name = path.replace("/", "");
+				System.out.println("NAME" + name);
 			} else {
-				if (resourcesPath[i] != null) {
-					//il metodo contains restituisce TRUE se res_quality è contenuta nel payload
-					if (resourcesPath[i].contains("res_quality")) {
-						//inetAddress.getHostAddress restituisce l'IP
-						
-						Quality q = new Quality(inetAddress.getHostAddress(),resourcesPath[i]);
-						if (MainApplication.getQualityMap().containsValue(q)) {
-							System.out.println("This quality value is present yet");
-						} else if(!MainApplication.getQualityMap().containsValue(q)) {
-							MainApplication.getQualityMap().put(name, q);
-							addObservingClient(q);
-						}
-					} else if (resourcesPath[i].contains("res_air")) {
-						Air a = new Air(inetAddress.getHostAddress(),resourcesPath[i]);
-						if (MainApplication.getAirMap().containsValue(a)) {
-							System.out.println("This air state is present yet");
-						} else if (!MainApplication.getAirMap().containsValue(a)) {
-							MainApplication.getAirMap().put(name, a);
-							
-						}
-					}
-					
-				}
+				System.out.println("BYE");
 			}
-			
-			
-			
-		}
-		nodeId++;
-		roomCounter++;
-		
-		System.out.println("Room "+ name + " added");
-		System.out.println("-------------------------------");
-		System.out.println("The rooms registered are:" + roomCounter);
-		System.out.println("-------------------------------");
-		if (roomCounter == Rooms.length) {
-			System.out.println("-------------------------------");
-			System.out.println("All the resources are added!");
-			System.out.println("-------------------------------");
-			System.out.println("Registration is complete!");
-			System.out.println("-------------------------------");
-			MainApplication.setWaitRegistration(false);
-		}
+				//String info = parameters[1]+";"+parameters[2];
+				
+//				boolean obs = false;
+//				if(responseText.contains("obs")) {
+//					obs = true;
+//				}
+				
+//				if (name.contains("res_quality")) {
+//					Flag newFlag = new Flag(name, path, addr.getHostAddress(), obs);
+//					Application.getSharedInstance().getFlagsMap().put(name, newFlag);
+//					System.out.println("\n"+name+" registered\n");
+//					System.out.print(">> ");
+//				} else {
+//					TrackLimit newTracklimit = new TrackLimit(name, path, addr.getHostAddress(), obs);
+//					Application.getSharedInstance().getTracklimitsMap().put(name, newTracklimit);
+//					System.out.println("\n"+name+" registered\n");
+//					System.out.print(">> ");
+////					if(obs==true) {
+////					Interface.observedResources.put(name, new ObservingCoapClient(newRes));	
+////					Interface.observedResources.get(name).startObserving();
+////				}
+//				}
+			}
 	}
-	
+			//String []resources2 = resources[i].split(";");
+			//System.out.println("RESOURCES2" + resources2.length);
+			
+//			if (resources2.length > 1) {
+//				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
+//				//ottenere i nomi delle singole risorse
+//				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
+//				index++;
+//				resourcesPath[index] = resources2[1].replaceAll("[//<>]", "");
+//				System.out.println("RESOURCES_PATH"+ resourcesPath[index]);
+//				}
+//			
+//		}
+		
+//		for (int i = 0; i < resourcesPath.length; i++) {
+//			
+//			name = Rooms[nodeId];
+//			if (resourcesPath[i] == null) {
+//				System.out.println("There is no resource");
+//			} else {
+//				if (resourcesPath[i] != null) {
+//					//il metodo contains restituisce TRUE se res_quality è contenuta nel payload
+//					if (resourcesPath[i].contains("res_quality")) {
+//						//inetAddress.getHostAddress restituisce l'IP
+//						
+//						Quality q = new Quality(inetAddress.getHostAddress(),resourcesPath[i]);
+//						if (MainApplication.getQualityMap().containsValue(q)) {
+//							System.out.println("This quality value is present yet");
+//						} else if(!MainApplication.getQualityMap().containsValue(q)) {
+//							MainApplication.getQualityMap().put(name, q);
+//							addObservingClient(q);
+//						}
+//					} else if (resourcesPath[i].contains("res_air")) {
+//						Air a = new Air(inetAddress.getHostAddress(),resourcesPath[i]);
+//						if (MainApplication.getAirMap().containsValue(a)) {
+//							System.out.println("This air state is present yet");
+//						} else if (!MainApplication.getAirMap().containsValue(a)) {
+//							MainApplication.getAirMap().put(name, a);
+//							
+//						}
+//					}
+//					
+//				}
+//			}
+//			
+//			
+//			
+//		}
+//		nodeId++;
+//		roomCounter++;
+//		
+//		System.out.println("Room "+ name + " added");
+//		System.out.println("-------------------------------");
+//		System.out.println("The rooms registered are:" + roomCounter);
+//		System.out.println("-------------------------------");
+//		if (roomCounter == Rooms.length) {
+//			System.out.println("-------------------------------");
+//			System.out.println("All the resources are added!");
+//			System.out.println("-------------------------------");
+//			System.out.println("Registration is complete!");
+//			System.out.println("-------------------------------");
+//			MainApplication.setWaitRegistration(false);
+//		}
+//	}
+//	
 	public void addObservingClient(Quality q) {
 		MyClient client = new MyClient(q);
 		MainApplication.getClientList().add(client);
