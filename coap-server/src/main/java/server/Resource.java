@@ -16,7 +16,7 @@ public class Resource {
 //		this.name = name;
 //	}
 
-	public Resource(String ip, String path, String name) {
+	public Resource(String ip, String path) {
 		// TODO Auto-generated constructor stub
 		this.ip = ip;
 		this.path = path;
