@@ -1,5 +1,6 @@
 package server;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.IIOException;
+
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapResponse;
+import org.eclipse.californium.core.coap.MediaTypeRegistry;
 
 public class MainApplication {
 	
@@ -88,6 +93,7 @@ public class MainApplication {
 		while(true) {
 			
 			int cmd = getCommand();
+			Integer nodeId;
 			if (cmd > 4) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
@@ -99,11 +105,17 @@ public class MainApplication {
 					showMenu();
 					break;
 				case 2:
-					//startDepuration();
+					nodeId = getNodeId();
+					if (nodeId != null) {
+						changeDepuratorStatus("ON", airList.get(nodeId));
+					}
 					showMenu();
 					break;
 				case 3:
-					//stopDepuration();
+					nodeId = getNodeId();
+					if (nodeId != null) {
+						changeDepuratorStatus("OFF", airList.get(nodeId));
+					}
 					showMenu();
 					break;
 				case 0:
@@ -164,12 +176,40 @@ public static void showResources() {
 	for (int i = 0; i < getQualityList().size(); i++) {
 		Air air = getAirList().get(i);
 		Quality quality = qualityList.get(i);
-		System.out.println("This is the " + i + "quality resource: " + quality.getIp() + " " + quality.getPath());
-		System.out.println("This is the " + i + "air resource: " + air.getIp() + " " + air.getPath());
+		System.out.println("This is the node" + i+2 + "quality resource: " + quality.getIp() + " " + quality.getPath());
+		System.out.println("This is the node" + i+2 + "air resource: " + air.getIp() + " " + air.getPath());
 	}
 	
 }
+public static void changeDepuratorStatus(String state, Air air) {
+	CoapClient client = new CoapClient(air.getCoapURI());
+	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+	CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+	String code = coapResponse.getCode().toString();
+	if (!code.startsWith("2")) {
+		System.out.println("Error: " + code);
+		return;
+	}
+	if (state.toString().equals("ON")) {
+		air.setState(true);
+	} else {
+		air.setState(false);
+	}
+}
 
-	
+public static Integer getNodeId() {
+	System.out.println("INSERT THE NODE ID");
+	int index = getCommand();
+	if (index == -1) {
+		return null;
+	}
+	if (index < qualityList.size()) {
+		return index;
+	} else {
+		System.out.println("THERE IS NO NODE WITH THIS ID");
+	}
+		
+
+	return null;
 
 }
