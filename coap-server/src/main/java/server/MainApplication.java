@@ -208,8 +208,10 @@ public static Integer getNodeId() {
 	} else {
 		System.out.println("THERE IS NO NODE WITH THIS ID");
 	}
+	return null;
 		
 
-	return null;
+	
+}
 
 }
