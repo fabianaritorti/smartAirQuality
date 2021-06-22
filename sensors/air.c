@@ -14,7 +14,7 @@
 #define LOG_LEVEL LOG_LEVEL_DBG
 
 #define P_THRESHOLD 50
-#define Q_THRESHOLD 100
+#define Q_THRESHOLD 50
 
 //resource definition
 extern coap_resource_t res_presence; 
