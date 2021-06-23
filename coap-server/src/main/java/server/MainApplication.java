@@ -232,6 +232,7 @@ public static void showAirResources() {
 public static void changeDepuratorStatus(String state) {
 	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 	String name;
+	System.out.println("INSERT THE NAME OF THE RESOURCE");
 	try {
 		name = bufferedReader.readLine();
 		Air air = airMap.get(name);
@@ -258,13 +259,53 @@ public static void changeDepuratorStatus(String state) {
 		e.printStackTrace();
 	}
 	
-//	
-//	
-//	
-//	
-//	
+	
 	
 }
+
+public static void getStatusResource(String key) {
+	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	String nameQuality;
+	String nameAir;
+	System.out.println("INSERT THE NAME OF THE RESOURCES");
+	try {
+		System.out.println("QUALITY NAME");
+		nameQuality = bufferedReader.readLine();
+		System.out.println("AIR NAME");
+		nameAir= bufferedReader.readLine();
+		Air air = airMap.get(nameAir);
+		if (air == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		Quality quality = qualityMap.get(nameQuality);
+		if (quality == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		String qualityValue = null;
+		if (quality.getQuality() < 50 ) {
+			qualityValue = "BAD";
+		} else {
+			qualityValue = "GOOD";
+		}
+		String lightValue = null;
+		if (air.isState()) {
+			lightValue = "ON";
+		} else {
+			lightValue = "OFF";
+		}
+
+		System.out.println("THE NODE HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
+		
+		
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
 
 
 
@@ -281,25 +322,7 @@ public static void changeDepuratorStatus(String state) {
 //	}
 //	return null;
 		
-//public static void getStatusResource(String key) {
-//	int nodeId = Arrays.asList(RegistrationResource.Rooms).indexOf(key) +2;
-//	Quality q = getQualityMap().get(key);
-//	Air a = getAirMap().get(key);
-//	String qualityValue = null;
-//	if (q.getQuality() < 50 ) {
-//		qualityValue = "BAD";
-//	} else {
-//		qualityValue = "GOOD";
-//	}
-//	String lightValue = null;
-//	if (a.isState()) {
-//		lightValue = "ON";
-//	} else {
-//		lightValue = "OFF";
-//	}
-//	
-//	System.out.println("THE ROOM: " + key + "WITH ID: " + nodeId + "HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
-//}
+
 //	
 }
 
