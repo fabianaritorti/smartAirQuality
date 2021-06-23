@@ -29,7 +29,7 @@ public class RegistrationResource extends CoapResource {
 		String nameRoom = null;
 		
 		//ottengo la richiesta della payload come una stringa
-		String responseText2 = exchange.getRequestText();
+		String responseText2 = exchange.getRequestText().toString();
 		System.out.println("RESPONSE TEXT" + responseText2);
 		
 		//converto la stringa in un array di char
