@@ -98,7 +98,7 @@ public class MainApplication {
 //			}
 			
 			int cmd = getCommand();
-			Integer nodeId;
+			
 			if (cmd > 4) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
