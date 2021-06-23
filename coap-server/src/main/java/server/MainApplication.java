@@ -106,7 +106,7 @@ public class MainApplication {
 			}
 			switch(cmd) {
 				case 1:
-					showResourcesStatus();
+					//showResourcesStatus();
 					showMenu();
 					break;
 				case 2:
@@ -188,11 +188,11 @@ public static void runServer() {
 		
 	}
 
-public static void showResourcesStatus() {
-	for (String key : MainApplication.getQualityMap().keySet()) {
-		getStatusResource(key);
-	}
-}
+//public static void showResourcesStatus() {
+//	for (String key : MainApplication.getQualityMap().keySet()) {
+//		getStatusResource(key);
+//	}
+//}
 
 //public static void showResources() {
 //	System.out.println("THESE ARE THE RESOURCES:");
@@ -204,21 +204,21 @@ public static void showResourcesStatus() {
 //	}
 //	
 //}
-public static void changeDepuratorStatus(String state, Air air) {
-	CoapClient client = new CoapClient(air.getCoapURI());
-	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
-	CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
-	String code = coapResponse.getCode().toString();
-	if (!code.startsWith("2")) {
-		System.out.println("Error: " + code);
-		return;
-	}
-	if (state.toString().equals("ON")) {
-		air.setState(true);
-	} else {
-		air.setState(false);
-	}
-}
+//public static void changeDepuratorStatus(String state, Air air) {
+//	CoapClient client = new CoapClient(air.getCoapURI());
+//	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+//	CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+//	String code = coapResponse.getCode().toString();
+//	if (!code.startsWith("2")) {
+//		System.out.println("Error: " + code);
+//		return;
+//	}
+//	if (state.toString().equals("ON")) {
+//		air.setState(true);
+//	} else {
+//		air.setState(false);
+//	}
+//}
 
 //public static Integer getNodeId() {
 //	System.out.println("INSERT THE NODE ID");
@@ -233,26 +233,26 @@ public static void changeDepuratorStatus(String state, Air air) {
 //	}
 //	return null;
 		
-public static void getStatusResource(String key) {
-	int nodeId = Arrays.asList(RegistrationResource.Rooms).indexOf(key) +2;
-	Quality q = getQualityMap().get(key);
-	Air a = getAirMap().get(key);
-	String qualityValue = null;
-	if (q.getQuality() < 50 ) {
-		qualityValue = "BAD";
-	} else {
-		qualityValue = "GOOD";
-	}
-	String lightValue = null;
-	if (a.isState()) {
-		lightValue = "ON";
-	} else {
-		lightValue = "OFF";
-	}
-	
-	System.out.println("THE ROOM: " + key + "WITH ID: " + nodeId + "HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
-}
-	
+//public static void getStatusResource(String key) {
+//	int nodeId = Arrays.asList(RegistrationResource.Rooms).indexOf(key) +2;
+//	Quality q = getQualityMap().get(key);
+//	Air a = getAirMap().get(key);
+//	String qualityValue = null;
+//	if (q.getQuality() < 50 ) {
+//		qualityValue = "BAD";
+//	} else {
+//		qualityValue = "GOOD";
+//	}
+//	String lightValue = null;
+//	if (a.isState()) {
+//		lightValue = "ON";
+//	} else {
+//		lightValue = "OFF";
+//	}
+//	
+//	System.out.println("THE ROOM: " + key + "WITH ID: " + nodeId + "HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
+//}
+//	
 }
 
 
