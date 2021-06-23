@@ -43,8 +43,8 @@ public class RegistrationResource extends CoapResource {
 		
 		//inetAddress è il source address della richiesta
 		InetAddress inetAddress = exchange.getSourceAddress();
-		System.out.println("INETADDRESS"+ inetAddress);
-		System.out.println("INETHOSTADDRESS" + inetAddress.getHostAddress());
+//		System.out.println("INETADDRESS"+ inetAddress);
+//		System.out.println("INETHOSTADDRESS" + inetAddress.getHostAddress());
 		//con newCoapClient si costruisce un nuovo clientCoap che manda richieste ad un uri specifico
 		CoapClient client = new CoapClient("coap://[" + inetAddress.getHostAddress() + "]:5683/.well-known/core");
 		//in questo caso vengono restituite tutte le risorse get e quindi res_quality e res_air
