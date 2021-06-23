@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.IIOException;
 
@@ -107,6 +108,7 @@ public class MainApplication {
 			switch(cmd) {
 				case 1:
 					//showResourcesStatus();
+					showQualityResources();
 					showMenu();
 					break;
 				case 2:
@@ -187,6 +189,16 @@ public static void runServer() {
 		}.start();
 		
 	}
+
+public static void showQualityResources() {
+	if (qualityMap.size() == 0) {
+		System.out.println("THERE IS NO QUALITY RESOURCE");
+		return;
+	}
+	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
+		System.out.println("QUALITY VALUES:" + entry.getValue().toString());
+	}
+}
 
 //public static void showResourcesStatus() {
 //	for (String key : MainApplication.getQualityMap().keySet()) {
