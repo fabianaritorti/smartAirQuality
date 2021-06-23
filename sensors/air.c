@@ -65,7 +65,7 @@ PROCESS_THREAD(air_node, ev, data){
 	
 	coap_activate_resource(&res_air, "res_air");
     coap_activate_resource(&res_quality, "res_quality");
-	coap_activate_resource(&res_presence, "res_presence");
+	//coap_activate_resource(&res_presence, "res_presence");
 
 	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
 
@@ -102,7 +102,7 @@ PROCESS_THREAD(air_node, ev, data){
 		//genero valori casuali di presenza e qualità (numero da 1 a 100)
         // presence = 1 + rand()%100;
         quality = 1 + rand()%100;
-        LOG_DBG("presence: %d\n", presence);
+        //LOG_DBG("presence: %d\n", presence);
         LOG_DBG("quality: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
 		// 	air_state = 0;
@@ -131,7 +131,7 @@ PROCESS_THREAD(air_node, ev, data){
 
 		if (air_state != air_state_old) { // when state changes, trigger call
 			//res_air.trigger();
-			res_presence.trigger();
+			//res_presence.trigger();
 			res_quality.trigger();
 			//res_presence.trigger();
 			
