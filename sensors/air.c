@@ -119,7 +119,8 @@ PROCESS_THREAD(air_node, ev, data){
 			LOG_DBG("Air quality is bad! \n");
 			air_state = 1;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-			LOG_DBG("quality: %d\n", quality + qualityToAdd);
+			quality = quality+qualityToAdd;
+			LOG_DBG("quality: %d\n", quality);
 			//LOG_DBG("Air quality is good! \n");
 			
 			
