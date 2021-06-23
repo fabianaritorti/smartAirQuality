@@ -207,7 +207,7 @@ public static void showQualityResources() {
 
 public static void showAirResources() {
 	if (airMap.size() == 0) {
-		System.out.println("THERE IS NO QUALITY RESOURCE");
+		System.out.println("THERE IS NO AIR RESOURCE");
 		return;
 	}
 	for (Map.Entry<String, Air> entry: airMap.entrySet()) {
