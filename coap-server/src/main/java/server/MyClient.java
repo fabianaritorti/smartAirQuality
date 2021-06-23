@@ -1,6 +1,8 @@
 package server;
 
 import java.net.URI;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.californium.core.CoapClient;
@@ -16,7 +18,7 @@ public class MyClient extends CoapClient {
 
 	CoapObserveRelation obs;
 	private Quality quality;
-	//String keyQuality;
+	String keyQuality;
 	
 	public MyClient(Quality quality) {
 		//viene restituito l'host address relativo a questa risorsa(nodo)
@@ -41,21 +43,21 @@ public class MyClient extends CoapClient {
 						value = jsonObject.get("quality").toString();
 						//si converte il valore da stringa ad intero
 						int valueQuality = Integer.parseInt((value).trim());
-						//keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
+						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
 						
-						//Air air = MainApplication.getAirMap().get(keyQuality);						
+						Air air = MainApplication.getAirMap().get(keyQuality);						
 						
 						
 						if (valueQuality < THRESHOLD) {
 							//resituisce l'indice del primo valore della quality nella lista
-							int index = MainApplication.getQualityList().indexOf(quality);
+							//int index = MainApplication.getQualityList().indexOf(quality);
 							//mi prendo lo stesso indice perchè equivale allo stesso host
-							Air air = MainApplication.getAirList().get(index);
+							//Air air = MainApplication.getAirList().get(index);
 							if (!air.isState()) 
 								air.setState(true);
 						} else if (valueQuality > THRESHOLD){
-							int index = MainApplication.getQualityList().indexOf(quality);
-							Air air = MainApplication.getAirList().get(index);
+							//int index = MainApplication.getQualityList().indexOf(quality);
+							//Air air = MainApplication.getAirList().get(index);
 							if (air.isState()) 
 								air.setState(false);
 							}
@@ -65,6 +67,12 @@ public class MyClient extends CoapClient {
 					} else {
 						System.out.println("This quality value is not founded here!");
 						return;
+					}
+					if (MainApplication.observeMode == true) {
+						Date date = new Date();
+						Timestamp timestamp = new Timestamp(date.getTime());
+						System.out.println("TIMESTAMP:"+ timestamp);
+						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -80,7 +88,17 @@ public class MyClient extends CoapClient {
 			}
 		});
 	}
-	
-
-
+	public static <String, Quality> String getQualityKeys(Map <String, Quality> map, Quality q) {
+		for(String k: map.keySet()) {
+			if(q.equals(map.get(k))) {
+				return k;
+			}
+		}
+		
+		return null;
+	}
 }
+
+
+
+

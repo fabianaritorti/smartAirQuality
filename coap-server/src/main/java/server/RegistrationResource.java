@@ -9,9 +9,9 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class RegistrationResource extends CoapResource {
 	
-//	private final static int TOTAL_RESOURCES = 3;
-//	private int roomCounter = 0;
-//	public static final String []Rooms = {"Hall", "Bathroom", "Study" };
+	private final static int TOTAL_RESOURCES = 2;
+	private int roomCounter = 0;
+	public static final String []Rooms = {"Room1", "Room2"};
 	
 	public RegistrationResource(String name) {
 		super(name);
@@ -24,9 +24,9 @@ public class RegistrationResource extends CoapResource {
 	
 	
 	public void handleGET(CoapExchange exchange) {
-		//int nodeId = 0;
+		int nodeId = 0;
 		exchange.accept();
-		//String name = null;
+		String nameRoom = null;
 		
 		//ottengo la richiesta della payload come una stringa
 		//String responseText = exchange.getRequestText();
@@ -74,23 +74,40 @@ public class RegistrationResource extends CoapResource {
 				String name = path.replace("/", "");
 //				System.out.println("PATH "+ path);
 //				System.out.println("NAME" + name);
+				nameRoom = Rooms[nodeId];
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
-					if(!MainApplication.getQualityList().contains(newQuality)) {
-						MainApplication.getQualityList().add(newQuality);
-						System.out.println("RESOURCE" + name + "ADDED");
+					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
+						MainApplication.getQualityMap().put(nameRoom, newQuality);
+						//System.out.println("RESOURCE" + name + "ADDED");
 						addObservingClient(newQuality);
 						
 					}
 				} else if (name.contains("res_air")) {
 					Air newAir = new Air(inetAddress.getHostAddress(), name);
-					if(!MainApplication.getAirList().contains(newAir)) {
-						MainApplication.getAirList().add(newAir);
-						System.out.println("RESOURCE" + name + "ADDED");
+					if(!MainApplication.getAirMap().containsValue(newAir)) {
+						MainApplication.getAirMap().put(nameRoom,newAir);
+						//System.out.println("RESOURCE" + name + "ADDED");
 					}
 				}
 //					
 			}
+			nodeId++;
+			roomCounter++;
+			
+			System.out.println("Room "+ nameRoom + " added");
+			System.out.println("-------------------------------");
+			System.out.println("The rooms registered are:" + roomCounter);
+			System.out.println("-------------------------------");
+			if (roomCounter == Rooms.length) {
+				System.out.println("-------------------------------");
+				System.out.println("All the resources are added!");
+				System.out.println("-------------------------------");
+				System.out.println("Registration is complete!");
+				System.out.println("-------------------------------");
+				MainApplication.setWaitRegistration(false);
+			}
+//		}
 //			
 //				
 //				

@@ -4,7 +4,9 @@ import java.awt.PageAttributes.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.imageio.IIOException;
@@ -19,56 +21,56 @@ public class MainApplication {
 	
 	public static boolean waitRegistration = true;
 	
-//	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
+	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
 //	
-//	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
+	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
 	
 	public static ArrayList<MyClient> clientList = new ArrayList<MyClient>();
 	
-	public static ArrayList<Quality> qualityList = new ArrayList<Quality>();
-	public static ArrayList<Air> airList = new ArrayList<Air>();
+//	public static ArrayList<Quality> qualityList = new ArrayList<Quality>();
+//	public static ArrayList<Air> airList = new ArrayList<Air>();
 	
-	public static ArrayList<Quality> getQualityList() {
-		return qualityList;
-	}
-
-	public static ArrayList<Air> getAirList() {
-		return airList;
-	}
-
-	public static void setQualityList(ArrayList<Quality> qualityList) {
-		MainApplication.qualityList = qualityList;
-	}
-
-	public static void setAirList(ArrayList<Air> airList) {
-		MainApplication.airList = airList;
-	}
-	
-	public static ArrayList<MyClient> getClientList() {
-		return clientList;
-	}
-	//public static ArrayList<Presence> presenceList = new ArrayList<Presence>();
-	
-	
-//	public static HashMap<String, Quality> getQualityMap() {
-//		return qualityMap;
+//	public static ArrayList<Quality> getQualityList() {
+//		return qualityList;
 //	}
 //
-//	public static HashMap<String, Air> getAirMap() {
-//		return airMap;
+//	public static ArrayList<Air> getAirList() {
+//		return airList;
 //	}
 //
+//	public static void setQualityList(ArrayList<Quality> qualityList) {
+//		MainApplication.qualityList = qualityList;
+//	}
+//
+//	public static void setAirList(ArrayList<Air> airList) {
+//		MainApplication.airList = airList;
+//	}
+	
 //	public static ArrayList<MyClient> getClientList() {
 //		return clientList;
 //	}
-//
-//	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
-//		MainApplication.qualityMap = qualityMap;
-//	}
-//
-//	public static void setAirMap(HashMap<String, Air> airMap) {
-//		MainApplication.airMap = airMap;
-//	}
+	//public static ArrayList<Presence> presenceList = new ArrayList<Presence>();
+	
+	
+	public static HashMap<String, Quality> getQualityMap() {
+		return qualityMap;
+	}
+
+	public static HashMap<String, Air> getAirMap() {
+		return airMap;
+	}
+
+	public static ArrayList<MyClient> getClientList() {
+		return clientList;
+	}
+
+	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
+		MainApplication.qualityMap = qualityMap;
+	}
+
+	public static void setAirMap(HashMap<String, Air> airMap) {
+		MainApplication.airMap = airMap;
+	}
 
 	public static void setClientList(ArrayList<MyClient> clientList) {
 		MainApplication.clientList = clientList;
@@ -91,6 +93,9 @@ public class MainApplication {
 		showMenu();
 		
 		while(true) {
+			if (waitRegistration) {
+				System.out.println("LOADING REGISTRATION");
+			}
 			
 			int cmd = getCommand();
 			Integer nodeId;
@@ -101,23 +106,33 @@ public class MainApplication {
 			}
 			switch(cmd) {
 				case 1:
-					showResources();
+					showResourcesStatus();
 					showMenu();
 					break;
 				case 2:
-					nodeId = getNodeId();
-					if (nodeId != null) {
-						changeDepuratorStatus("ON", airList.get(nodeId));
-					}
+					//nodeId = getNodeId();
+//					if (nodeId != null) {
+//						changeDepuratorStatus("ON", airList.get(nodeId));
+//					}
 					showMenu();
 					break;
 				case 3:
-					nodeId = getNodeId();
-					if (nodeId != null) {
-						changeDepuratorStatus("OFF", airList.get(nodeId));
-					}
+//					nodeId = getNodeId();
+//					if (nodeId != null) {
+//						changeDepuratorStatus("OFF", airList.get(nodeId));
+//					}
 					showMenu();
 					break;
+				case 4:
+					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
+					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
+					observeMode = true;
+					while(observeMode) {
+						int command = getCommand();
+						if (command == 0) {
+							observeMode = false;
+						}
+					}
 				case 0:
 					System.out.println("**************************");
 					System.out.println("EXIT FROM THE APPLICATION");
@@ -140,7 +155,7 @@ public class MainApplication {
 		System.out.println("2.Start depuration");
 		System.out.println("3.Stop depuration");
 		System.out.println("4.Observe resource mode");
-		System.out.println("5.Show node status");
+		
 	// 	//eventualmente aggiungere altro
 		//System.out.pritnln("Show the last quality air value")
 		System.out.println("0.Exit");
@@ -172,16 +187,23 @@ public static void runServer() {
 		}.start();
 		
 	}
-public static void showResources() {
-	System.out.println("THESE ARE THE RESOURCES:");
-	for (int i = 0; i < getQualityList().size(); i++) {
-		Air air = getAirList().get(i);
-		Quality quality = qualityList.get(i);
-		System.out.println("This is the node" + i+2 + "quality resource: " + quality.getIp() + " " + quality.getPath());
-		System.out.println("This is the node" + i+2 + "air resource: " + air.getIp() + " " + air.getPath());
+
+public static void showResourcesStatus() {
+	for (String key : MainApplication.getQualityMap().keySet()) {
+		getStatusResource(key);
 	}
-	
 }
+
+//public static void showResources() {
+//	System.out.println("THESE ARE THE RESOURCES:");
+//	for (int i = 0; i < getQualityList().size(); i++) {
+//		Air air = getAirList().get(i);
+//		Quality quality = qualityList.get(i);
+//		System.out.println("This is the node" + i+2 + "quality resource: " + quality.getIp() + " " + quality.getPath());
+//		System.out.println("This is the node" + i+2 + "air resource: " + air.getIp() + " " + air.getPath());
+//	}
+//	
+//}
 public static void changeDepuratorStatus(String state, Air air) {
 	CoapClient client = new CoapClient(air.getCoapURI());
 	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
@@ -198,21 +220,39 @@ public static void changeDepuratorStatus(String state, Air air) {
 	}
 }
 
-public static Integer getNodeId() {
-	System.out.println("INSERT THE NODE ID");
-	int index = getCommand();
-	if (index == -1) {
-		return null;
-	}
-	if (index < qualityList.size()) {
-		return index;
-	} else {
-		System.out.println("THERE IS NO NODE WITH THIS ID");
-	}
-	return null;
+//public static Integer getNodeId() {
+//	System.out.println("INSERT THE NODE ID");
+//	int index = getCommand();
+//	if (index == -1) {
+//		return null;
+//	}
+//	if (index < qualityList.size()) {
+//		return index;
+//	} else {
+//		System.out.println("THERE IS NO NODE WITH THIS ID");
+//	}
+//	return null;
 		
-
+public static void getStatusResource(String key) {
+	int nodeId = Arrays.asList(RegistrationResource.Rooms).indexOf(key) +2;
+	Quality q = getQualityMap().get(key);
+	Air a = getAirMap().get(key);
+	String qualityValue = null;
+	if (q.getQuality() < 50 ) {
+		qualityValue = "BAD";
+	} else {
+		qualityValue = "GOOD";
+	}
+	String lightValue = null;
+	if (a.isState()) {
+		lightValue = "ON";
+	} else {
+		lightValue = "OFF";
+	}
+	
+	System.out.println("THE ROOM: " + key + "WITH ID: " + nodeId + "HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
+}
 	
 }
 
-}
+
