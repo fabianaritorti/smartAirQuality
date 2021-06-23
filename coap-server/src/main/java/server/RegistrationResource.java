@@ -92,6 +92,22 @@ public class RegistrationResource extends CoapResource {
 				}
 //					
 			}
+			nodeId++;
+			roomCounter++;
+			
+			System.out.println("Room "+ nameRoom + " added");
+			System.out.println("-------------------------------");
+			System.out.println("The rooms registered are:" + roomCounter);
+			System.out.println("-------------------------------");
+			if (roomCounter == Rooms.length) {
+				System.out.println("-------------------------------");
+				System.out.println("All the resources are added!");
+				System.out.println("-------------------------------");
+				System.out.println("Registration is complete!");
+				System.out.println("-------------------------------");
+				MainApplication.setWaitRegistration(false);
+			}
+//		}
 //			
 //				
 //				

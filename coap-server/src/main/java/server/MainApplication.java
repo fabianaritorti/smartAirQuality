@@ -93,6 +93,9 @@ public class MainApplication {
 		showMenu();
 		
 		while(true) {
+			if (waitRegistration) {
+				System.out.println("LOADING REGISTRATION");
+			}
 			
 			int cmd = getCommand();
 			Integer nodeId;
