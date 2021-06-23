@@ -101,7 +101,8 @@ PROCESS_THREAD(air_node, ev, data){
 		air_state_old = air_state;
 		//genero valori casuali di presenza e qualità (numero da 1 a 100)
         // presence = 1 + rand()%100;
-        quality = 1 + rand()%100;
+        //quality = 1 + rand()%100;
+		int qualityToAdd = 1+ rand()%10;
         //LOG_DBG("presence: %d\n", presence);
         LOG_DBG("quality: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
@@ -118,7 +119,7 @@ PROCESS_THREAD(air_node, ev, data){
 			LOG_DBG("Air quality is bad! \n");
 			air_state = 1;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-			LOG_DBG("quality: %d\n", quality + 15);
+			LOG_DBG("quality: %d\n", quality + qualityToAdd);
 			//LOG_DBG("Air quality is good! \n");
 			
 			
