@@ -3,6 +3,7 @@ package server;
 import java.awt.PageAttributes.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -114,8 +115,9 @@ public class MainApplication {
 					break;
 				case 2:
 					//nodeId = getNodeId();
+					changeDepuratorStatus("ON");
 //					if (nodeId != null) {
-//						changeDepuratorStatus("ON", airList.get(nodeId));
+//						
 //					}
 					showMenu();
 					break;
@@ -226,21 +228,44 @@ public static void showAirResources() {
 //	}
 //	
 //}
-//public static void changeDepuratorStatus(String state, Air air) {
-//	CoapClient client = new CoapClient(air.getCoapURI());
-//	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
-//	CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
-//	String code = coapResponse.getCode().toString();
-//	if (!code.startsWith("2")) {
-//		System.out.println("Error: " + code);
-//		return;
-//	}
-//	if (state.toString().equals("ON")) {
-//		air.setState(true);
-//	} else {
-//		air.setState(false);
-//	}
-//}
+public static void changeDepuratorStatus(String state) {
+	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	String name;
+	try {
+		name = bufferedReader.readLine();
+		Air air = airMap.get(name);
+		if (air == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		CoapClient client = new CoapClient(air.getCoapURI());
+		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+		String code = coapResponse.getCode().toString();
+		if (!code.startsWith("2")) {
+			System.out.println("Error: " + code);
+			return;
+		}
+		if (state.toString().equals("ON")) {
+			air.setState(true);
+		} else {
+			air.setState(false);
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+//	
+//	
+//	
+//	
+//	
+	
+}
+
+
 
 //public static Integer getNodeId() {
 //	System.out.println("INSERT THE NODE ID");

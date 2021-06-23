@@ -91,6 +91,7 @@ public class RegistrationResource extends CoapResource {
 					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
 					if(!MainApplication.getAirMap().containsValue(newAir)) {
 						MainApplication.getAirMap().put(name,newAir);
+						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 					}
 				}
