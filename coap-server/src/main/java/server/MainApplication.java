@@ -126,6 +126,7 @@ public class MainApplication {
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
+					changeDepuratorStatus("OFF");
 					showMenu();
 					break;
 				case 4:
