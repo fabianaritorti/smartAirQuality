@@ -66,7 +66,8 @@ public class RegistrationResource extends CoapResource {
 //		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
 //		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
 //		//int index = 0;
-		for (int i = 0; i<resources.length; i++) {
+		for (int i = 1; i<resources.length; i++) {
+			//1 because the first one is </.well-known/core>;ct=40
 //			//System.out.println("RESOURCES" + resources[i])
 			String[] parameters = resources[i].split(";");
 //			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
@@ -74,8 +75,8 @@ public class RegistrationResource extends CoapResource {
 			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
 				String path = parameters[0].split("<")[1].replace(">", "");
 				String name = path.replace("/", "");
-//				System.out.println("PATH "+ path);
-//				System.out.println("NAME" + name);
+				System.out.println("PATH "+ path);
+				System.out.println("NAME" + name);
 				//nameRoom = Rooms[nodeId];
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
@@ -83,7 +84,7 @@ public class RegistrationResource extends CoapResource {
 						MainApplication.getQualityMap().put(name, newQuality);
 						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
-						addObservingClient(newQuality);
+						//addObservingClient(newQuality);
 						
 					}
 				} else if (name.contains("res_air")) {
