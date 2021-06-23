@@ -87,7 +87,7 @@ PROCESS_THREAD(air_node, ev, data){
 	LOG_DBG("Registered\n");
 
     //genero un valore intero randomico ogni 20 secondi(per la presenza e la qualità dell'aria)
-    etimer_set(&timer,20 * CLOCK_SECOND);
+    etimer_set(&timer,30 * CLOCK_SECOND);
 	printf("TIMER:%d \n",timer);
 
     while(true) {
