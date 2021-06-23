@@ -12,8 +12,8 @@ public class Air extends Resource{
 		this.state = state;
 	}
 
-	public Air(String ip, String path) {
-		super(ip, path);
+	public Air(String ip, String path,String name) {
+		super(ip, path, name);
 		//quando inizializzo la risorsa l'attuatore dell'aria è spento
 		state = false;
 		// TODO Auto-generated constructor stub

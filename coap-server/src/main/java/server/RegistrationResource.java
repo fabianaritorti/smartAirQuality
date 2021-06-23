@@ -11,7 +11,7 @@ public class RegistrationResource extends CoapResource {
 	
 	//private final static int TOTAL_RESOURCES = 2;
 	//private int roomCounter = 0;
-	//public static final String []Rooms = {"Room1", "Room2"};
+	public static final String []Rooms = {"Room1"};
 	
 	public RegistrationResource(String name) {
 		super(name);
@@ -79,18 +79,21 @@ public class RegistrationResource extends CoapResource {
 				System.out.println("NAME" + name);
 				//nameRoom = Rooms[nodeId];
 				if (name.contains("res_quality")) {
-					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
+					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
 					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
 						MainApplication.getQualityMap().put(name, newQuality);
+						//MainApplication.getQualityMap().put(nameRoom, newQuality);
 						System.out.println("\n"+name+" registered\n");
+						//System.out.println("\n"+nameRoom+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 						//addObservingClient(newQuality);
 						
 					}
 				} else if (name.contains("res_air")) {
-					Air newAir = new Air(inetAddress.getHostAddress(), name);
+					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
 					if(!MainApplication.getAirMap().containsValue(newAir)) {
 						MainApplication.getAirMap().put(name,newAir);
+						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 					}
 				}

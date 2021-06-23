@@ -3,11 +3,13 @@ package server;
 import java.awt.PageAttributes.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.IIOException;
 
@@ -98,7 +100,7 @@ public class MainApplication {
 //			}
 			
 			int cmd = getCommand();
-			Integer nodeId;
+			
 			if (cmd > 4) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
@@ -107,12 +109,16 @@ public class MainApplication {
 			switch(cmd) {
 				case 1:
 					//showResourcesStatus();
+					showQualityResources();
+					showAirResources();
+					getStatusResource();
 					showMenu();
 					break;
 				case 2:
 					//nodeId = getNodeId();
+					changeDepuratorStatus("ON");
 //					if (nodeId != null) {
-//						changeDepuratorStatus("ON", airList.get(nodeId));
+//						
 //					}
 					showMenu();
 					break;
@@ -121,6 +127,7 @@ public class MainApplication {
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
+					changeDepuratorStatus("OFF");
 					showMenu();
 					break;
 				case 4:
@@ -188,6 +195,25 @@ public static void runServer() {
 		
 	}
 
+public static void showQualityResources() {
+	if (qualityMap.size() == 0) {
+		System.out.println("THERE IS NO QUALITY RESOURCE");
+		return;
+	}
+	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
+		System.out.println("QUALITY RESOURCES:" + entry.getValue().toString());
+	}
+}
+
+public static void showAirResources() {
+	if (airMap.size() == 0) {
+		System.out.println("THERE IS NO AIR RESOURCE");
+		return;
+	}
+	for (Map.Entry<String, Air> entry: airMap.entrySet()) {
+		System.out.println("AIR RESOURCES:" + entry.getValue().toString());
+	}
+}
 //public static void showResourcesStatus() {
 //	for (String key : MainApplication.getQualityMap().keySet()) {
 //		getStatusResource(key);
@@ -204,21 +230,85 @@ public static void runServer() {
 //	}
 //	
 //}
-//public static void changeDepuratorStatus(String state, Air air) {
-//	CoapClient client = new CoapClient(air.getCoapURI());
-//	//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
-//	CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
-//	String code = coapResponse.getCode().toString();
-//	if (!code.startsWith("2")) {
-//		System.out.println("Error: " + code);
-//		return;
-//	}
-//	if (state.toString().equals("ON")) {
-//		air.setState(true);
-//	} else {
-//		air.setState(false);
-//	}
-//}
+public static void changeDepuratorStatus(String state) {
+	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	String name;
+	System.out.println("INSERT THE NAME OF THE RESOURCE");
+	try {
+		name = bufferedReader.readLine();
+		Air air = airMap.get(name);
+		if (air == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		CoapClient client = new CoapClient(air.getCoapURI());
+		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+		String code = coapResponse.getCode().toString();
+		if (!code.startsWith("2")) {
+			System.out.println("Error: " + code);
+			return;
+		}
+		if (state.toString().equals("ON")) {
+			air.setState(true);
+		} else {
+			air.setState(false);
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	
+}
+
+public static void getStatusResource() {
+	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	String nameQuality;
+	String nameAir;
+	System.out.println("INSERT THE NAME OF THE RESOURCES");
+	try {
+		System.out.println("QUALITY NAME");
+		nameQuality = bufferedReader.readLine();
+		System.out.println("AIR NAME");
+		nameAir= bufferedReader.readLine();
+		Air air = airMap.get(nameAir);
+		if (air == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		Quality quality = qualityMap.get(nameQuality);
+		if (quality == null) {
+			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+			return;
+		}
+		String qualityValue = null;
+		if (quality.getQuality() < 50 ) {
+			qualityValue = "BAD";
+		} else {
+			qualityValue = "GOOD";
+		}
+		String lightValue = null;
+		if (air.isState()) {
+			lightValue = "ON";
+		} else {
+			lightValue = "OFF";
+		}
+
+		System.out.println("THE NODE HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
+		
+		
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+
+
 
 //public static Integer getNodeId() {
 //	System.out.println("INSERT THE NODE ID");
@@ -233,25 +323,7 @@ public static void runServer() {
 //	}
 //	return null;
 		
-//public static void getStatusResource(String key) {
-//	int nodeId = Arrays.asList(RegistrationResource.Rooms).indexOf(key) +2;
-//	Quality q = getQualityMap().get(key);
-//	Air a = getAirMap().get(key);
-//	String qualityValue = null;
-//	if (q.getQuality() < 50 ) {
-//		qualityValue = "BAD";
-//	} else {
-//		qualityValue = "GOOD";
-//	}
-//	String lightValue = null;
-//	if (a.isState()) {
-//		lightValue = "ON";
-//	} else {
-//		lightValue = "OFF";
-//	}
-//	
-//	System.out.println("THE ROOM: " + key + "WITH ID: " + nodeId + "HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
-//}
+
 //	
 }
 
