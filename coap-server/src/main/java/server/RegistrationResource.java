@@ -9,9 +9,9 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class RegistrationResource extends CoapResource {
 	
-	private final static int TOTAL_RESOURCES = 2;
-	private int roomCounter = 0;
-	public static final String []Rooms = {"Room1", "Room2"};
+	//private final static int TOTAL_RESOURCES = 2;
+	//private int roomCounter = 0;
+	//public static final String []Rooms = {"Room1", "Room2"};
 	
 	public RegistrationResource(String name) {
 		super(name);
@@ -24,16 +24,17 @@ public class RegistrationResource extends CoapResource {
 	
 	
 	public void handleGET(CoapExchange exchange) {
-		int nodeId = 0;
+		//int nodeId = 0;
 		exchange.accept();
-		String nameRoom = null;
+		//String nameRoom = null;
 		
 		//ottengo la richiesta della payload come una stringa
-		String responseText2 = exchange.getRequestText().toString();
-		System.out.println("RESPONSE TEXT" + responseText2);
+		//String responseText2 = exchange.getRequestText();
+		
 		
 		//converto la stringa in un array di char
-		//char[] charResponse = responseText.toCharArray();
+		//char[] charResponse = responseText2.toCharArray();
+		
 		
 		//nodeId = Character.getNumericValue(charResponse[0]);
 		
@@ -75,11 +76,12 @@ public class RegistrationResource extends CoapResource {
 				String name = path.replace("/", "");
 //				System.out.println("PATH "+ path);
 //				System.out.println("NAME" + name);
-				nameRoom = Rooms[nodeId];
+				//nameRoom = Rooms[nodeId];
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),name);
 					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
-						MainApplication.getQualityMap().put(nameRoom, newQuality);
+						MainApplication.getQualityMap().put(name, newQuality);
+						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 						addObservingClient(newQuality);
 						
@@ -87,27 +89,13 @@ public class RegistrationResource extends CoapResource {
 				} else if (name.contains("res_air")) {
 					Air newAir = new Air(inetAddress.getHostAddress(), name);
 					if(!MainApplication.getAirMap().containsValue(newAir)) {
-						MainApplication.getAirMap().put(nameRoom,newAir);
+						MainApplication.getAirMap().put(name,newAir);
 						//System.out.println("RESOURCE" + name + "ADDED");
 					}
 				}
 //					
 			}
-			nodeId++;
-			roomCounter++;
-			
-			System.out.println("Room "+ nameRoom + " added");
-			System.out.println("-------------------------------");
-			System.out.println("The rooms registered are:" + roomCounter);
-			System.out.println("-------------------------------");
-			if (roomCounter == Rooms.length) {
-				System.out.println("-------------------------------");
-				System.out.println("All the resources are added!");
-				System.out.println("-------------------------------");
-				System.out.println("Registration is complete!");
-				System.out.println("-------------------------------");
-				MainApplication.setWaitRegistration(false);
-			}
+		
 //		}
 //			
 //				
