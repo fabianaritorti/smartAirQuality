@@ -4,6 +4,7 @@ public class Resource {
 
 	private String ip;
 	private String path;
+	private String name;
 	//private String name;
 	
 
@@ -16,12 +17,20 @@ public class Resource {
 //		this.name = name;
 //	}
 
-	public Resource(String ip, String path) {
+	public Resource(String ip, String path,String name) {
 		// TODO Auto-generated constructor stub
 		this.ip = ip;
 		this.path = path;
-		//this.name = name;
+		this.name = name;
 		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPath() {
@@ -54,8 +63,8 @@ public class Resource {
 		builder.append(ip);
 		builder.append(", path=");
 		builder.append(path);
-//		builder.append(", name=");
-//		builder.append(name);
+		builder.append(", name=");
+		builder.append(name);
 		builder.append("]");
 		return builder.toString();
 	}

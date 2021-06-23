@@ -109,6 +109,7 @@ public class MainApplication {
 				case 1:
 					//showResourcesStatus();
 					showQualityResources();
+					showAirResources();
 					showMenu();
 					break;
 				case 2:
@@ -196,10 +197,19 @@ public static void showQualityResources() {
 		return;
 	}
 	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
-		System.out.println("QUALITY VALUES:" + entry.getValue().toString());
+		System.out.println("QUALITY RESOURCES:" + entry.getValue().toString());
 	}
 }
 
+public static void showAirResources() {
+	if (airMap.size() == 0) {
+		System.out.println("THERE IS NO QUALITY RESOURCE");
+		return;
+	}
+	for (Map.Entry<String, Air> entry: airMap.entrySet()) {
+		System.out.println("AIR RESOURCES:" + entry.getValue().toString());
+	}
+}
 //public static void showResourcesStatus() {
 //	for (String key : MainApplication.getQualityMap().keySet()) {
 //		getStatusResource(key);
