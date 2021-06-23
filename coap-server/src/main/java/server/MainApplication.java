@@ -111,6 +111,7 @@ public class MainApplication {
 					//showResourcesStatus();
 					showQualityResources();
 					showAirResources();
+					getStatusResource();
 					showMenu();
 					break;
 				case 2:
@@ -263,7 +264,7 @@ public static void changeDepuratorStatus(String state) {
 	
 }
 
-public static void getStatusResource(String key) {
+public static void getStatusResource() {
 	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 	String nameQuality;
 	String nameAir;
