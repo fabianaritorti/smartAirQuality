@@ -99,10 +99,16 @@ PROCESS_THREAD(air_node, ev, data){
 			
 
 		air_state_old = air_state;
+		int qualityToAdd = 1+ rand()%10;
+
+		if (air_state_old == 0) {
+			quality = quality - qualityToAdd;
+
+		}
 		//genero valori casuali di presenza e qualità (numero da 1 a 100)
         // presence = 1 + rand()%100;
         //quality = 1 + rand()%100;
-		int qualityToAdd = 1+ rand()%10;
+		
         //LOG_DBG("presence: %d\n", presence);
         LOG_DBG("quality: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
