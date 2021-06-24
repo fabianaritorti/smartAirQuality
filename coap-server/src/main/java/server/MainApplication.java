@@ -101,7 +101,7 @@ public class MainApplication {
 			
 			int cmd = getCommand();
 			
-			if (cmd > 4) {
+			if (cmd > 5) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
 				showMenu();
@@ -111,12 +111,13 @@ public class MainApplication {
 					//showResourcesStatus();
 					showQualityResources();
 					showAirResources();
-					getStatusResource();
+					
 					showMenu();
 					break;
 				case 2:
+					getStatusResource();
 					//nodeId = getNodeId();
-					changeDepuratorStatus("ON");
+					
 //					if (nodeId != null) {
 //						
 //					}
@@ -127,10 +128,13 @@ public class MainApplication {
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
-					changeDepuratorStatus("OFF");
+					changeDepuratorStatus("ON");
+					
 					showMenu();
 					break;
 				case 4:
+					changeDepuratorStatus("OFF");
+				case 5:
 					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
 					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
 					observeMode = true;
@@ -158,10 +162,11 @@ public class MainApplication {
 		System.out.println("************************************************");
 		System.out.println("Welcome to the Air Depuration System!");
 		System.out.println("Please, insert a command");
-		System.out.println("1.Show the resources");
-		System.out.println("2.Start depuration");
-		System.out.println("3.Stop depuration");
-		System.out.println("4.Observe resource mode");
+		System.out.println("1.Show the resources info");
+		System.out.println("2.Show the resources status");
+		System.out.println("3.Start depuration");
+		System.out.println("4.Stop depuration");
+		System.out.println("5.Observe resource mode");
 		
 	// 	//eventualmente aggiungere altro
 		//System.out.pritnln("Show the last quality air value")
@@ -297,7 +302,7 @@ public static void getStatusResource() {
 			lightValue = "OFF";
 		}
 
-		System.out.println("THE NODE HAS QUALITY VALUE : " + qualityValue + "AND LIGHT VALUE" + lightValue);
+		System.out.println("THE NODE HAS : " + qualityValue +  "QUALITY VALUE " + "AND LIGHT VALUE: " + lightValue);
 		
 		
 		
