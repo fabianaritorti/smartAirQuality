@@ -9,9 +9,9 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class RegistrationResource extends CoapResource {
 	
-	//private final static int TOTAL_RESOURCES = 2;
-	//private int roomCounter = 0;
-	public static final String []Rooms = {"Room1"};
+	private final static int TOTAL_RESOURCES = 2;
+	private int roomCounter = 0;
+	public static final String []Rooms = {"Room1, Room2"};
 	
 	public RegistrationResource(String name) {
 		super(name);
@@ -26,10 +26,11 @@ public class RegistrationResource extends CoapResource {
 	public void handleGET(CoapExchange exchange) {
 		//int nodeId = 0;
 		exchange.accept();
-		String nameNode = null;
+		
 		
 		//ottengo la richiesta della payload come una stringa
-		//String responseText2 = exchange.getRequestText();
+		String exch = exchange.getRequestText();
+		System.out.println("EXCH"+ exch);
 		
 		
 		//converto la stringa in un array di char
@@ -82,8 +83,8 @@ public class RegistrationResource extends CoapResource {
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
 					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
-						//MainApplication.getQualityMap().put(name, newQuality);
-						MainApplication.getQualityMap().put(nameNode, newQuality);
+						MainApplication.getQualityMap().put(name, newQuality);
+						//MainApplication.getQualityMap().put(nameNode, newQuality);
 						System.out.println("\n"+name+" registered\n");
 						//System.out.println("\n"+nameNode+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
@@ -93,8 +94,8 @@ public class RegistrationResource extends CoapResource {
 				} else if (name.contains("res_air")) {
 					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
 					if(!MainApplication.getAirMap().containsValue(newAir)) {
-						//MainApplication.getAirMap().put(name,newAir);
-						MainApplication.getAirMap().put(nameNode,newAir);
+						MainApplication.getAirMap().put(name,newAir);
+						//MainApplication.getAirMap().put(nameNode,newAir);
 						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 					}
