@@ -43,9 +43,9 @@ public class MyClient extends CoapClient {
 						value = jsonObject.get("quality").toString();
 						//si converte il valore da stringa ad intero
 						int valueQuality = Integer.parseInt((value).trim());
-						//keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
+						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
 						
-						//Air air = MainApplication.getAirMap().get(keyQuality);						
+						Air air = MainApplication.getAirMap().get(keyQuality);						
 						
 						
 						if (valueQuality < THRESHOLD) {
@@ -88,16 +88,16 @@ public class MyClient extends CoapClient {
 			}
 		});
 	}
-	//questo metterlo quando la qualità dell'aria e l 'aria hanno la stessa chiave
-//	public static <String, Quality> String getQualityKeys(Map <String, Quality> map, Quality q) {
-//		for(String k: map.keySet()) {
-//			if(q.equals(map.get(k))) {
-//				return k;
-//			}
-//		}
-//		
-//		return null;
-//	}
+//	questo metterlo quando la qualità dell'aria e l 'aria hanno la stessa chiave
+	public static <String, Quality> String getQualityKeys(Map <String, Quality> map, Quality q) {
+		for(String k: map.keySet()) {
+			if(q.equals(map.get(k))) {
+				return k;
+			}
+		}
+		
+		return null;
+	}
 }
 
 
