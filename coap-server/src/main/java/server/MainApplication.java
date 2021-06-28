@@ -136,15 +136,15 @@ public class MainApplication {
 					changeDepuratorStatus("OFF");
 					showMenu();
 				case 5:
-					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
-					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
-					observeMode = true;
-					while(observeMode) {
-						int command = getCommand();
-						if (command == 0) {
-							observeMode = false;
-						}
-					}
+					//System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
+					//System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
+					//observeMode = true;
+//					while(observeMode) {
+//						int command = getCommand();
+//						if (command == 0) {
+//							observeMode = false;
+//						}
+//					}
 				case 0:
 					System.out.println("**************************");
 					System.out.println("EXIT FROM THE APPLICATION");
