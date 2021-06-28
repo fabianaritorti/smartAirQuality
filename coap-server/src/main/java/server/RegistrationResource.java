@@ -79,7 +79,7 @@ public class RegistrationResource extends CoapResource {
 				System.out.println("PATH "+ path);
 				System.out.println("NAME" + name);
 				//nameRoom = Rooms[nodeId];
-				nameNode = "NODE: " + i+1;
+				//nameNode = "NODE: " + i+1;
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
 					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
