@@ -146,6 +146,7 @@ public class MainApplication {
 //							observeMode = false;
 //						}
 //					}
+					break;
 				case 0:
 					System.out.println("**************************");
 					System.out.println("EXIT FROM THE APPLICATION");
