@@ -26,7 +26,7 @@ public class RegistrationResource extends CoapResource {
 	public void handleGET(CoapExchange exchange) {
 		//int nodeId = 0;
 		exchange.accept();
-		//String nameRoom = null;
+		String nameNode = null;
 		
 		//ottengo la richiesta della payload come una stringa
 		//String responseText2 = exchange.getRequestText();
@@ -78,13 +78,14 @@ public class RegistrationResource extends CoapResource {
 				System.out.println("PATH "+ path);
 				System.out.println("NAME" + name);
 				//nameRoom = Rooms[nodeId];
+				nameNode = "NODE: " + i+1;
 				if (name.contains("res_quality")) {
 					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
 					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
-						MainApplication.getQualityMap().put(name, newQuality);
-						//MainApplication.getQualityMap().put(nameRoom, newQuality);
+						//MainApplication.getQualityMap().put(name, newQuality);
+						MainApplication.getQualityMap().put(nameNode, newQuality);
 						System.out.println("\n"+name+" registered\n");
-						//System.out.println("\n"+nameRoom+" registered\n");
+						//System.out.println("\n"+nameNode+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 						//addObservingClient(newQuality);
 						
@@ -92,7 +93,8 @@ public class RegistrationResource extends CoapResource {
 				} else if (name.contains("res_air")) {
 					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
 					if(!MainApplication.getAirMap().containsValue(newAir)) {
-						MainApplication.getAirMap().put(name,newAir);
+						//MainApplication.getAirMap().put(name,newAir);
+						MainApplication.getAirMap().put(nameNode,newAir);
 						System.out.println("\n"+name+" registered\n");
 						//System.out.println("RESOURCE" + name + "ADDED");
 					}
@@ -196,7 +198,7 @@ public class RegistrationResource extends CoapResource {
 	public void addObservingClient(Quality q) {
 	MyClient client = new MyClient(q);
 	MainApplication.getClientList().add(client);
-	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0
+	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
 	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
 }
 	
