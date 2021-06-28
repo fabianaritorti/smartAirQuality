@@ -134,6 +134,7 @@ public class MainApplication {
 					break;
 				case 4:
 					changeDepuratorStatus("OFF");
+					showMenu();
 				case 5:
 					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
 					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
