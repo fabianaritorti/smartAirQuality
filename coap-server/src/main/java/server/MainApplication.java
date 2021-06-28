@@ -209,7 +209,8 @@ public static void showQualityResources() {
 		return;
 	}
 	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
-		System.out.println("QUALITY RESOURCES:" + entry.getValue().toString());
+		System.out.println("NODE" + qualityMap.keySet());
+		System.out.println("QUALITY RESOURCES:"  + entry.getValue().toString());
 	}
 }
 
