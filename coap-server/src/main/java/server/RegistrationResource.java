@@ -98,6 +98,10 @@ public class RegistrationResource extends CoapResource {
 				System.out.println("\n"+name+" registered");
 				
 				//TODO OBSERVING CLIENT
+				if (obs == true) {
+					MainApplication.observedResources.put(name,new MyClient(newResource));
+					MainApplication.getObservedResources().get(name).startObserving();
+				}
 				
 				//nameRoom = Rooms[nodeId];
 				//nameNode = "NODE: " + i+1;
