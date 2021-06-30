@@ -23,11 +23,39 @@ public class MainApplication {
 	
 	public static boolean waitRegistration = true;
 	
-	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
-//	
-	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
+//	public static HashMap<String,Quality> qualityMap = new HashMap<String,Quality>();
+////	
+//	public static HashMap<String,Air> airMap = new HashMap<String,Air>();
 	
-	public static ArrayList<MyClient> clientList = new ArrayList<MyClient>();
+	static public Map<String,Resource> registeredResources = new HashMap<String,Resource>();
+	static public Map<String,MyClient> observedResources = new HashMap<String,MyClient>();
+	
+	public static boolean isObserveMode() {
+		return observeMode;
+	}
+
+	public static Map<String, Resource> getRegisteredResources() {
+		return registeredResources;
+	}
+
+	public static Map<String, MyClient> getObservedResources() {
+		return observedResources;
+	}
+
+	public static void setObserveMode(boolean observeMode) {
+		MainApplication.observeMode = observeMode;
+	}
+
+	public static void setRegisteredResources(Map<String, Resource> registeredResources) {
+		MainApplication.registeredResources = registeredResources;
+	}
+
+	public static void setObservedResources(Map<String, MyClient> observedResources) {
+		MainApplication.observedResources = observedResources;
+	}
+
+	
+//	public static ArrayList<MyClient> clientList = new ArrayList<MyClient>();
 	
 //	public static ArrayList<Quality> qualityList = new ArrayList<Quality>();
 //	public static ArrayList<Air> airList = new ArrayList<Air>();
@@ -54,29 +82,29 @@ public class MainApplication {
 	//public static ArrayList<Presence> presenceList = new ArrayList<Presence>();
 	
 	
-	public static HashMap<String, Quality> getQualityMap() {
-		return qualityMap;
-	}
-
-	public static HashMap<String, Air> getAirMap() {
-		return airMap;
-	}
-
-	public static ArrayList<MyClient> getClientList() {
-		return clientList;
-	}
-
-	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
-		MainApplication.qualityMap = qualityMap;
-	}
-
-	public static void setAirMap(HashMap<String, Air> airMap) {
-		MainApplication.airMap = airMap;
-	}
-
-	public static void setClientList(ArrayList<MyClient> clientList) {
-		MainApplication.clientList = clientList;
-	}
+//	public static HashMap<String, Quality> getQualityMap() {
+//		return qualityMap;
+//	}
+//
+//	public static HashMap<String, Air> getAirMap() {
+//		return airMap;
+//	}
+//
+//	public static ArrayList<MyClient> getClientList() {
+//		return clientList;
+//	}
+//
+//	public static void setQualityMap(HashMap<String, Quality> qualityMap) {
+//		MainApplication.qualityMap = qualityMap;
+//	}
+//
+//	public static void setAirMap(HashMap<String, Air> airMap) {
+//		MainApplication.airMap = airMap;
+//	}
+//
+//	public static void setClientList(ArrayList<MyClient> clientList) {
+//		MainApplication.clientList = clientList;
+//	}
 	
 	public static boolean isWaitRegistration() {
 		return waitRegistration;
@@ -108,14 +136,14 @@ public class MainApplication {
 			}
 			switch(cmd) {
 				case 1:
-					//showResourcesStatus();
-					showQualityResources();
-					showAirResources();
+					showResourcesStatus();
+					//showQualityResources();
+					//showAirResources();
 					
 					showMenu();
 					break;
 				case 2:
-					getStatusResource();
+					//getStatusResource();
 					//nodeId = getNodeId();
 					
 //					if (nodeId != null) {
@@ -128,12 +156,12 @@ public class MainApplication {
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
-					changeDepuratorStatus("ON");
+					//changeDepuratorStatus("ON");
 					
 					showMenu();
 					break;
 				case 4:
-					changeDepuratorStatus("OFF");
+					//changeDepuratorStatus("OFF");
 					showMenu();
 					break;
 				case 5:
@@ -159,6 +187,15 @@ public class MainApplication {
 		}
 		
 
+	}
+
+	private static void showResourcesStatus() {
+		// TODO Auto-generated method stub
+		for (Map.Entry<String, Resource> entry: registeredResources.entrySet()) {
+//			//System.out.println("NODE" + qualityMap.keySet());
+			System.out.println("RESOURCES:"  + entry.getValue().toString());
+		}
+		
 	}
 
 	public static void showMenu() {
@@ -203,26 +240,26 @@ public static void runServer() {
 		
 	}
 
-public static void showQualityResources() {
-	if (qualityMap.size() == 0) {
-		System.out.println("THERE IS NO QUALITY RESOURCE");
-		return;
-	}
-	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
-		//System.out.println("NODE" + qualityMap.keySet());
-		System.out.println("QUALITY RESOURCES:"  + entry.getValue().toString());
-	}
-}
+//public static void showQualityResources() {
+//	if (qualityMap.size() == 0) {
+//		System.out.println("THERE IS NO QUALITY RESOURCE");
+//		return;
+//	}
+//	for (Map.Entry<String, Quality> entry: qualityMap.entrySet()) {
+//		//System.out.println("NODE" + qualityMap.keySet());
+//		System.out.println("QUALITY RESOURCES:"  + entry.getValue().toString());
+//	}
+//}
 
-public static void showAirResources() {
-	if (airMap.size() == 0) {
-		System.out.println("THERE IS NO AIR RESOURCE");
-		return;
-	}
-	for (Map.Entry<String, Air> entry: airMap.entrySet()) {
-		System.out.println("AIR RESOURCES:" + entry.getValue().toString());
-	}
-}
+//public static void showAirResources() {
+//	if (airMap.size() == 0) {
+//		System.out.println("THERE IS NO AIR RESOURCE");
+//		return;
+//	}
+//	for (Map.Entry<String, Air> entry: airMap.entrySet()) {
+//		System.out.println("AIR RESOURCES:" + entry.getValue().toString());
+//	}
+//}
 //public static void showResourcesStatus() {
 //	for (String key : MainApplication.getQualityMap().keySet()) {
 //		getStatusResource(key);
@@ -239,82 +276,82 @@ public static void showAirResources() {
 //	}
 //	
 //}
-public static void changeDepuratorStatus(String state) {
-	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-	String name;
-	System.out.println("INSERT THE NAME OF THE RESOURCE");
-	try {
-		name = bufferedReader.readLine();
-		Air air = airMap.get(name);
-		if (air == null) {
-			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
-			return;
-		}
-		CoapClient client = new CoapClient(air.getCoapURI());
-		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
-		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
-		String code = coapResponse.getCode().toString();
-		if (!code.startsWith("2")) {
-			System.out.println("Error: " + code);
-			return;
-		}
-		if (state.toString().equals("ON")) {
-			air.setState(true);
-		} else {
-			air.setState(false);
-		}
-		
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	
-	
-}
+//public static void changeDepuratorStatus(String state) {
+//	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//	String name;
+//	System.out.println("INSERT THE NAME OF THE RESOURCE");
+//	try {
+//		name = bufferedReader.readLine();
+//		Air air = airMap.get(name);
+//		if (air == null) {
+//			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+//			return;
+//		}
+//		CoapClient client = new CoapClient(air.getCoapURI());
+//		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+//		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+//		String code = coapResponse.getCode().toString();
+//		if (!code.startsWith("2")) {
+//			System.out.println("Error: " + code);
+//			return;
+//		}
+//		if (state.toString().equals("ON")) {
+//			air.setState(true);
+//		} else {
+//			air.setState(false);
+//		}
+//		
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//	
+//	
+//	
+//}
 
-public static void getStatusResource() {
-	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-	String nameQuality;
-	String nameAir;
-	System.out.println("INSERT THE NAME OF THE RESOURCES");
-	try {
-		System.out.println("QUALITY NAME");
-		nameQuality = bufferedReader.readLine();
-		System.out.println("AIR NAME");
-		nameAir= bufferedReader.readLine();
-		Air air = airMap.get(nameAir);
-		if (air == null) {
-			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
-			return;
-		}
-		Quality quality = qualityMap.get(nameQuality);
-		if (quality == null) {
-			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
-			return;
-		}
-		String qualityValue = null;
-		if (quality.getQuality() < 50 ) {
-			qualityValue = "BAD";
-		} else {
-			qualityValue = "GOOD";
-		}
-		String lightValue = null;
-		if (air.isState()) {
-			lightValue = "ON";
-		} else {
-			lightValue = "OFF";
-		}
-
-		System.out.println("THE NODE HAS : " + qualityValue +  "QUALITY VALUE " + "AND LIGHT VALUE: " + lightValue);
-		
-		
-		
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-}
+//public static void getStatusResource() {
+//	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//	String nameQuality;
+//	String nameAir;
+//	System.out.println("INSERT THE NAME OF THE RESOURCES");
+//	try {
+//		System.out.println("QUALITY NAME");
+//		nameQuality = bufferedReader.readLine();
+//		System.out.println("AIR NAME");
+//		nameAir= bufferedReader.readLine();
+//		Air air = airMap.get(nameAir);
+//		if (air == null) {
+//			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+//			return;
+//		}
+//		Quality quality = qualityMap.get(nameQuality);
+//		if (quality == null) {
+//			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
+//			return;
+//		}
+//		String qualityValue = null;
+//		if (quality.getQuality() < 50 ) {
+//			qualityValue = "BAD";
+//		} else {
+//			qualityValue = "GOOD";
+//		}
+//		String lightValue = null;
+//		if (air.isState()) {
+//			lightValue = "ON";
+//		} else {
+//			lightValue = "OFF";
+//		}
+//
+//		System.out.println("THE NODE HAS : " + qualityValue +  "QUALITY VALUE " + "AND LIGHT VALUE: " + lightValue);
+//		
+//		
+//		
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//}
 
 
 

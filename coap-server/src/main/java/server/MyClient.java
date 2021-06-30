@@ -43,24 +43,24 @@ public class MyClient extends CoapClient {
 						value = jsonObject.get("quality").toString();
 						//si converte il valore da stringa ad intero
 						int valueQuality = Integer.parseInt((value).trim());
-						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
+//						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
+//						
+//						Air air = MainApplication.getAirMap().get(keyQuality);						
 						
-						Air air = MainApplication.getAirMap().get(keyQuality);						
-						
-						
-						if (valueQuality < THRESHOLD) {
-							//resituisce l'indice del primo valore della quality nella lista
-							//int index = MainApplication.getQualityList().indexOf(quality);
-							//mi prendo lo stesso indice perchè equivale allo stesso host
-							//Air air = MainApplication.getAirList().get(index);
-							if (!air.isState()) 
-								air.setState(true);
-						} else if (valueQuality > THRESHOLD){
-							//int index = MainApplication.getQualityList().indexOf(quality);
-							//Air air = MainApplication.getAirList().get(index);
-							if (air.isState()) 
-								air.setState(false);
-							}
+//						
+//						if (valueQuality < THRESHOLD) {
+//							//resituisce l'indice del primo valore della quality nella lista
+//							//int index = MainApplication.getQualityList().indexOf(quality);
+//							//mi prendo lo stesso indice perchè equivale allo stesso host
+//							//Air air = MainApplication.getAirList().get(index);
+//							if (!air.isState()) 
+//								air.setState(true);
+//						} else if (valueQuality > THRESHOLD){
+//							//int index = MainApplication.getQualityList().indexOf(quality);
+//							//Air air = MainApplication.getAirList().get(index);
+//							if (air.isState()) 
+//								air.setState(false);
+//							}
 						
 						
 						//TODO settare l'hashMap in base al valore della qualità
