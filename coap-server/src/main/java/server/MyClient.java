@@ -17,13 +17,13 @@ import io.netty.handler.codec.json.JsonObjectDecoder;
 public class MyClient extends CoapClient {
 
 	CoapObserveRelation obs;
-	private Quality quality;
-	String keyQuality;
+	private Resource resource;
 	
-	public MyClient(Quality quality) {
+	
+	public MyClient(Resource resource) {
 		//viene restituito l'host address relativo a questa risorsa(nodo)
-		super(quality.getCoapURI());
-		this.quality = quality;
+		super(resource.getCoapURI());
+		this.resource = resource;
 	}
 	
 	public void startObserving() {
@@ -36,37 +36,50 @@ public class MyClient extends CoapClient {
 				try {
 					String value;
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
-					Integer THRESHOLD = 50 ;
+					//Integer THRESHOLD = 50 ;
 					//containsKey ritorna vero se la mappa(jsonObject) contiene questo valore
-					if (jsonObject.containsKey("quality")) {
+					if (resource.getName().contains("air")) {
 						//la get ritorna il valore associato alla chiave
-						value = jsonObject.get("quality").toString();
-						//si converte il valore da stringa ad intero
-						int valueQuality = Integer.parseInt((value).trim());
-						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
-						
-						Air air = MainApplication.getAirMap().get(keyQuality);						
-						
-						
-						if (valueQuality < THRESHOLD) {
-							//resituisce l'indice del primo valore della quality nella lista
-							//int index = MainApplication.getQualityList().indexOf(quality);
-							//mi prendo lo stesso indice perchè equivale allo stesso host
-							//Air air = MainApplication.getAirList().get(index);
-							if (!air.isState()) 
-								air.setState(true);
-						} else if (valueQuality > THRESHOLD){
-							//int index = MainApplication.getQualityList().indexOf(quality);
-							//Air air = MainApplication.getAirList().get(index);
-							if (air.isState()) 
-								air.setState(false);
+						value = jsonObject.get("air").toString();
+						if (value.equals("ON")) {
+							if (!resource.isState()) {
+								System.out.println("Depuration air started");
 							}
+							resource.setState(true);
+						} else if (value.equals("OFF")){
+							if (resource.isState()) {
+								System.out.println("Depuration air stopped");
+							}
+							resource.setState(false);
+							
+						}
+						
+						//si converte il valore da stringa ad intero
+						//int valueQuality = Integer.parseInt((value).trim());
+//						keyQuality = getQualityKeys(MainApplication.getQualityMap(), quality);
+//						
+//						Air air = MainApplication.getAirMap().get(keyQuality);						
+						
+//						
+//						if (valueQuality < THRESHOLD) {
+//							//resituisce l'indice del primo valore della quality nella lista
+//							//int index = MainApplication.getQualityList().indexOf(quality);
+//							//mi prendo lo stesso indice perchè equivale allo stesso host
+//							//Air air = MainApplication.getAirList().get(index);
+//							if (!air.isState()) 
+//								air.setState(true);
+//						} else if (valueQuality > THRESHOLD){
+//							//int index = MainApplication.getQualityList().indexOf(quality);
+//							//Air air = MainApplication.getAirList().get(index);
+//							if (air.isState()) 
+//								air.setState(false);
+//							}
 						
 						
 						//TODO settare l'hashMap in base al valore della qualità
-					} else {
-						System.out.println("This quality value is not founded here!");
-						return;
+					} else if (resource.getName().equals("quality")){
+						//TODO HERE
+						
 					}
 					if (MainApplication.observeMode == true) {
 						Date date = new Date();
@@ -89,15 +102,15 @@ public class MyClient extends CoapClient {
 		});
 	}
 //	questo metterlo quando la qualità dell'aria e l 'aria hanno la stessa chiave
-	public static <String, Quality> String getQualityKeys(Map <String, Quality> map, Quality q) {
-		for(String k: map.keySet()) {
-			if(q.equals(map.get(k))) {
-				return k;
-			}
-		}
-		
-		return null;
-	}
+//	public static <String, Quality> String getQualityKeys(Map <String, Quality> map, Quality q) {
+//		for(String k: map.keySet()) {
+//			if(q.equals(map.get(k))) {
+//				return k;
+//			}
+//		}
+//		
+//		return null;
+//	}
 }
 
 

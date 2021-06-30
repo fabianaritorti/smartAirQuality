@@ -29,13 +29,13 @@ public class RegistrationResource extends CoapResource {
 		
 		
 		//ottengo la richiesta della payload come una stringa
-		char[] exch = exchange.getRequestText().toCharArray();
+		//char[] exch = exchange.getRequestText().toCharArray();
 		//C@325d91a1
 
-		System.out.println("EXCH"+ exch);
+		//System.out.println("EXCH"+ exch);
 		
-		int value = Character.getNumericValue(exch[0]);
-		System.out.println("CHARACTER VALUE" + value);
+//		int value = Character.getNumericValue(exch[0]);
+//		System.out.println("CHARACTER VALUE" + value);
 		
 		
 		//converto la stringa in un array di char
@@ -81,30 +81,50 @@ public class RegistrationResource extends CoapResource {
 			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
 				String path = parameters[0].split("<")[1].replace(">", "");
 				String name = path.replace("/", "");
+				String info = parameters[1]+";"+parameters[2];
 				System.out.println("PATH "+ path);
 				System.out.println("NAME" + name);
-				//nameRoom = Rooms[nodeId];
-				//nameNode = "NODE: " + i+1;
-				if (name.contains("res_quality")) {
-					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
-					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
-						MainApplication.getQualityMap().put(name, newQuality);
-						//MainApplication.getQualityMap().put(nameNode, newQuality);
-						System.out.println("\n"+name+" registered\n");
-						//System.out.println("\n"+nameNode+" registered\n");
-						//System.out.println("RESOURCE" + name + "ADDED");
-						//addObservingClient(newQuality);
-						
-					}
-				} else if (name.contains("res_air")) {
-					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
-					if(!MainApplication.getAirMap().containsValue(newAir)) {
-						MainApplication.getAirMap().put(name,newAir);
-						//MainApplication.getAirMap().put(nameNode,newAir);
-						System.out.println("\n"+name+" registered\n");
-						//System.out.println("RESOURCE" + name + "ADDED");
+				boolean obs = false;
+				
+				if(parameters.length>3) {
+					if(parameters[3].contains("obs")) {
+					obs = true;
 					}
 				}
+				
+				Resource newResource = new Resource(inetAddress.getHostAddress(), path,name,info,obs);
+				MainApplication.getRegisteredResources().put(name,newResource);
+				
+				System.out.println("\n"+name+" registered");
+				
+				//TODO OBSERVING CLIENT
+				if (obs == true) {
+					MainApplication.observedResources.put(name,new MyClient(newResource));
+					MainApplication.getObservedResources().get(name).startObserving();
+				}
+				
+				//nameRoom = Rooms[nodeId];
+				//nameNode = "NODE: " + i+1;
+//				if (name.contains("res_quality")) {
+//					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
+//					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
+//						MainApplication.getQualityMap().put(name, newQuality);
+//						//MainApplication.getQualityMap().put(nameNode, newQuality);
+//						System.out.println("\n"+name+" registered\n");
+//						//System.out.println("\n"+nameNode+" registered\n");
+//						//System.out.println("RESOURCE" + name + "ADDED");
+//						//addObservingClient(newQuality);
+//						
+//					}
+//				} else if (name.contains("res_air")) {
+//					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
+//					if(!MainApplication.getAirMap().containsValue(newAir)) {
+//						MainApplication.getAirMap().put(name,newAir);
+//						//MainApplication.getAirMap().put(nameNode,newAir);
+//						System.out.println("\n"+name+" registered\n");
+//						//System.out.println("RESOURCE" + name + "ADDED");
+//					}
+//				}
 //					
 			}
 		
@@ -201,12 +221,12 @@ public class RegistrationResource extends CoapResource {
 //			MainApplication.setWaitRegistration(false);
 //		}
 //	}
-	public void addObservingClient(Quality q) {
-	MyClient client = new MyClient(q);
-	MainApplication.getClientList().add(client);
-	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
-	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
-}
+//	public void addObservingClient(Quality q) {
+//	MyClient client = new MyClient(q);
+//	MainApplication.getClientList().add(client);
+//	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
+//	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
+//}
 	
 
 }
