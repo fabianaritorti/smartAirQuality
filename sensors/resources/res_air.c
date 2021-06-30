@@ -84,6 +84,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 	if(request != NULL) {
 		LOG_DBG("POST/PUT Request Sent\n");
 		LOG_DBG("Actual state: %d\n", air_state);
+		
 	}
   
 	size_t len = 0;
