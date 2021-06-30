@@ -217,12 +217,12 @@ public class RegistrationResource extends CoapResource {
 //			MainApplication.setWaitRegistration(false);
 //		}
 //	}
-	public void addObservingClient(Quality q) {
-	MyClient client = new MyClient(q);
-	MainApplication.getClientList().add(client);
-	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
-	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
-}
+//	public void addObservingClient(Quality q) {
+//	MyClient client = new MyClient(q);
+//	MainApplication.getClientList().add(client);
+//	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
+//	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
+//}
 	
 
 }
