@@ -130,7 +130,7 @@ public class MainApplication {
 			
 			int cmd = getCommand();
 			
-			if (cmd > 5) {
+			if (cmd > 4) {
 				System.out.println("Error on digiting command");
 				System.out.println("Please, check and insert a new command again");
 				showMenu();
@@ -143,29 +143,21 @@ public class MainApplication {
 					
 					showMenu();
 					break;
+				
 				case 2:
-					//getStatusResource();
-					//nodeId = getNodeId();
-					
-//					if (nodeId != null) {
-//						
-//					}
-					showMenu();
-					break;
-				case 3:
 //					nodeId = getNodeId();
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
-					//changeDepuratorStatus("ON");
+					changeDepuratorStatus("ON","res_quality");
 					
 					showMenu();
 					break;
-				case 4:
-					//changeDepuratorStatus("OFF");
+				case 3:
+					changeDepuratorStatus("OFF", "res_quality");
 					showMenu();
 					break;
-				case 5:
+				case 4:
 					//System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
 					//System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
 					//observeMode = true;
@@ -198,16 +190,34 @@ public class MainApplication {
 		}
 		
 	}
+	
+	public static void changeDepuratorStatus(String state,String name) {
+		CoapClient client = new CoapClient(registeredResources.get(name).getCoapURI());
+		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
+		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
+		String code = coapResponse.getCode().toString();
+		if (!code.startsWith("2")) {
+			System.out.println("Error: " + code);
+			return;
+		}
+		if (state == "ON") {
+			System.out.println("Depuration air started");
+			registeredResources.get(name).setState(true);
+		} else if (state == "OFF"){
+			System.out.println("Depuration air stopped");
+			registeredResources.get(name).setState(false);
+		}
+	}
+	
 
 	public static void showMenu() {
 		System.out.println("************************************************");
 		System.out.println("Welcome to the Air Depuration System!");
 		System.out.println("Please, insert a command");
 		System.out.println("1.Show the resources info");
-		System.out.println("2.Show the resources status");
-		System.out.println("3.Start depuration");
-		System.out.println("4.Stop depuration");
-		System.out.println("5.Observe resource mode");
+		System.out.println("2.Start depuration");
+		System.out.println("3.Stop depuration");
+		System.out.println("4.Observe resource mode");
 		
 	// 	//eventualmente aggiungere altro
 		//System.out.pritnln("Show the last quality air value")
@@ -277,36 +287,7 @@ public static void runServer() {
 //	}
 //	
 //}
-//public static void changeDepuratorStatus(String state) {
-//	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//	String name;
-//	System.out.println("INSERT THE NAME OF THE RESOURCE");
-//	try {
-//		name = bufferedReader.readLine();
-//		Air air = airMap.get(name);
-//		if (air == null) {
-//			System.out.println("THERE IS NO RESOURCE WITH THIS NAME");
-//			return;
-//		}
-//		CoapClient client = new CoapClient(air.getCoapURI());
-//		//una volta inizializzato il client faccio una richiesta post(payload ossia lo status, formato)
-//		CoapResponse coapResponse = client.post("state=" + state, MediaTypeRegistry.TEXT_PLAIN);
-//		String code = coapResponse.getCode().toString();
-//		if (!code.startsWith("2")) {
-//			System.out.println("Error: " + code);
-//			return;
-//		}
-//		if (state.toString().equals("ON")) {
-//			air.setState(true);
-//		} else {
-//			air.setState(false);
-//		}
-//		
-//	} catch (IOException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	
+
 //	
 //	
 //}
