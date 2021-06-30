@@ -29,13 +29,13 @@ public class RegistrationResource extends CoapResource {
 		
 		
 		//ottengo la richiesta della payload come una stringa
-		char[] exch = exchange.getRequestText().toCharArray();
+		//char[] exch = exchange.getRequestText().toCharArray();
 		//C@325d91a1
 
-		System.out.println("EXCH"+ exch);
+		//System.out.println("EXCH"+ exch);
 		
-		int value = Character.getNumericValue(exch[0]);
-		System.out.println("CHARACTER VALUE" + value);
+//		int value = Character.getNumericValue(exch[0]);
+//		System.out.println("CHARACTER VALUE" + value);
 		
 		
 		//converto la stringa in un array di char

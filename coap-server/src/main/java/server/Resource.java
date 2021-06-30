@@ -132,18 +132,18 @@ public class Resource {
 //
 
 //	
-//	@Override
-//	public String toString() {
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("Resource [ip=");
-//		builder.append(ip);
-//		builder.append(", path=");
-//		builder.append(path);
-//		builder.append(", name=");
-//		builder.append(name);
-//		builder.append("]");
-//		return builder.toString();
-//	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Resource [ip=");
+		builder.append(ip);
+		builder.append(", path=");
+		builder.append(path);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 	
 
