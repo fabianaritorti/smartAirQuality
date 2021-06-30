@@ -149,12 +149,12 @@ public class MainApplication {
 //					if (nodeId != null) {
 //						changeDepuratorStatus("OFF", airList.get(nodeId));
 //					}
-					changeDepuratorStatus("ON","res_quality");
+					changeDepuratorStatus("ON","res_air");
 					
 					showMenu();
 					break;
 				case 3:
-					changeDepuratorStatus("OFF", "res_quality");
+					changeDepuratorStatus("OFF", "res_air");
 					showMenu();
 					break;
 				case 4:
