@@ -158,15 +158,15 @@ public class MainApplication {
 					showMenu();
 					break;
 				case 4:
-					//System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
-					//System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
-					//observeMode = true;
-//					while(observeMode) {
-//						int command = getCommand();
-//						if (command == 0) {
-//							observeMode = false;
-//						}
-//					}
+					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
+					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
+					observeMode = true;
+					while(observeMode) {
+						int command = getCommand();
+						if (command == 0) {
+							observeMode = false;
+						}
+					}
 					break;
 				case 0:
 					System.out.println("**************************");
