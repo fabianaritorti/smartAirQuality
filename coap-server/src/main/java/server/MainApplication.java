@@ -165,8 +165,10 @@ public class MainApplication {
 						int command = getCommand();
 						if (command == 0) {
 							observeMode = false;
+							break;
 						}
 					}
+					showMenu();
 					break;
 				case 0:
 					System.out.println("**************************");

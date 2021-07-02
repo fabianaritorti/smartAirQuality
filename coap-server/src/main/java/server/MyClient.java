@@ -34,7 +34,7 @@ public class MyClient extends CoapClient {
 			public void onLoad(CoapResponse response) {
 				// TODO Auto-generated method stub
 				try {
-					String value;
+					String value = "";
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
 					//Integer THRESHOLD = 50 ;
 					//containsKey ritorna vero se la mappa(jsonObject) contiene questo valore
@@ -77,7 +77,7 @@ public class MyClient extends CoapClient {
 						
 						
 						//TODO settare l'hashMap in base al valore della qualità
-					} else if (resource.getName().equals("quality")){
+					} else if (resource.getName().contains("quality")){
 						int v = (Integer) jsonObject.get("value");
 						resource.setValue(v);
 						//TODO HERE
