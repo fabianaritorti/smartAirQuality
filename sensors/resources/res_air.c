@@ -18,7 +18,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 //static void res_event_handler(void);
 
 RESOURCE(res_air, 
-		"title=\"Air actuator: ?POST/PUT state=ON|OFF\";obs;rt=\"Air Control\"",
+		"title=\"Air actuator: ?POST/PUT state=ON|OFF\";rt=\"Air Control\";obs",
 	    res_get_handler,
         res_post_put_handler,
         res_post_put_handler,
