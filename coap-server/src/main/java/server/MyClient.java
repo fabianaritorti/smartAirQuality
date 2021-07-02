@@ -78,7 +78,7 @@ public class MyClient extends CoapClient {
 						
 						//TODO settare l'hashMap in base al valore della qualità
 					} else if (resource.getName().contains("quality")){
-						Integer v = (Integer) jsonObject.get("value");
+						Long v = (Long) jsonObject.get("value");
 						resource.setValue(v);
 						//TODO HERE
 						

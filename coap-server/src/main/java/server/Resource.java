@@ -10,7 +10,7 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private Integer value = 15;
+	private Long value = (long) 15;
 	
 	public Resource(String ip, String path, String name, String info, boolean isObservable) {
 		super();
@@ -46,7 +46,7 @@ public class Resource {
 		return state;
 	}
 
-	public int getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -70,7 +70,7 @@ public class Resource {
 		this.state = state;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
