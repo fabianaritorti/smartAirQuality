@@ -10,7 +10,7 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private int value = 15;
+	private Integer value = 15;
 	
 	public Resource(String ip, String path, String name, String info, boolean isObservable) {
 		super();
@@ -70,7 +70,7 @@ public class Resource {
 		this.state = state;
 	}
 
-	public void setValue(int value) {
+	public void setValue(Integer value) {
 		this.value = value;
 	}
 

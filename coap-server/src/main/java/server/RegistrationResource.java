@@ -18,8 +18,14 @@ public class RegistrationResource extends CoapResource {
 		// TODO Auto-generated constructor stub
 	}
 
-	//</.well-known/core>;ct=40,</res_air>;title="Air actuator: ?POST/
-	//		PUT state=ON|OFF";obs;rt="Air Control",</res_quality>;title="Quality sensor";methods="GET";rt="int";obs
+//	</.well-known/core>;ct=40,</res_air>;title="Air actuator: ?POST/PUT state=ON|OFF";rt="Air Control";obs,</res_quality>;title="Quality sensor";rt="Quality sensor";obs
+//	PUT state=ON|OFF";obs;rt="Air Control",</res_quality>;title="Quality sensor";methods="GET";rt="int";obs
+
+	
+//	PATH /res_air
+//	NAMEres_air
+//	INFO title="Air actuator: ?POST/PUT state=ON|OFF";rt="Air Control"
+//	OBSobs
 
 	
 	
