@@ -221,7 +221,7 @@ public class MainApplication {
 		System.out.println("4.Observe resource mode");
 		
 	// 	//eventualmente aggiungere altro
-		//System.out.pritnln("Show the last quality air value")
+		
 		System.out.println("0.Exit");
 		System.out.println("************************************************");
 	}
