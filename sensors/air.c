@@ -110,7 +110,7 @@ PROCESS_THREAD(air_node, ev, data){
         //quality = 1 + rand()%100;
 		
         //LOG_DBG("presence: %d\n", presence);
-        LOG_DBG("quality: %d\n", quality);
+        LOG_DBG("quality value: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
 		// 	air_state = 0;
         //     leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
@@ -126,7 +126,7 @@ PROCESS_THREAD(air_node, ev, data){
 			air_state = 1;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
 			quality = quality+qualityToAdd;
-			LOG_DBG("quality: %d\n", quality);
+			LOG_DBG("quality value: %d\n", quality);
 			//LOG_DBG("Air quality is good! \n");
 			
 			

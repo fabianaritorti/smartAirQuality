@@ -24,7 +24,7 @@ static void res_event_handler(void);
 
 
 EVENT_RESOURCE(res_quality,
-	"title=\"Quality sensor\";methods=\"GET\";rt=\"int\";obs",
+	"title=\"Quality sensor\";rt=\"Quality sensor\";obs",
 	res_get_handler,
 	NULL,
     NULL,
@@ -51,7 +51,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 
 	if(accept == TEXT_PLAIN) {
 	    coap_set_header_content_format(response, TEXT_PLAIN);
-	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "<value=\"%d\"/>", quality);
+	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "value=%d", quality);
 	    coap_set_payload(response, (uint8_t *)buffer, strlen((char *)buffer));    
 	} else if(accept == APPLICATION_XML) {
 		coap_set_header_content_format(response, APPLICATION_XML);

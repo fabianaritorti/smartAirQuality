@@ -48,6 +48,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 		LOG_DBG("Received GET\n");
 		//LOG_DBG("Observing handler number %d\n", counter); 
 	}
+	LOG_DBG("Air state", air_state);
 
 
 	unsigned int accept = -1;
