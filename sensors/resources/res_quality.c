@@ -24,7 +24,7 @@ static void res_event_handler(void);
 
 
 EVENT_RESOURCE(res_quality,
-	"title=\"Quality sensor\";methods=\"GET\";rt=\"int\";obs",
+	"title=\"Quality sensor\";rt=\"Quality sensor\";obs",
 	res_get_handler,
 	NULL,
     NULL,
