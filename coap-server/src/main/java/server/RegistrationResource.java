@@ -82,8 +82,11 @@ public class RegistrationResource extends CoapResource {
 				String path = parameters[0].split("<")[1].replace(">", "");
 				String name = path.replace("/", "");
 				String info = parameters[1]+";"+parameters[2];
+				String observableP = parameters[3];
 				System.out.println("PATH "+ path);
 				System.out.println("NAME" + name);
+				System.out.println("INFO "+ info);
+				System.out.println("OBS" + observableP);
 				boolean obs = false;
 				
 				if(parameters.length>3) {
