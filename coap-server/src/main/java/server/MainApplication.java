@@ -168,6 +168,7 @@ public class MainApplication {
 							break;
 						}
 					}
+					showMenu();
 					break;
 				case 0:
 					System.out.println("**************************");
