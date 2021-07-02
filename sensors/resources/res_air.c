@@ -59,16 +59,16 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 
 	if(accept == TEXT_PLAIN) {
 	    coap_set_header_content_format(response, TEXT_PLAIN);
-	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "air_state=%d", air_state);
+	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "status=%d", air_state);
 	    coap_set_payload(response, (uint8_t *)buffer, strlen((char *)buffer));    
 	} else if(accept == APPLICATION_XML) {
 		coap_set_header_content_format(response, APPLICATION_XML);
- 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<air_state=\"%d\"/>", air_state);
+ 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<status=\"%d\"/>", air_state);
 		coap_set_payload(response, buffer, strlen((char *)buffer));
     	} 
 	else if(accept == APPLICATION_JSON) {
 		coap_set_header_content_format(response, APPLICATION_JSON);
-		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"air_state\":%d}", air_state);
+		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"status\":%d}", air_state);
 		coap_set_payload(response, buffer, strlen((char *)buffer));
 	}
 	else {
@@ -84,6 +84,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 	if(request != NULL) {
 		LOG_DBG("POST/PUT Request Sent\n");
 		LOG_DBG("Actual state: %d\n", air_state);
+		
 	}
   
 	size_t len = 0;
