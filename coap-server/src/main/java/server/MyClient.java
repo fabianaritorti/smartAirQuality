@@ -40,7 +40,7 @@ public class MyClient extends CoapClient {
 					//containsKey ritorna vero se la mappa(jsonObject) contiene questo valore
 					if (resource.getName().contains("air")) {
 						//la get ritorna il valore associato alla chiave
-						value = jsonObject.get("air").toString();
+						value = jsonObject.get("status").toString();
 						if (value.equals("ON")) {
 							if (!resource.isState()) {
 								System.out.println("Depuration air started");
@@ -78,13 +78,20 @@ public class MyClient extends CoapClient {
 						
 						//TODO settare l'hashMap in base al valore della qualità
 					} else if (resource.getName().equals("quality")){
+						int v = (Integer) jsonObject.get("value");
+						resource.setValue(v);
 						//TODO HERE
 						
 					}
 					if (MainApplication.observeMode == true) {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
-						System.out.println("TIMESTAMP:"+ timestamp);
+						resource.showStatus();
+						
+						if (jsonObject.containsKey("value")) {
+							System.out.println("TIMESTAMP:"+ timestamp);
+						}
+						
 						
 					}
 				} catch (Exception e) {

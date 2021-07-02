@@ -145,6 +145,21 @@ public class Resource {
 		return builder.toString();
 	}
 	
+	public String showStatus() {
+		if (this.getName().contains("res_air")) {
+			if (this.isState()) {
+				System.out.println("STATUS:ON");
+			} else if (!this.isState()) {
+				System.out.println("STATUS:OFF");
+			}
+		}
+		if (this.getName().contains("res_quality")) {
+			System.out.println("QUALITY VALUE: " + this.getValue());
+		}
+		return this.getName();
+		
+	}
+	
 	
 
 	

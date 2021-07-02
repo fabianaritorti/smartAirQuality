@@ -158,15 +158,15 @@ public class MainApplication {
 					showMenu();
 					break;
 				case 4:
-					//System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
-					//System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
-					//observeMode = true;
-//					while(observeMode) {
-//						int command = getCommand();
-//						if (command == 0) {
-//							observeMode = false;
-//						}
-//					}
+					System.out.println("WELCOME TO THE OBSERVE RESOURCE MODE");
+					System.out.println("PLEASE PRESS 0 IF YOU WANT TO EXIT FROM THIS MODE");
+					observeMode = true;
+					while(observeMode) {
+						int command = getCommand();
+						if (command == 0) {
+							observeMode = false;
+						}
+					}
 					break;
 				case 0:
 					System.out.println("**************************");
@@ -187,6 +187,7 @@ public class MainApplication {
 		for (Map.Entry<String, Resource> entry: registeredResources.entrySet()) {
 //			//System.out.println("NODE" + qualityMap.keySet());
 			System.out.println("RESOURCES:"  + entry.getValue().toString());
+			System.out.println("STATUS:"  + entry.getValue().showStatus());
 		}
 		
 	}
@@ -220,7 +221,7 @@ public class MainApplication {
 		System.out.println("4.Observe resource mode");
 		
 	// 	//eventualmente aggiungere altro
-		//System.out.pritnln("Show the last quality air value")
+		
 		System.out.println("0.Exit");
 		System.out.println("************************************************");
 	}
