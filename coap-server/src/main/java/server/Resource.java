@@ -146,15 +146,16 @@ public class Resource {
 	}
 	
 	public String showStatus() {
+		String status = "";
 		if (this.getName().contains("res_air")) {
 			if (this.isState()) {
-				System.out.println("STATUS:ON");
+				status = "ON";
 			} else if (!this.isState()) {
-				System.out.println("STATUS:OFF");
+				status = "OFF";
 			}
 		}
 		if (this.getName().contains("res_quality")) {
-			System.out.println("QUALITY VALUE: " + this.getValue());
+			System.out.println("QUALITY VALUE: " + this.getValue() + "status" + status);
 		}
 		return this.getName();
 		
