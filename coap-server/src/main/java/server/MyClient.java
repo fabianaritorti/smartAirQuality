@@ -102,7 +102,7 @@ public class MyClient extends CoapClient {
 			}
 			
 			public void onError() {
-				System.out.println("Error in observing request.");
+				System.out.println("Error in observing request!.");
 				// TODO Auto-generated method stub
 				
 			}
