@@ -81,6 +81,7 @@ public class MyClient extends CoapClient {
 						Long v = (Long) jsonObject.get("value");
 						resource.setValue(v);
 						//TODO HERE
+						//vede solo le risorse quando il depuratore e' acceso
 						
 					}
 					if (MainApplication.observeMode == true) {

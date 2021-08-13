@@ -144,7 +144,7 @@ public class Resource {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+	//metodo per mostrare lo stato delle risorse e i valori ottenuti
 	public String showStatus() {
 		String status = "";
 		if (this.getName().contains("res_air")) {
