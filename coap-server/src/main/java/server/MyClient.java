@@ -34,13 +34,15 @@ public class MyClient extends CoapClient {
 			public void onLoad(CoapResponse response) {
 				// TODO Auto-generated method stub
 				try {
-					String value;
+					//String value = null;
+					Long value = null;
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
 					//Integer THRESHOLD = 50 ;
 					//containsKey ritorna vero se la mappa(jsonObject) contiene questo valore
 					if (resource.getName().contains("air")) {
 						//la get ritorna il valore associato alla chiave
-						value = jsonObject.get("status").toString();
+						//value = jsonObject.get("status").toString();
+						value = (Long) jsonObject.get("status");
 						//System.out.println("STATO DEL DEPURATORE" + value);
 						if (value.equals("ON")) {
 							if (!resource.getState()) {
