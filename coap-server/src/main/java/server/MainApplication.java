@@ -128,6 +128,7 @@ public class MainApplication {
 //				System.out.println("LOADING REGISTRATION");
 //			}
 			
+			
 			int cmd = getCommand();
 			
 			if (cmd > 4) {
