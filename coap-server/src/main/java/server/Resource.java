@@ -42,7 +42,7 @@ public class Resource {
 		return info;
 	}
 
-	public boolean isState() {
+	public boolean getState() {
 		return state;
 	}
 
@@ -148,9 +148,9 @@ public class Resource {
 	public String showStatus() {
 		String status = "";
 		if (this.getName().contains("res_air")) {
-			if (this.isState()) {
+			if (this.getState()) {
 				status = "ON";
-			} else if (!this.isState()) {
+			} else if (!this.getState()) {
 				status = "OFF";
 			}
 		}

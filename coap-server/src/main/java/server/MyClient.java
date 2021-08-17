@@ -42,12 +42,12 @@ public class MyClient extends CoapClient {
 						//la get ritorna il valore associato alla chiave
 						value = jsonObject.get("status").toString();
 						if (value.equals("ON")) {
-							if (!resource.isState()) {
+							if (!resource.getState()) {
 								System.out.println("Depuration air started");
 							}
 							resource.setState(true);
 						} else if (value.equals("OFF")){
-							if (resource.isState()) {
+							if (resource.getState()) {
 								System.out.println("Depuration air stopped");
 							}
 							resource.setState(false);
