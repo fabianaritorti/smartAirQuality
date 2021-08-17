@@ -41,7 +41,7 @@ public class MyClient extends CoapClient {
 					if (resource.getName().contains("air")) {
 						//la get ritorna il valore associato alla chiave
 						value = jsonObject.get("status").toString();
-						System.out.println("STATO DEL DEPURATORE" + value);
+						//System.out.println("STATO DEL DEPURATORE" + value);
 						if (value.equals("ON")) {
 							if (!resource.getState()) {
 								System.out.println("Depuration air started");
@@ -78,7 +78,7 @@ public class MyClient extends CoapClient {
 //							}
 						
 						
-						//TODO settare l'hashMap in base al valore della qualità
+						
 					} else if (resource.getName().contains("quality")){
 						Long v = (Long) jsonObject.get("value");
 						resource.setValue(v);
@@ -90,7 +90,7 @@ public class MyClient extends CoapClient {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
 						resource.showStatus();
-						
+						System.out.println("VALORE STATO DEPURATORE "+ value);
 						if (jsonObject.containsKey("value")) {
 							System.out.println("TIMESTAMP:"+ timestamp);
 						}

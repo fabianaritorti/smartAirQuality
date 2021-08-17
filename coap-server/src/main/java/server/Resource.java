@@ -155,7 +155,7 @@ public class Resource {
 			}
 		}
 		if (this.getName().contains("res_quality")) {
-			System.out.println("QUALITY VALUE: " + this.getValue() + "status" + status);
+			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
 		}
 		return this.getName();
 		
