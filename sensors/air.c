@@ -140,6 +140,7 @@ PROCESS_THREAD(air_node, ev, data){
 		if (air_state != air_state_old) { // when state changes, trigger call
 			res_air.trigger();
 			//res_presence.trigger();
+			
 			res_quality.trigger();
 			//res_presence.trigger();
 			
