@@ -51,6 +51,7 @@ public class MyClient extends CoapClient {
 								System.out.println("Depuration air stopped");
 							}
 							resource.setState(false);
+							//vedere questa cosa dello stato
 							
 						}
 						
