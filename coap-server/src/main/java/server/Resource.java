@@ -81,57 +81,7 @@ public class Resource {
 	public boolean equals(Resource o){
 		return (this.path.equals(o.path) && this.ip.equals(o.ip));
 	}
-	//private String name;
 	
-	
-	
-	
-
-//	public String getName() {
-//		return name;
-//	}
-
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-
-//	public Resource(String ip, String path,String name) {
-//		// TODO Auto-generated constructor stub
-//		this.ip = ip;
-//		this.path = path;
-//		this.name = name;
-//		
-//	}
-
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public String getPath() {
-//		return path;
-//	}
-//
-//	public String getIp() {
-//		return ip;
-//	}
-//	
-//	
-//
-//	public void setPath(String path) {
-//		this.path = path;
-//	}
-//
-//	public void setIp(String ip) {
-//		this.ip = ip;
-//
-//	}
-//
-
-//	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -167,19 +117,25 @@ public class Resource {
 		} else if (!this.getState()) {
 			status = "OFF";
 		}
-		System.out.println("QUALITY VALUE: " + " " + this.getValue() + "STATUS: " + status);
-//			} else if (!this.getState()) {
-//				status = "OFF";
-//			}
-//		}
-//		if (this.getName().contains("res_quality")) {
-//			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
-//		}
-//		return this.getName();
-//		
+		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
+		
 	}
 	
-
+	public String showResourcesInfo() {
+	String valueResource = null;
+	if (this.getName().contains("res_air")) {
+		if (this.getState()) {
+			valueResource = "DEPURATOR STATUS : ON";
+		} else if (!this.getState()) {
+			valueResource = "DEPURATOR STATUS : OFF";
+		}
+	}
+	if (this.getName().contains("res_quality")) {
+		valueResource = this.getValue().toString();
+	}
+	return this.getName() + " " + valueResource;
+	
+}
 	
 	
 	

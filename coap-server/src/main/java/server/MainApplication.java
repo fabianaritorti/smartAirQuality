@@ -190,8 +190,8 @@ public class MainApplication {
 		for (Map.Entry<String, Resource> entry: registeredResources.entrySet()) {
 //			//System.out.println("NODE" + qualityMap.keySet());
 			System.out.println("RESOURCES:"  + entry.getValue().toString());
-			//System.out.println("STATUS:"  + entry.getValue().showStatus());
-			entry.getValue().showStatus();
+			System.out.println("STATUS INFO:"  + entry.getValue().showResourcesInfo());
+			//entry.getValue().showStatus();
 		}
 		
 	}
