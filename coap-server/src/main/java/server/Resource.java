@@ -145,22 +145,39 @@ public class Resource {
 		return builder.toString();
 	}
 	//metodo per mostrare lo stato delle risorse e i valori ottenuti
-	public String showStatus() {
+//	public String showStatus() {
+//		String status = "";
+//		if (this.getName().contains("res_air")) {
+//			if (this.getState()) {
+//				status = "ON";
+//			} else if (!this.getState()) {
+//				status = "OFF";
+//			}
+//		}
+//		if (this.getName().contains("res_quality")) {
+//			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
+//		}
+//		return this.getName();
+//		
+//	}
+	public void showStatus() {
 		String status = "";
-		if (this.getName().contains("res_air")) {
-			if (this.getState()) {
-				status = "ON";
-			} else if (!this.getState()) {
-				status = "OFF";
-			}
+		if (this.getState()) {
+			status = "ON";
+		} else if (!this.getState()) {
+			status = "OFF";
 		}
-		if (this.getName().contains("res_quality")) {
-			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
-		}
-		return this.getName();
-		
+		System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
+//			} else if (!this.getState()) {
+//				status = "OFF";
+//			}
+//		}
+//		if (this.getName().contains("res_quality")) {
+//			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
+//		}
+//		return this.getName();
+//		
 	}
-	
 	
 
 	
