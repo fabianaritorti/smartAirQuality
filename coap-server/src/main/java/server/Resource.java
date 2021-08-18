@@ -10,7 +10,7 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private Long value = (long) 15;
+	private Long value = (long) 30;
 	
 	public Resource(String ip, String path, String name, String info, boolean isObservable) {
 		super();
@@ -167,7 +167,7 @@ public class Resource {
 		} else if (!this.getState()) {
 			status = "OFF";
 		}
-		System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
+		System.out.println("QUALITY VALUE: " + " " + this.getValue() + "STATUS: " + status);
 //			} else if (!this.getState()) {
 //				status = "OFF";
 //			}
