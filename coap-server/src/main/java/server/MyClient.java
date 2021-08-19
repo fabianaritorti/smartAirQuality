@@ -104,10 +104,11 @@ public class MyClient extends CoapClient {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
 						resource.showStatus();
+						System.out.println("TIMESTAMP:"+timestamp);
 						//System.out.println("VALORE STATO DEPURATORE "+ value);
-						if (jsonObject.containsKey("value")) {
-							System.out.println("TIMESTAMP:"+ timestamp);
-						}
+//						if (jsonObject.containsKey("value")) {
+//							System.out.println("TIMESTAMP:"+ timestamp);
+//						}
 						
 						
 					}
