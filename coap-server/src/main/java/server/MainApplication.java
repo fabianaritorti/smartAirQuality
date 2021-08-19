@@ -121,13 +121,13 @@ public class MainApplication {
 	public static void main(String[] args) throws IOException {
 		
 		runServer();
-//		showMenu();
+		showMenu();
 		
 		while(true) {
 //			if (waitRegistration) {
 //				System.out.println("LOADING REGISTRATION");
 //			}
-			showMenu();
+			//showMenu();
 			
 			int cmd = getCommand();
 			
