@@ -10,8 +10,14 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private Long value = (long) 30;
+	private Long valueQ = (long) 30;
+	private Long valueP = (long) 15;
 	
+	
+
+
+
+
 	public Resource(String ip, String path, String name, String info, boolean isObservable) {
 		super();
 		this.ip = ip;
@@ -23,7 +29,18 @@ public class Resource {
 	}
 
 	
-	
+	public Long getValueP() {
+		return valueP;
+	}
+
+
+
+
+
+	public void setValueP(Long valueP) {
+		this.valueP = valueP;
+	}
+
 	
 	
 	public String getIp() {
@@ -46,8 +63,8 @@ public class Resource {
 		return state;
 	}
 
-	public Long getValue() {
-		return value;
+	public Long getValueQ() {
+		return valueQ;
 	}
 
 	public void setIp(String ip) {
@@ -70,8 +87,8 @@ public class Resource {
 		this.state = state;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	public void setValueQ(Long valueQ) {
+		this.valueQ = valueQ;
 	}
 
 	public String getCoapURI() {
@@ -118,9 +135,9 @@ public class Resource {
 			status = "OFF";
 		}
 		String nameNode = this.ip;
-		System.out.println("NODE = " + nameNode.charAt(nameNode.length() - 1));
+		System.out.println("NODE : " + nameNode.charAt(nameNode.length() - 1));
 		//System.out.println("NODE");
-		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
+		System.out.println("QUALITY VALUE: " + this.getValueQ() +  " " + "STATUS: " + status);
 		
 	}
 	
@@ -134,7 +151,15 @@ public class Resource {
 		}
 	}
 	if (this.getName().contains("res_quality")) {
-		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
+		valueResource = "QUALITY VALUE:" + " " + this.getValueQ().toString();
+	}
+	if (this.getName().contains("res_presence")) {
+		if (this.getValueP() < 50) {
+			valueResource = "PRESENCE NOT DETECTED";
+		} else {
+			valueResource = "PRESENCE DETECTED";
+		}
+		
 	}
 	return this.getName() + " " + valueResource;
 	
