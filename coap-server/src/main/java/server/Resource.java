@@ -161,7 +161,7 @@ public class Resource {
 //		}
 //		
 //	}
-	return this.getName() + " " + valueResource;
+	return valueResource;
 	
 }
 	
