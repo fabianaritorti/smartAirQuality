@@ -143,21 +143,17 @@ public class Resource {
 	
 	public String showResourcesInfo() {
 	String valueResource = null;
-//	if (this.getName().contains("res_air")) {
-//		if (this.getState()) {
-//			valueResource = "DEPURATOR STATUS : ON";
-//		} else if (!this.getState()) {
-//			valueResource = "DEPURATOR STATUS : OFF";
-//		}
-//	}
-	if (this.getState()) {
-		valueResource = "DEPURATOR STATUS : ON";
-	} else if (!this.getState()) {
-		valueResource = "DEPURATOR STATUS : OFF";
+	if (this.getName().contains("res_air")) {
+		if (this.getState()) {
+			valueResource = "DEPURATOR STATUS : ON";
+		} else if (!this.getState()) {
+			valueResource = "DEPURATOR STATUS : OFF";
+		}
 	}
-//	if (this.getName().contains("res_quality")) {
-//		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
-//	}
+	
+	if (this.getName().contains("res_quality")) {
+		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
+	}
 //	if (this.getName().contains("res_presence")) {
 //		if (this.getValueP() < 50) {
 //			valueResource = "PRESENCE NOT DETECTED";
