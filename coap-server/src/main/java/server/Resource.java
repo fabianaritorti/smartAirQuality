@@ -10,8 +10,8 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private Long valueQ = (long) 30;
-	private Long valueP = (long) 15;
+	private Long value = (long) 30;
+	//private Long valueP = (long) 15;
 	
 	
 
@@ -29,17 +29,17 @@ public class Resource {
 	}
 
 	
-	public Long getValueP() {
-		return valueP;
-	}
-
-
-
-
-
-	public void setValueP(Long valueP) {
-		this.valueP = valueP;
-	}
+//	public Long getValueP() {
+//		return valueP;
+//	}
+//
+//
+//
+//
+//
+//	public void setValueP(Long valueP) {
+//		this.valueP = valueP;
+//	}
 
 	
 	
@@ -63,8 +63,8 @@ public class Resource {
 		return state;
 	}
 
-	public Long getValueQ() {
-		return valueQ;
+	public Long getValue() {
+		return value;
 	}
 
 	public void setIp(String ip) {
@@ -87,8 +87,8 @@ public class Resource {
 		this.state = state;
 	}
 
-	public void setValueQ(Long valueQ) {
-		this.valueQ = valueQ;
+	public void setValue(Long value) {
+		this.value = value;
 	}
 
 	public String getCoapURI() {
@@ -137,7 +137,7 @@ public class Resource {
 		String nameNode = this.ip;
 		System.out.println("NODE : " + nameNode.charAt(nameNode.length() - 1));
 		//System.out.println("NODE");
-		System.out.println("QUALITY VALUE: " + this.getValueQ() +  " " + "STATUS: " + status);
+		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
 		
 	}
 	
@@ -151,16 +151,16 @@ public class Resource {
 		}
 	}
 	if (this.getName().contains("res_quality")) {
-		valueResource = "QUALITY VALUE:" + " " + this.getValueQ().toString();
+		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
 	}
-	if (this.getName().contains("res_presence")) {
-		if (this.getValueP() < 50) {
-			valueResource = "PRESENCE NOT DETECTED";
-		} else {
-			valueResource = "PRESENCE DETECTED";
-		}
-		
-	}
+//	if (this.getName().contains("res_presence")) {
+//		if (this.getValueP() < 50) {
+//			valueResource = "PRESENCE NOT DETECTED";
+//		} else {
+//			valueResource = "PRESENCE DETECTED";
+//		}
+//		
+//	}
 	return this.getName() + " " + valueResource;
 	
 }

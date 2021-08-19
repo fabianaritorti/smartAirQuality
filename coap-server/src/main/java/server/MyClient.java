@@ -39,7 +39,7 @@ public class MyClient extends CoapClient {
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
 					if (resource.getName().contains("quality")){
 						Long v = (Long) jsonObject.get("value");
-						resource.setValueQ(v);
+						resource.setValue(v);
 						if (v < 50) {
 							resource.setState(true);
 						} else if (v > 50) {
