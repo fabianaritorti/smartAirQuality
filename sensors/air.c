@@ -65,7 +65,7 @@ PROCESS_THREAD(air_node, ev, data){
 	
 	coap_activate_resource(&res_air, "res_air");
     coap_activate_resource(&res_quality, "res_quality");
-	coap_activate_resource(&res_presence, "res_presence");
+	//coap_activate_resource(&res_presence, "res_presence");
 
 	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
 
@@ -106,14 +106,14 @@ PROCESS_THREAD(air_node, ev, data){
 
 		}
 		//genero valori casuali di presenza e qualità (numero da 1 a 100)
-        presence = 1 + rand()%100;
-		LOG_DBG("presence value: %d\n", presence);
-		if (presence <= P_THRESHOLD) {
-			LOG_DBG("Presence not detected!\n");
-		}
-		else if (presence > P_THRESHOLD) {
-			LOG_DBG("Presence detected! \n");
-		}
+        // presence = 1 + rand()%100;
+		// LOG_DBG("presence value: %d\n", presence);
+		// if (presence <= P_THRESHOLD) {
+		// 	LOG_DBG("Presence not detected!\n");
+		// }
+		// else if (presence > P_THRESHOLD) {
+		// 	LOG_DBG("Presence detected! \n");
+		// }
 
         //quality = 1 + rand()%100;
 
