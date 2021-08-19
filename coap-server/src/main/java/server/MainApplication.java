@@ -207,6 +207,7 @@ public class MainApplication {
 		}
 		if (state == "ON") {
 			System.out.println("Depuration air started");
+			
 			registeredResources.get(name).setState(true);
 		} else if (state == "OFF"){
 			System.out.println("Depuration air stopped");
