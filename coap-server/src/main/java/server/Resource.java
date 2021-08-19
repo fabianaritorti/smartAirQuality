@@ -131,7 +131,7 @@ public class Resource {
 		}
 	}
 	if (this.getName().contains("res_quality")) {
-		valueResource = this.getValue().toString();
+		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
 	}
 	return this.getName() + " " + valueResource;
 	
