@@ -35,25 +35,40 @@ public class MyClient extends CoapClient {
 				// TODO Auto-generated method stub
 				try {
 					String value = "";
+					
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
+					if (resource.getName().contains("quality")){
+						Long v = (Long) jsonObject.get("value");
+						resource.setValue(v);
+						if (v < 50) {
+							resource.setState(true);
+						} else if (v > 50) {
+							resource.setState(false);
+						}
+					}
 					//Integer THRESHOLD = 50 ;
 					//containsKey ritorna vero se la mappa(jsonObject) contiene questo valore
-					if (resource.getName().contains("air")) {
-						//la get ritorna il valore associato alla chiave
-						value = jsonObject.get("status").toString();
-						if (value.equals("ON")) {
-							if (!resource.getState()) {
-								System.out.println("Depuration air started");
-							}
-							resource.setState(true);
-						} else if (value.equals("OFF")){
-							if (resource.getState()) {
-								System.out.println("Depuration air stopped");
-							}
-							resource.setState(false);
-							//vedere questa cosa dello stato
-							
-						}
+					
+					
+					//NON CANCELLARE DA 44 A 61(vecchio codice)
+//					if (resource.getName().contains("air")) {
+//						//la get ritorna il valore associato alla chiave
+//						value = jsonObject.get("status").toString();
+//						
+//						//System.out.println("STATO DEL DEPURATORE" + value);
+//						if (value.equals("ON")) {
+//							if (!resource.getState()) {
+//								System.out.println("Depuration air started");
+//							}
+//							resource.setState(true);
+//						} else if (value.equals("OFF")){
+//							if (resource.getState()) {
+//								System.out.println("Depuration air stopped");
+//							}
+//							resource.setState(false);
+//							//vedere questa cosa dello stato
+//							
+//						}
 						
 						//si converte il valore da stringa ad intero
 						//int valueQuality = Integer.parseInt((value).trim());
@@ -77,22 +92,23 @@ public class MyClient extends CoapClient {
 //							}
 						
 						
-						//TODO settare l'hashMap in base al valore della qualità
-					} else if (resource.getName().contains("quality")){
-						Long v = (Long) jsonObject.get("value");
-						resource.setValue(v);
-						//TODO HERE
-						//vede solo le risorse quando il depuratore e' acceso
-						
-					}
+					//NON CANCELLARE DA 84 A 90(vecchio codice)	
+//					} else if (resource.getName().contains("quality")){
+//						Long v = (Long) jsonObject.get("value");
+//						resource.setValue(v);
+//						//TODO HERE
+//						//vede solo le risorse quando il depuratore e' acceso
+//						
+//					}
 					if (MainApplication.observeMode == true) {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
 						resource.showStatus();
-						
-						if (jsonObject.containsKey("value")) {
-							System.out.println("TIMESTAMP:"+ timestamp);
-						}
+						System.out.println("TIMESTAMP:"+timestamp);
+						//System.out.println("VALORE STATO DEPURATORE "+ value);
+//						if (jsonObject.containsKey("value")) {
+//							System.out.println("TIMESTAMP:"+ timestamp);
+//						}
 						
 						
 					}

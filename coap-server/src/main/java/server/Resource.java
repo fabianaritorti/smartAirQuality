@@ -10,7 +10,7 @@ public class Resource {
 	private String info;
 	private boolean isObservable;
 	private boolean state = false;
-	private Long value = (long) 15;
+	private Long value = (long) 30;
 	
 	public Resource(String ip, String path, String name, String info, boolean isObservable) {
 		super();
@@ -81,57 +81,7 @@ public class Resource {
 	public boolean equals(Resource o){
 		return (this.path.equals(o.path) && this.ip.equals(o.ip));
 	}
-	//private String name;
 	
-	
-	
-	
-
-//	public String getName() {
-//		return name;
-//	}
-
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-
-//	public Resource(String ip, String path,String name) {
-//		// TODO Auto-generated constructor stub
-//		this.ip = ip;
-//		this.path = path;
-//		this.name = name;
-//		
-//	}
-
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public String getPath() {
-//		return path;
-//	}
-//
-//	public String getIp() {
-//		return ip;
-//	}
-//	
-//	
-//
-//	public void setPath(String path) {
-//		this.path = path;
-//	}
-//
-//	public void setIp(String ip) {
-//		this.ip = ip;
-//
-//	}
-//
-
-//	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -145,24 +95,50 @@ public class Resource {
 		return builder.toString();
 	}
 	//metodo per mostrare lo stato delle risorse e i valori ottenuti
-	public String showStatus() {
+//	public String showStatus() {
+//		String status = "";
+//		if (this.getName().contains("res_air")) {
+//			if (this.getState()) {
+//				status = "ON";
+//			} else if (!this.getState()) {
+//				status = "OFF";
+//			}
+//		}
+//		if (this.getName().contains("res_quality")) {
+//			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
+//		}
+//		return this.getName();
+//		
+//	}
+	public void showStatus() {
 		String status = "";
-		if (this.getName().contains("res_air")) {
-			if (this.getState()) {
-				status = "ON";
-			} else if (!this.getState()) {
-				status = "OFF";
-			}
+		if (this.getState()) {
+			status = "ON";
+		} else if (!this.getState()) {
+			status = "OFF";
 		}
-		if (this.getName().contains("res_quality")) {
-			System.out.println("QUALITY VALUE: " + this.getValue() + "status" + status);
-		}
-		return this.getName();
+		String nameNode = this.ip;
+		System.out.println("NODE = " + nameNode.charAt(nameNode.length() - 1));
+		//System.out.println("NODE");
+		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
 		
 	}
 	
+	public String showResourcesInfo() {
+	String valueResource = null;
+	if (this.getName().contains("res_air")) {
+		if (this.getState()) {
+			valueResource = "DEPURATOR STATUS : ON";
+		} else if (!this.getState()) {
+			valueResource = "DEPURATOR STATUS : OFF";
+		}
+	}
+	if (this.getName().contains("res_quality")) {
+		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
+	}
+	return this.getName() + " " + valueResource;
 	
-
+}
 	
 	
 	

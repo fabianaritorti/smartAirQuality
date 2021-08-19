@@ -102,14 +102,18 @@ public class RegistrationResource extends CoapResource {
 				}
 				
 				Resource newResource = new Resource(inetAddress.getHostAddress(), path,name,info,obs);
-				MainApplication.getRegisteredResources().put(name,newResource);
+				String nameResource = name + inetAddress.getHostAddress();
+				//MainApplication.getRegisteredResources().put(name,newResource);
+				MainApplication.getRegisteredResources().put(nameResource,newResource);
 				
-				System.out.println("\n"+name+" registered");
+				System.out.println("\n"+nameResource+" registered");
 				
 				//TODO OBSERVING CLIENT
 				if (obs == true) {
-					MainApplication.observedResources.put(name,new MyClient(newResource));
-					MainApplication.getObservedResources().get(name).startObserving();
+					//MainApplication.observedResources.put(name,new MyClient(newResource));
+					//MainApplication.getObservedResources().get(name).startObserving();
+					MainApplication.observedResources.put(nameResource,new MyClient(newResource));
+					MainApplication.getObservedResources().get(nameResource).startObserving();
 				}
 				
 				//nameRoom = Rooms[nodeId];
