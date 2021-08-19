@@ -118,8 +118,8 @@ public class Resource {
 			status = "OFF";
 		}
 		String nameNode = this.ip;
-		//System.out.println("NODE = " + nameNode.charAt(nameNode.length() - 1));
-		System.out.println("NODE");
+		System.out.println("NODE = " + nameNode.charAt(nameNode.length() - 1));
+		//System.out.println("NODE");
 		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
 		
 	}
