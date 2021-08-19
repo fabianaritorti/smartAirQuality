@@ -25,7 +25,7 @@ static void res_event_handler(void);
 
 
 EVENT_RESOURCE(res_presence,
-	"title=\"Presence sensor\";methods=\"GET\";rt=\"int\";obs\n",
+	"title=\"Presence sensor\";rt=\"Quality sensor\";obs",
 	res_get_handler,
 	NULL,
     NULL,
@@ -55,22 +55,26 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 	
 	if(accept == TEXT_PLAIN) {
 	    coap_set_header_content_format(response, TEXT_PLAIN);
-	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "<presence=\"%d\"/>", presence);
+	    snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE,  "value=%d", presence);
 	    coap_set_payload(response, (uint8_t *)buffer, strlen((char *)buffer)); 
 	} else if(accept == APPLICATION_XML) {
 		coap_set_header_content_format(response, APPLICATION_XML);
- 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<presence=\"%d\"/>", presence);
+ 		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "<value=\"%d\"/>", presence);
 		coap_set_payload(response, buffer, strlen((char *)buffer));
     	} 
 	else if(accept == APPLICATION_JSON) {
 		coap_set_header_content_format(response, APPLICATION_JSON);
-		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"presence\":%d}", presence);
+		snprintf((char *)buffer, COAP_MAX_CHUNK_SIZE, "{\"value\":%d}", presence);
 		coap_set_payload(response, buffer, strlen((char *)buffer));
 	}
 	else {
 		coap_set_status_code(response, NOT_ACCEPTABLE_4_06);
-		const char *msg = "Supporting content-type application/json";
+		const char *msg = "Supporting content-type plaintext application/json and application/XML";
 		coap_set_payload(response, msg, strlen(msg));
   	}
+
+	 
+	
+    
 
 }

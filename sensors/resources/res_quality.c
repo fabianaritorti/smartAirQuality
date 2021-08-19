@@ -10,7 +10,7 @@
 #define LOG_MODULE "Quality sensor"
 #define LOG_LEVEL LOG_LEVEL_DBG
 
-#define Q_THRESHOLD 100
+#define Q_THRESHOLD 50
 
 static int counter = 0;
 extern bool air_state; 
