@@ -132,12 +132,13 @@ PROCESS_THREAD(air_node, ev, data){
         // }
 		if (quality <= Q_THRESHOLD) { 
 			//LOG_DBG("Presence detected! \n");
+			LOG_DBG("quality value: %d\n", quality);
 			LOG_DBG("Air quality is bad! \n");
 			air_state = 1;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
 			quality = quality+qualityToAdd;
-			//COMMENTO PER ME HO COMMENTATO LA RIGA 139
-			LOG_DBG("quality value: %d\n", quality);
+			//COMMENTO PER ME HO COMMENTATO LA RIGA 142
+			
 			//LOG_DBG("Air quality is good! \n");
 			
 			
