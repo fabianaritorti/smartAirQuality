@@ -39,7 +39,7 @@ public class MyClient extends CoapClient {
 					JSONObject jsonObject = (JSONObject) JSONValue.parseWithException(response.getResponseText());
 					if (resource.getName().contains("quality")){
 						Long v = (Long) jsonObject.get("value");
-						resource.setValue(v);
+						resource.setValueQ(v);
 						if (v < 50) {
 							resource.setState(true);
 						} else if (v > 50) {
@@ -104,11 +104,11 @@ public class MyClient extends CoapClient {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
 						resource.showStatus();
-						System.out.println("TIMESTAMP:"+timestamp);
+						//System.out.println("TIMESTAMP:"+timestamp);
 						//System.out.println("VALORE STATO DEPURATORE "+ value);
-//						if (jsonObject.containsKey("value")) {
-//							System.out.println("TIMESTAMP:"+ timestamp);
-//						}
+						if (jsonObject.containsKey("value")) {
+							System.out.println("TIMESTAMP:"+ timestamp);
+						}
 						
 						
 					}
