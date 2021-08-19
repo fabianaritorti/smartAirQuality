@@ -109,8 +109,10 @@ PROCESS_THREAD(air_node, ev, data){
         presence = 1 + rand()%100;
 		LOG_DBG("presence value: %d\n", presence);
 		if (presence <= P_THRESHOLD) {
-			LOG_DBG("Presence detected \n");
-
+			LOG_DBG("Presence not detected!\n");
+		}
+		else if (presence > P_THRESHOLD) {
+			LOG_DBG("Presence detected! \n");
 		}
 
         //quality = 1 + rand()%100;
