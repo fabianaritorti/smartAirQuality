@@ -147,8 +147,9 @@ PROCESS_THREAD(air_node, ev, data){
 			//HO AGGIUNTO LA RIGA 147
 			LOG_DBG("quality value: %d\n", quality);
 			LOG_DBG("Air quality is good! \n");
-			air_state = 0;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
+			air_state = 0;
+			
 		}
 
 		if (air_state != air_state_old) { // when state changes, trigger call
