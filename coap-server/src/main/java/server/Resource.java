@@ -150,9 +150,9 @@ public class Resource {
 			valueResource = "DEPURATOR STATUS : OFF";
 		}
 	}
-	if (this.getName().contains("res_quality")) {
-		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
-	}
+//	if (this.getName().contains("res_quality")) {
+//		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
+//	}
 //	if (this.getName().contains("res_presence")) {
 //		if (this.getValueP() < 50) {
 //			valueResource = "PRESENCE NOT DETECTED";
