@@ -117,6 +117,8 @@ public class Resource {
 		} else if (!this.getState()) {
 			status = "OFF";
 		}
+		String nameNode = this.ip;
+		System.out.println("NODE = " + nameNode.charAt(nameNode.length() - 1));
 		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
 		
 	}
