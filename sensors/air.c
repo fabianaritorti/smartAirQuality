@@ -143,7 +143,7 @@ PROCESS_THREAD(air_node, ev, data){
 			
 			
 		}
-		else if (quality > Q_THRESHOLD) {
+		if (quality > Q_THRESHOLD) {
 			//HO AGGIUNTO LA RIGA 147
 			//LOG_DBG("quality value: %d\n", quality);
 			LOG_DBG("Air quality is good! \n");
