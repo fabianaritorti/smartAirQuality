@@ -96,7 +96,7 @@ PROCESS_THREAD(air_node, ev, data){
 		
 		
         //HO AGGIUNTO LA RIGA 99
-		LOG_DBG("quality value: %d\n", quality);
+		//LOG_DBG("quality value: %d\n", quality);
 
 		air_state_old = air_state;
 		int qualityToAdd = 1+ rand()%10;
@@ -120,7 +120,7 @@ PROCESS_THREAD(air_node, ev, data){
 		
         //LOG_DBG("presence: %d\n", presence);
 		//HO COMMENTATO LA RIGA 123
-        //LOG_DBG("quality value: %d\n", quality);
+        LOG_DBG("quality value: %d\n", quality);
         // if (presence <= P_THRESHOLD) {
 		// 	air_state = 0;
         //     leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
@@ -143,7 +143,7 @@ PROCESS_THREAD(air_node, ev, data){
 			
 			
 		}
-		else if (quality > Q_THRESHOLD) {
+		if (quality > Q_THRESHOLD) {
 			//HO AGGIUNTO LA RIGA 147
 			//LOG_DBG("quality value: %d\n", quality);
 			LOG_DBG("Air quality is good! \n");
