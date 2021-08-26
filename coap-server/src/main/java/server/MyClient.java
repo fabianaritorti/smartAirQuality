@@ -103,7 +103,7 @@ public class MyClient extends CoapClient {
 					if (MainApplication.observeMode == true) {
 						Date date = new Date();
 						Timestamp timestamp = new Timestamp(date.getTime());
-						System.out.println("RISORSA REGISTRATA"+ "\n"+ resource.getName()+"\n"+resource.getIp());
+						System.out.println("Resource"+ "\n"+ resource.getName()+"\n"+resource.getIp());
 						resource.showStatus();
 						//System.out.println("TIMESTAMP:"+timestamp);
 						//System.out.println("VALORE STATO DEPURATORE "+ value);
