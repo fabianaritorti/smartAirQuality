@@ -99,7 +99,9 @@ PROCESS_THREAD(air_node, ev, data){
 		//LOG_DBG("quality value: %d\n", quality);
 
 		air_state_old = air_state;
-		int qualityToAdd = 1+ rand()%10;
+		//int qualityToAdd = 1+ rand()%10;
+
+		int qualityToAdd = 1+ rand()%15;
 
 		if (air_state_old == 0) {
 			quality = quality - qualityToAdd;
