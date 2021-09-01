@@ -11,7 +11,7 @@ public class Resource {
 	private boolean isObservable;
 	private boolean state = false;
 	private Long value = (long) 30;
-	//private Long valueP = (long) 15;
+	
 	
 	
 
@@ -29,17 +29,7 @@ public class Resource {
 	}
 
 	
-//	public Long getValueP() {
-//		return valueP;
-//	}
-//
-//
-//
-//
-//
-//	public void setValueP(Long valueP) {
-//		this.valueP = valueP;
-//	}
+
 
 	
 	
@@ -111,22 +101,7 @@ public class Resource {
 		builder.append("]");
 		return builder.toString();
 	}
-	//metodo per mostrare lo stato delle risorse e i valori ottenuti
-//	public String showStatus() {
-//		String status = "";
-//		if (this.getName().contains("res_air")) {
-//			if (this.getState()) {
-//				status = "ON";
-//			} else if (!this.getState()) {
-//				status = "OFF";
-//			}
-//		}
-//		if (this.getName().contains("res_quality")) {
-//			System.out.println("QUALITY VALUE: " + this.getValue() + "STATUS:" + status);
-//		}
-//		return this.getName();
-//		
-//	}
+
 	public void showStatus() {
 		String status = "";
 		if (this.getState()) {
@@ -136,7 +111,7 @@ public class Resource {
 		}
 		String nameNode = this.ip;
 		System.out.println("NODE : " + nameNode.charAt(nameNode.length() - 1));
-		//System.out.println("NODE");
+		
 		System.out.println("QUALITY VALUE: " + this.getValue() +  " " + "STATUS: " + status);
 		
 	}
@@ -154,14 +129,7 @@ public class Resource {
 	if (this.getName().contains("res_quality")) {
 		valueResource = "QUALITY VALUE:" + " " + this.getValue().toString();
 	}
-//	if (this.getName().contains("res_presence")) {
-//		if (this.getValueP() < 50) {
-//			valueResource = "PRESENCE NOT DETECTED";
-//		} else {
-//			valueResource = "PRESENCE DETECTED";
-//		}
-//		
-//	}
+
 	return valueResource;
 	
 }

@@ -30,25 +30,11 @@ public class RegistrationResource extends CoapResource {
 	
 	
 	public void handleGET(CoapExchange exchange) {
-		//int nodeId = 0;
+		
 		exchange.accept();
 		
 		
-		//ottengo la richiesta della payload come una stringa
-		//char[] exch = exchange.getRequestText().toCharArray();
-		//C@325d91a1
-
-		//System.out.println("EXCH"+ exch);
-		
-//		int value = Character.getNumericValue(exch[0]);
-//		System.out.println("CHARACTER VALUE" + value);
-		
-		
-		//converto la stringa in un array di char
-		//char[] charResponse = responseText2.toCharArray();
-		
-		
-		//nodeId = Character.getNumericValue(charResponse[0]);
+	
 		
 		
 		
@@ -56,8 +42,7 @@ public class RegistrationResource extends CoapResource {
 		
 		//inetAddress è il source address della richiesta
 		InetAddress inetAddress = exchange.getSourceAddress();
-//		System.out.println("INETADDRESS"+ inetAddress);
-//		System.out.println("INETHOSTADDRESS" + inetAddress.getHostAddress());
+
 		//con newCoapClient si costruisce un nuovo clientCoap che manda richieste ad un uri specifico
 		CoapClient client = new CoapClient("coap://[" + inetAddress.getHostAddress() + "]:5683/.well-known/core");
 		//in questo caso vengono restituite tutte le risorse get e quindi res_quality e res_air
@@ -76,14 +61,14 @@ public class RegistrationResource extends CoapResource {
 //		
 		String[] resources = responseText.split(",");
 //		//mi costruisco un resourcesPath con il numero totale di risorse (ho 3 nodi e ne devo avere 3)
-//		//String []resourcesPath =  new String[TOTAL_RESOURCES]; 
+
 //		//int index = 0;
 		for (int i = 1; i<resources.length; i++) {
 			//1 because the first one is </.well-known/core>;ct=40
-//			//System.out.println("RESOURCES" + resources[i])
+
 			String[] parameters = resources[i].split(";");
 //			//per ogni risorsa splittata prima (vedi 21,24) mi faccio uno split con la , per ottenere </res_quality>
-//			//String []resources2 = resources[i].split(",");
+
 			if(parameters.length > 0 && parameters[0].split("<").length > 1) {
 				String path = parameters[0].split("<")[1].replace(">", "");
 				String name = path.replace("/", "");
@@ -103,143 +88,29 @@ public class RegistrationResource extends CoapResource {
 				
 				Resource newResource = new Resource(inetAddress.getHostAddress(), path,name,info,obs);
 				String nameResource = name + inetAddress.getHostAddress();
-				//MainApplication.getRegisteredResources().put(name,newResource);
+			
 				MainApplication.getRegisteredResources().put(nameResource,newResource);
 				
 				System.out.println("\n"+nameResource+" registered");
 				
 				//TODO OBSERVING CLIENT
 				if (obs == true) {
-					//MainApplication.observedResources.put(name,new MyClient(newResource));
-					//MainApplication.getObservedResources().get(name).startObserving();
+					
 					MainApplication.observedResources.put(nameResource,new MyClient(newResource));
 					MainApplication.getObservedResources().get(nameResource).startObserving();
 				}
 				
-				//nameRoom = Rooms[nodeId];
-				//nameNode = "NODE: " + i+1;
-//				if (name.contains("res_quality")) {
-//					Quality newQuality = new Quality(inetAddress.getHostAddress(),path,name);
-//					if(!MainApplication.getQualityMap().containsValue(newQuality)) {
-//						MainApplication.getQualityMap().put(name, newQuality);
-//						//MainApplication.getQualityMap().put(nameNode, newQuality);
-//						System.out.println("\n"+name+" registered\n");
-//						//System.out.println("\n"+nameNode+" registered\n");
-//						//System.out.println("RESOURCE" + name + "ADDED");
-//						//addObservingClient(newQuality);
-//						
-//					}
-//				} else if (name.contains("res_air")) {
-//					Air newAir = new Air(inetAddress.getHostAddress(), path,name);
-//					if(!MainApplication.getAirMap().containsValue(newAir)) {
-//						MainApplication.getAirMap().put(name,newAir);
-//						//MainApplication.getAirMap().put(nameNode,newAir);
-//						System.out.println("\n"+name+" registered\n");
-//						//System.out.println("RESOURCE" + name + "ADDED");
-//					}
-//				}
-//					
+				
+					
 			}
 		
-//		}
-//			
-//				
-//				
-//				System.out.println("NAME" + path);
-//			}
-				//String info = parameters[1]+";"+parameters[2];
-				
-//				boolean obs = false;
-//				if(responseText.contains("obs")) {
-//					obs = true;
-//				}
-				
-				//Flag newFlag = new Flag(name, path, addr.getHostAddress(), obs);
-//					Application.getSharedInstance().getFlagsMap().put(name, newFlag);
-//					System.out.println("\n"+name+" registered\n");
-//					System.out.print(">> ");
-//				} else {
-//					TrackLimit newTracklimit = new TrackLimit(name, path, addr.getHostAddress(), obs);
-//					Application.getSharedInstance().getTracklimitsMap().put(name, newTracklimit);
-//					System.out.println("\n"+name+" registered\n");
-//					System.out.print(">> ");
-////					if(obs==true) {
-////					Interface.observedResources.put(name, new ObservingCoapClient(newRes));	
-////					Interface.observedResources.get(name).startObserving();
-////				}
-//				}
+
+
 			}
 	}
-			//String []resources2 = resources[i].split(";");
-			//System.out.println("RESOURCES2" + resources2.length);
 			
-//			if (resources2.length > 1) {
-//				//se sono + si 1 e quindi il mio numero di risorse vado a rimpiazzare i simboli sotto con le "" in modo tale da 
-//				//ottenere i nomi delle singole risorse
-//				//resourcesPath[index++] = resources2[1].replaceAll("[\\<>]", "");	
-//				index++;
-//				resourcesPath[index] = resources2[1].replaceAll("[//<>]", "");
-//				System.out.println("RESOURCES_PATH"+ resourcesPath[index]);
-//				}
-//			
-//		}
-		
-//		for (int i = 0; i < resourcesPath.length; i++) {
-//			
-//			name = Rooms[nodeId];
-//			if (resourcesPath[i] == null) {
-//				System.out.println("There is no resource");
-//			} else {
-//				if (resourcesPath[i] != null) {
-//					//il metodo contains restituisce TRUE se res_quality è contenuta nel payload
-//					if (resourcesPath[i].contains("res_quality")) {
-//						//inetAddress.getHostAddress restituisce l'IP
-//						
-//						Quality q = new Quality(inetAddress.getHostAddress(),resourcesPath[i]);
-//						if (MainApplication.getQualityMap().containsValue(q)) {
-//							System.out.println("This quality value is present yet");
-//						} else if(!MainApplication.getQualityMap().containsValue(q)) {
-//							MainApplication.getQualityMap().put(name, q);
-//							addObservingClient(q);
-//						}
-//					} else if (resourcesPath[i].contains("res_air")) {
-//						Air a = new Air(inetAddress.getHostAddress(),resourcesPath[i]);
-//						if (MainApplication.getAirMap().containsValue(a)) {
-//							System.out.println("This air state is present yet");
-//						} else if (!MainApplication.getAirMap().containsValue(a)) {
-//							MainApplication.getAirMap().put(name, a);
-//							
-//						}
-//					}
-//					
-//				}
-//			}
-//			
-//			
-//			
-//		}
-//		nodeId++;
-//		roomCounter++;
-//		
-//		System.out.println("Room "+ name + " added");
-//		System.out.println("-------------------------------");
-//		System.out.println("The rooms registered are:" + roomCounter);
-//		System.out.println("-------------------------------");
-//		if (roomCounter == Rooms.length) {
-//			System.out.println("-------------------------------");
-//			System.out.println("All the resources are added!");
-//			System.out.println("-------------------------------");
-//			System.out.println("Registration is complete!");
-//			System.out.println("-------------------------------");
-//			MainApplication.setWaitRegistration(false);
-//		}
-//	}
-//	public void addObservingClient(Quality q) {
-//	MyClient client = new MyClient(q);
-//	MainApplication.getClientList().add(client);
-//	//essendo un array faccio -1 perchè il get mi restituisce l'indice e quindi il client ad esempio il 1o è in posizione 0 e quindi la size è 1 e fa -1 che è 0
-//	MainApplication.getClientList().get(MainApplication.getClientList().size()-1).startObserving();
-//}
+
+
 	
 
 }
