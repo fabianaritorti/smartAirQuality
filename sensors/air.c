@@ -17,7 +17,7 @@
 #define Q_THRESHOLD 50
 
 //resource definition
-extern coap_resource_t res_presence; 
+
 extern coap_resource_t res_quality; 
 extern coap_resource_t res_air; 
 
@@ -65,7 +65,7 @@ PROCESS_THREAD(air_node, ev, data){
 	
 	coap_activate_resource(&res_air, "res_air");
     coap_activate_resource(&res_quality, "res_quality");
-	//coap_activate_resource(&res_presence, "res_presence");
+	
 
 	coap_endpoint_parse(SERVER_EP, strlen(SERVER_EP), &server_ep);
 
@@ -75,10 +75,10 @@ PROCESS_THREAD(air_node, ev, data){
 
 	char msg[4];
 	
-	//sprintf(msg,"%d",node_id);
+	
 	coap_set_payload(request, (uint16_t * )msg, sizeof(msg)-1);
 
-	//per registrare la risorsa, commentare da riga 81 ad 84
+	
 	while(!registered){
 		LOG_DBG("Retrying registration..\n");
 		COAP_BLOCKING_REQUEST(&server_ep, request, client_chunk_handler);
@@ -86,20 +86,19 @@ PROCESS_THREAD(air_node, ev, data){
 
 	LOG_DBG("Registered\n");
 
-    //genero un valore intero randomico ogni 20 secondi(per la presenza e la qualità dell'aria)
+    
     etimer_set(&timer,30 * CLOCK_SECOND);
 	printf("TIMER:%d \n",timer);
 
     while(true) {
         PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
-		//printf("YOU ARE IN");
 		
 		
-        //HO AGGIUNTO LA RIGA 99
-		//LOG_DBG("quality value: %d\n", quality);
+		
+        
 
 		air_state_old = air_state;
-		//int qualityToAdd = 1+ rand()%10;
+		
 
 		int qualityToAdd = 1+ rand()%15;
 
@@ -107,47 +106,26 @@ PROCESS_THREAD(air_node, ev, data){
 			quality = quality - qualityToAdd;
 
 		}
-		//genero valori casuali di presenza e qualità (numero da 1 a 100)
-        // presence = 1 + rand()%100;
-		// LOG_DBG("presence value: %d\n", presence);
-		// if (presence <= P_THRESHOLD) {
-		// 	LOG_DBG("Presence not detected!\n");
-		// }
-		// else if (presence > P_THRESHOLD) {
-		// 	LOG_DBG("Presence detected! \n");
-		// }
-
-        //quality = 1 + rand()%100;
+		
 
 		
-        //LOG_DBG("presence: %d\n", presence);
-		//HO COMMENTATO LA RIGA 123
+        
         LOG_DBG("quality value: %d\n", quality);
-        // if (presence <= P_THRESHOLD) {
-		// 	air_state = 0;
-        //     leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
-        // }
-        // else if (presence > P_THRESHOLD && quality <= Q_THRESHOLD) {
-		// 	air_state = 1;
-        //     leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
-        //     //METTERE QUALCOSA PER FAR IN MODO CHE LA QUALITA' DELL'ARIA SIA BUONA
-        // }
+        
 		if (quality <= Q_THRESHOLD) { 
-			//LOG_DBG("Presence detected! \n");
-			//LOG_DBG("quality value: %d\n", quality);
+			
 			LOG_DBG("Air quality is bad! \n");
 			air_state = 1;
 			leds_set(LEDS_NUM_TO_MASK(LEDS_GREEN));
 			quality = quality+qualityToAdd;
-			//COMMENTO PER ME HO COMMENTATO LA RIGA 141
+			
 			LOG_DBG("quality value: %d\n", quality);
-			//LOG_DBG("Air quality is good! \n");
+			
 			
 			
 		}
 		if (quality > Q_THRESHOLD) {
-			//HO AGGIUNTO LA RIGA 147
-			//LOG_DBG("quality value: %d\n", quality);
+			
 			LOG_DBG("Air quality is good! \n");
 			leds_set(LEDS_NUM_TO_MASK(LEDS_RED));
 			air_state = 0;
@@ -155,11 +133,10 @@ PROCESS_THREAD(air_node, ev, data){
 		}
 
 		if (air_state != air_state_old) { // when state changes, trigger call
-			//res_air.trigger();
-			//res_presence.trigger();
+			
 			
 			res_quality.trigger();
-			//res_presence.trigger();
+			
 			
 			
 		}
