@@ -25,28 +25,14 @@ RESOURCE(res_air,
         NULL);
 
 
-// EVENT_RESOURCE(res_air, 
-// 		"title=\" Air actuator: ?POST/PUT auto=AUTO|MAN&status=ON|OFF\";rt=\"Air actuator\";obs",
-// 	    res_get_handler,
-//         res_post_put_handler,
-//         NULL,
-//         NULL,
-// 		res_event_handler);
 
-
-
-
-// static void res_event_handler(void) {
-// 	LOG_DBG("sending notification");
-//   	coap_notify_observers(&res_air);
-// }
 
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 
 
 	if(request != NULL){
 		LOG_DBG("Received GET\n");
-		//LOG_DBG("Observing handler number %d\n", counter); 
+		
 	}
 	LOG_DBG("Air state", air_state);
 
@@ -84,7 +70,7 @@ static void res_post_put_handler(coap_message_t *request, coap_message_t *respon
 {
 	if(request != NULL) {
 		LOG_DBG("POST/PUT Request Sent\n");
-		LOG_DBG("Actual state: %d\n", air_state);
+		//LOG_DBG("Actual state: %d\n", air_state);
 		
 	}
   
