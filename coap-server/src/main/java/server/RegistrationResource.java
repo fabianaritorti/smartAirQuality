@@ -9,9 +9,9 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class RegistrationResource extends CoapResource {
 	
-	private final static int TOTAL_RESOURCES = 2;
-	private int roomCounter = 0;
-	public static final String []Rooms = {"Room1, Room2"};
+//	private final static int TOTAL_RESOURCES = 2;
+//	private int roomCounter = 0;
+//	public static final String []Rooms = {"Room1, Room2"};
 	
 	public RegistrationResource(String name) {
 		super(name);
