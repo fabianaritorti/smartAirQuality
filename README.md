@@ -12,6 +12,6 @@ After downloading the repository in contiki-ng directory, please do the followin
 
 3.Go in the coap-server directory and start the java application:
 
-	java -jar target/app-0.0.1-SNAPSHOT.jar	
+	java -jar target/coap-server-0.0.1-SNAPSHOT.jar
 
 
