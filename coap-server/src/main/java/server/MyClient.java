@@ -21,16 +21,16 @@ public class MyClient extends CoapClient {
 	
 	
 	public MyClient(Resource resource) {
-		//viene restituito l'host address relativo a questa risorsa(nodo)
+		//it returns the host address related to this resource(node)
 		super(resource.getCoapURI());
 		this.resource = resource;
 	}
 	
 	public void startObserving() {
-		//si manda una richiesta di observe e si invoca un handler ogni volta che una notifica arriva (HANDLER = CAOP RECEIVING MESSAGES)
+		//sending observing request and invokes handler each time notify arrives 
 		obs = this.observe(new CoapHandler() {
 			
-			//questo metodo viene invocato quando arriva una risposta o notifica COAP
+			//this method is invoked when response or COAP notify arrives 
 			public void onLoad(CoapResponse response) {
 				// TODO Auto-generated method stub
 				try {
